@@ -1,0 +1,163 @@
+section {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 0 1.25rem;
+  color: black;
+  font-family: Arial, sans-serif;
+}
+
+section h1 {
+  font-size: 3rem;
+}
+
+section p {
+  font-size: 1.25rem;
+  max-width: 700px;
+  line-height: 1.6;
+}
+
+#FirstL {
+  font-size: 4rem;
+}
+
+span {
+  font-size: 5rem;
+}
+
+.stats {
+  display: flex;
+  gap: 50px;
+  margin-top: 2rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stat-number {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #ff6347;
+  margin-bottom: 0.75rem;
+}
+
+.stat-label {
+  font-size: 1.125rem;
+  color: black;
+}
+
+.boxes {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  margin: 3rem;
+}
+
+.box {
+  background-color: #f0f0f0;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 350px;
+}
+
+@media (max-width: 1024px) {
+  section h1 {
+    font-size: 2.5rem;
+  }
+
+  section p {
+    font-size: 1.1rem;
+  }
+
+  #FirstL {
+    font-size: 3.5rem;
+  }
+
+  span {
+    font-size: 4.5rem;
+  }
+
+  .stats {
+    gap: 30px;
+  }
+
+  .stat-number {
+    font-size: 2.5rem;
+  }
+
+  .stat-label {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  section h1 {
+    font-size: 2rem;
+  }
+
+  section p {
+    font-size: 1rem;
+  }
+
+  #FirstL {
+    font-size: 3rem;
+  }
+
+  span {
+    font-size: 4rem;
+  }
+
+  .stats {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .stat-number {
+    font-size: 2rem;
+  }
+
+  .stat-label {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  section h1 {
+    font-size: 1.75rem;
+  }
+
+  section p {
+    font-size: 0.9rem;
+  }
+
+  #FirstL {
+    font-size: 2.5rem;
+  }
+
+  span {
+    font-size: 3.5rem;
+  }
+
+  .stats {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .stat-number {
+    font-size: 1.8rem;
+  }
+
+  .stat-label {
+    font-size: 0.8rem;
+  }
+}
