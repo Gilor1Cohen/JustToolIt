@@ -1,1 +1,25 @@
+<footer class="footer">
+  <div class="upper-footer">
+    <div class="footer-logo">
+      <h1>WebToolz</h1>
+    </div>
 
+    <div class="footer-links">
+      <a [routerLink]="'/Tools'">Tools</a>
+      <a [routerLink]="'/Pricing'">Pricing</a>
+      <a [routerLink]="'/FAQs'">FAQs</a>
+    </div>
+
+    <div class="footer-contact">
+      <h2>Contact Us</h2>
+      <p>
+        Email: <a href="mailto:{{ this.Email }}">{{ this.Email }}</a>
+      </p>
+    </div>
+  </div>
+
+  <div class="downer-footer">
+    <p>&copy; 2025 WebToolz. All rights reserved.</p>
+    <p>Terms of Service | Privacy Policy</p>
+  </div>
+</footer>

@@ -55,11 +55,67 @@ nav .btns {
   font-size: 1.125rem;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 767px) {
   nav {
-    position: fixed;
-    width: 600px;
-    right: 0%;
-    left: 0%;
+    position: relative;
+    top: 0;
+    left: 50%;
+    right: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    padding: 10px 15px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 20px;
+    margin: 0 auto;
+  }
+
+  nav .btns {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  #profile-link,
+  #get-started-btn {
+    flex: 1;
+    font-size: 1rem;
+    padding: 6px 10px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  nav {
+    position: sticky;
+    top: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    max-width: 600px;
+    height: auto;
+    padding: 10px 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+
+  nav h1 {
+    font-size: 1.125rem;
+  }
+
+  nav .btns {
+    gap: 15px;
+  }
+
+  #profile-link,
+  #get-started-btn {
+    font-size: 1rem;
+    padding: 7px 12px;
   }
 }

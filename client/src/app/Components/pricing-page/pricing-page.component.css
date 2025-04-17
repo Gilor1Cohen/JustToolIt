@@ -1,0 +1,104 @@
+#pricing-page {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  padding: 40px 20px;
+  box-sizing: border-box;
+}
+
+.pricingBox {
+  width: 320px;
+  background-color: #ffffff;
+  color: #000000;
+  padding: 30px 25px;
+  border-radius: 12px;
+  border: 1px solid #000;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.pricingBox h1 {
+  font-size: 24px;
+  margin-bottom: 12px;
+  color: #111;
+}
+
+.pricingBox p {
+  font-size: 15px;
+  margin-bottom: 16px;
+  color: #333;
+}
+
+.pricingBox ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px 0;
+}
+
+.pricingBox ul li {
+  margin: 6px 0;
+  font-size: 14px;
+  color: #222;
+}
+
+.pricingBox h3 {
+  font-size: 20px;
+  margin: 15px 0;
+  color: #000;
+}
+
+.pricingBox button {
+  padding: 10px 24px;
+  border: 1px solid #000;
+  background-color: #fff;
+  color: #000;
+  cursor: pointer;
+  border-radius: 6px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.pricingBox button:hover {
+  background-color: #000;
+  color: #fff;
+}
+
+.pricingBox button:active {
+  transform: scale(0.95);
+}
+
+@media (max-width: 768px) {
+  #pricing-page {
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px 10px;
+  }
+
+  .pricingBox {
+    width: 100%;
+    max-width: 90%;
+    padding: 20px 15px;
+  }
+
+  .pricingBox h1 {
+    font-size: 20px;
+  }
+
+  .pricingBox p,
+  .pricingBox ul li,
+  .pricingBox h3 {
+    font-size: 14px;
+  }
+
+  .pricingBox button {
+    width: 100%;
+    padding: 12px;
+  }
+}

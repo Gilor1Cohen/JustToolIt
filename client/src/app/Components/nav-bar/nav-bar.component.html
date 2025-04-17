@@ -5,16 +5,26 @@
     Tools
   </button>
 
-  <button class="nav-text-btn" [routerLink]="['/Pricing']">Pricing</button>
+  <button class="nav-text-btn" *ngIf="!Auth" [routerLink]="['/Pricing']">
+    Pricing
+  </button>
 
   <button class="nav-text-btn" [routerLink]="['/FAQs']">FAQs</button>
 
   <div class="auth-section">
     <ng-container *ngIf="!Auth; else profileBtn">
-      <button id="get-started-btn">Get Started</button>
+      <button id="get-started-btn" [routerLink]="['/GetStarted']">
+        Get Started
+      </button>
     </ng-container>
     <ng-template #profileBtn>
-      <button class="nav-text-btn" id="profile-link">Profile</button>
+      <button
+        class="nav-text-btn"
+        id="profile-link"
+        [routerLink]="['/Profile']"
+      >
+        Profile
+      </button>
     </ng-template>
   </div>
 </nav>
