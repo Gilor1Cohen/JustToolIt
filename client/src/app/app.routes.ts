@@ -48,5 +48,21 @@ export const routes: Routes = [
       ),
   },
 
+  {
+    path: 'Terms-Of-Service',
+    loadComponent: () =>
+      import('./Components/terms-of-service/terms-of-service.component').then(
+        (m) => m.TermsOfServiceComponent
+      ),
+  },
+
+  {
+    path: 'Privacy-Policy',
+    loadComponent: () =>
+      import('./Components/privacy-policy/privacy-policy.component').then(
+        (m) => m.PrivacyPolicyComponent
+      ),
+  },
+
   { path: '**', redirectTo: '', pathMatch: 'full' },
 ];
