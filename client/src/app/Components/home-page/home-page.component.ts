@@ -17,7 +17,7 @@ export class HomePageComponent implements OnInit {
     {
       title: 'Cost-Effective',
       description:
-        'With WebToolz, you gain access to a wide range of services without breaking the bank.',
+        'With JustToolIt, you gain access to a wide range of services without breaking the bank.',
     },
     {
       title: 'Easy-to-Use',
@@ -32,7 +32,7 @@ export class HomePageComponent implements OnInit {
     {
       title: 'Global Reach',
       description:
-        'WebToolz serves users in over 100 countries, making our services accessible to everyone, everywhere.',
+        'JustToolIt serves users in over 100 countries, making our services accessible to everyone, everywhere.',
     },
     {
       title: 'Secure & Private',
