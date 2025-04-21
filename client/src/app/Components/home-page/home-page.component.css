@@ -26,15 +26,24 @@ img {
   width: 50%;
 }
 
-#get-started-btn {
-  margin-top: 2rem;
+.HomePageBtns {
+  margin: 2rem 0.5rem;
   padding: 10px 15px;
-  border: none;
   border-radius: 8px;
-  background-color: #1b5fe0;
-  color: #fff;
   cursor: pointer;
   font-size: 1rem;
+}
+
+#get-started-btn {
+  background-color: #1b5fe0;
+  color: #fff;
+  border: none;
+}
+
+#Tools-btn {
+  background-color: #fff;
+  color: #1b5fe0;
+  border: 1px solid #1b5fe0;
 }
 
 section h1 {
@@ -115,7 +124,7 @@ span {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 868px) {
   section {
     padding: 2rem 1rem;
   }
@@ -127,6 +136,22 @@ span {
   section p {
     font-size: 1.125rem;
     max-width: 90%;
+  }
+
+  img {
+    width: 225px;
+    height: auto;
+  }
+
+  #Welcome {
+    margin-top: 100px;
+    height: 100vh;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .HomePageBtns {
+    margin: 1.125rem 25px;
   }
 
   #FirstL {
@@ -169,6 +194,14 @@ span {
     font-size: 2rem;
   }
 
+  #Welcome {
+    margin-top: 125px;
+  }
+
+  .HomePageBtns {
+    margin: 1.125rem -15px;
+  }
+
   section p {
     font-size: 1rem;
     max-width: 90%;
@@ -180,6 +213,10 @@ span {
 
   span {
     font-size: 3.5rem;
+  }
+
+  #text {
+    width: 65%;
   }
 
   .stats {
@@ -202,5 +239,15 @@ span {
 
   .box {
     padding: 1rem;
+  }
+}
+
+@media (max-width: 390px) {
+  #Welcome {
+    margin-top: 125px;
+  }
+
+  .HomePageBtns {
+    margin: 1.125rem 5px;
   }
 }

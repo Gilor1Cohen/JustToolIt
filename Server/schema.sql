@@ -1,4 +1,19 @@
-CREATE TABLE users (
+CREATE DATABASE IF NOT EXISTS JustToolIt;
+
+USE JustToolIt;
+
+CREATE TABLE IF NOT EXISTS subscriptions (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  type VARCHAR(50) NOT NULL COMMENT 'free, monthly, yearly',
+  price DECIMAL(10,2) NOT NULL,
+  subscriptions_interval ENUM('none','month','year') NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,  
+  subscription_status ENUM('active','inactive','cancelled') DEFAULT 'inactive',
+  UNIQUE KEY uq_subscriptions_type (type)
+);
+
+
+CREATE TABLE IF NOT EXISTS users (
   id INT AUTO_INCREMENT PRIMARY KEY,
   user_name VARCHAR(100) NOT NULL,
   email VARCHAR(255) NOT NULL UNIQUE,
@@ -12,17 +27,8 @@ CREATE TABLE users (
     ON UPDATE CASCADE
 );
 
-CREATE TABLE subscriptions (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  type VARCHAR(50) NOT NULL COMMENT 'free, monthly, yearly',
-  price DECIMAL(10,2) NOT NULL,
-  interval ENUM('none','month','year') NOT NULL,
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,  
-  subscription_status ENUM('active','inactive','cancelled') DEFAULT 'inactive',
-  UNIQUE KEY uq_subscriptions_type (type)
-);
 
-CREATE TABLE payments (
+CREATE TABLE IF NOT EXISTS payments (
   id INT AUTO_INCREMENT PRIMARY KEY,
   user_id INT NOT NULL,
   subscription_id INT NOT NULL,

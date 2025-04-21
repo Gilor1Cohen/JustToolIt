@@ -41,7 +41,23 @@ export const routes: Routes = [
   },
 
   {
-    path: 'GetStarted',
+    path: 'Terms-Of-Service',
+    loadComponent: () =>
+      import('./Components/terms-of-service/terms-of-service.component').then(
+        (m) => m.TermsOfServiceComponent
+      ),
+  },
+
+  {
+    path: 'Privacy-Policy',
+    loadComponent: () =>
+      import('./Components/privacy-policy/privacy-policy.component').then(
+        (m) => m.PrivacyPolicyComponent
+      ),
+  },
+
+  {
+    path: 'SignUp',
     loadComponent: () =>
       import('./Components/auth-page/auth-page.component').then(
         (m) => m.AuthPageComponent
@@ -49,10 +65,25 @@ export const routes: Routes = [
   },
 
   {
-    path: 'Terms-Of-Service',
+    path: 'LogIn',
     loadComponent: () =>
-      import('./Components/terms-of-service/terms-of-service.component').then(
-        (m) => m.TermsOfServiceComponent
+      import('./Components/auth-page/auth-page.component').then(
+        (m) => m.AuthPageComponent
+      ),
+  },
+  {
+    path: 'ChoosePlan',
+    loadComponent: () =>
+      import('./Components/choose-plane/choose-plane.component').then(
+        (m) => m.ChoosePlaneComponent
+      ),
+  },
+
+  {
+    path: 'Privacy-Policy',
+    loadComponent: () =>
+      import('./Components/privacy-policy/privacy-policy.component').then(
+        (m) => m.PrivacyPolicyComponent
       ),
   },
 

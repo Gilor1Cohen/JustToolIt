@@ -1,11 +1,64 @@
-import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-auth-page',
-  imports: [],
+  imports: [CommonModule, RouterModule, ReactiveFormsModule],
   templateUrl: './auth-page.component.html',
-  styleUrl: './auth-page.component.css'
+  styleUrl: './auth-page.component.css',
 })
-export class AuthPageComponent {
+export class AuthPageComponent implements OnInit {
+  isSignUp: boolean = true;
+  Form!: FormGroup;
 
+  constructor(private route: ActivatedRoute, private fb: FormBuilder) {}
+
+  ngOnInit(): void {
+    this.route.url.subscribe((url) => {
+      this.isSignUp = url[0].path === 'SignUp';
+    });
+
+    this.FormInitialization();
+  }
+
+  FormInitialization(): void {
+    const baseControls = {
+      Email: ['', [Validators.required, Validators.email]],
+      Password: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(7),
+          Validators.maxLength(10),
+        ],
+      ],
+    };
+
+    if (this.isSignUp) {
+      this.Form = this.fb.group({
+        FirstName: [
+          '',
+          [
+            Validators.required,
+            Validators.minLength(3),
+            Validators.maxLength(10),
+          ],
+        ],
+        ...baseControls,
+      });
+    } else {
+      this.Form = this.fb.group(baseControls);
+    }
+  }
+
+  onSubmit(): void {
+    console.log(this.Form.value);
+  }
 }

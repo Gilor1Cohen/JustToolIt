@@ -1,1 +1,121 @@
-<p>auth-page works!</p>
+<div class="auth-container">
+  <div class="auth-box">
+    <h2>{{ isSignUp ? "Sign Up" : "Log In" }}</h2>
+
+    <form id="AuthForm" [formGroup]="Form" (ngSubmit)="onSubmit()">
+      <div class="box" *ngIf="isSignUp">
+        <label class="labelBox" for="FirstName">FirstName</label>
+        <input
+          type="text"
+          class="inputBox"
+          name="FirstName"
+          formControlName="FirstName"
+          placeholder="Enter your first name"
+        />
+
+        <div
+          *ngIf="
+            Form.get('FirstName')?.invalid && Form.get('FirstName')?.touched
+          "
+        >
+          <p
+            class="ErrorMessage"
+            *ngIf="Form.get('FirstName')?.errors?.['required']"
+          >
+            First name is required.
+          </p>
+          <p
+            class="ErrorMessage"
+            *ngIf="Form.get('FirstName')?.errors?.['minlength']"
+          >
+            First name is too short.
+          </p>
+          <p
+            class="ErrorMessage"
+            *ngIf="Form.get('FirstName')?.errors?.['maxlength']"
+          >
+            First name is too long.
+          </p>
+        </div>
+      </div>
+
+      <div class="box">
+        <label class="labelBox" for="email">Email</label>
+        <input
+          type="email"
+          class="inputBox"
+          name="email"
+          formControlName="Email"
+          placeholder="Enter your email"
+        />
+        <div
+          class="ErrorMessage"
+          *ngIf="Form.get('Email')?.invalid && Form.get('Email')?.touched"
+        >
+          <p
+            class="ErrorMessage"
+            *ngIf="Form.get('Email')?.errors?.['required']"
+          >
+            Email is required.
+          </p>
+          <p class="ErrorMessage" *ngIf="Form.get('Email')?.errors?.['email']">
+            Invalid email address.
+          </p>
+        </div>
+      </div>
+
+      <div class="box">
+        <label class="labelBox" for="password">Password</label>
+        <input
+          type="password"
+          class="inputBox"
+          name="password"
+          formControlName="Password"
+          placeholder="Enter your password"
+        />
+        <div
+          *ngIf="Form.get('Password')?.invalid && Form.get('Password')?.touched"
+        >
+          <p
+            class="ErrorMessage"
+            *ngIf="Form.get('Password')?.errors?.['required']"
+          >
+            Password is required.
+          </p>
+          <p
+            class="ErrorMessage"
+            *ngIf="Form.get('Password')?.errors?.['minlength']"
+          >
+            Password is too short.
+          </p>
+          <p
+            class="ErrorMessage"
+            *ngIf="Form.get('Password')?.errors?.['maxlength']"
+          >
+            Password is too long.
+          </p>
+        </div>
+      </div>
+
+      <input
+        type="submit"
+        id="submitBtn"
+        [value]="isSignUp ? 'Sign In' : 'Log In'"
+        [disabled]="Form.invalid"
+      />
+    </form>
+
+    <ng-container *ngIf="isSignUp; else profileBtn">
+      <p class="link">
+        Already have an account?
+        <a routerLink="/LogIn">Log in</a>
+      </p>
+    </ng-container>
+    <ng-template #profileBtn>
+      <p class="link">
+        Don't have an account?
+        <a routerLink="/SignUp">Get Started</a>
+      </p>
+    </ng-template>
+  </div>
+</div>
