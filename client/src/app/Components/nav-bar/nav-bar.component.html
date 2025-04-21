@@ -1,18 +1,16 @@
 <nav>
   <h1 [routerLink]="['/']">JustToolIt</h1>
 
-  <button class="nav-text-btn" id="tools-link" [routerLink]="['/Tools']">
-    Tools
-  </button>
+  <div class="btns">
+    <button class="nav-text-btn" id="tools-link" [routerLink]="['/Tools']">
+      Tools
+    </button>
 
-  <button class="nav-text-btn" *ngIf="!Auth" [routerLink]="['/Pricing']">
-    Pricing
-  </button>
+    <button class="nav-text-btn" [routerLink]="['/FAQs']">FAQs</button>
 
-  <button class="nav-text-btn" [routerLink]="['/FAQs']">FAQs</button>
-
-  <div class="auth-section">
     <ng-container *ngIf="!Auth; else profileBtn">
+      <button class="nav-text-btn" [routerLink]="['/Pricing']">Pricing</button>
+
       <button id="get-started-btn" [routerLink]="['/GetStarted']">
         Get Started
       </button>

@@ -11,8 +11,30 @@ section {
   box-sizing: border-box;
 }
 
+img {
+  width: 400px;
+  height: auto;
+}
+
 #Welcome {
   height: 100vh;
+  flex-direction: row;
+  gap: 10%;
+}
+
+#text {
+  width: 50%;
+}
+
+#get-started-btn {
+  margin-top: 2rem;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 8px;
+  background-color: #1b5fe0;
+  color: #fff;
+  cursor: pointer;
+  font-size: 1rem;
 }
 
 section h1 {
@@ -24,7 +46,6 @@ section p {
   font-size: 1.25rem;
   max-width: 700px;
   line-height: 1.6;
-  margin-bottom: 2rem;
 }
 
 #FirstL {
@@ -37,14 +58,14 @@ span {
 
 .stats {
   width: 100%;
-  height: 35vh;
+  height: 300px;
   padding: 3rem 1rem;
   display: flex;
   flex-direction: row;
   gap: 50px;
   justify-content: center;
   flex-wrap: wrap;
-  background-color: #000;
+  background-color: #efefef;
   box-sizing: border-box;
 }
 
@@ -58,13 +79,13 @@ span {
 .stat-number {
   font-size: 3rem;
   font-weight: 800;
-  color: #ffffff;
+  color: #000;
   margin-bottom: 0.75rem;
 }
 
 .stat-label {
   font-size: 1.25rem;
-  color: #ffffff;
+  color: #000;
 }
 
 #why {
