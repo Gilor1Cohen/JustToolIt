@@ -26,34 +26,19 @@ export class HomePageComponent implements OnInit {
         'Our platform is intuitive, user-friendly, and doesn’t require any technical knowledge to get started.',
     },
     {
-      title: 'Fast Performance',
-      description:
-        'Our tools are optimized for speed, ensuring minimal load times and instant results no matter your device.',
-    },
-    {
-      title: 'Global Reach',
-      description:
-        'JustToolIt serves users in over 100 countries, making our services accessible to everyone, everywhere.',
-    },
-    {
-      title: 'Secure & Private',
+      title: 'Secure-&-Private',
       description:
         'We prioritize your privacy. All tools are designed with top-notch security measures to keep your data safe.',
     },
     {
-      title: 'Constantly Evolving',
+      title: 'Constantly-Evolving',
       description:
         'We are always adding new tools and updating existing ones based on user feedback and the latest technology trends.',
     },
     {
-      title: 'No Installation Needed',
+      title: 'No-Installation-Needed',
       description:
         'All our tools are fully online—no downloads, no installations. Just open your browser and start using.',
-    },
-    {
-      title: '24/7 Support',
-      description:
-        'Have a question or issue? Our support team is available around the clock to assist you.',
     },
   ];
 

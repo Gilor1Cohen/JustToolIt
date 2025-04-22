@@ -42,6 +42,7 @@
 
   <div class="boxes">
     <div class="box" *ngFor="let feature of features">
+      <img [src]="'assets/images/' + feature.title + '.png'" />
       <h1>{{ feature.title }}</h1>
       <p>{{ feature.description }}</p>
     </div>

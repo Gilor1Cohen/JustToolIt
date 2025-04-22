@@ -8,7 +8,10 @@ app.use(
     origin: "http://localhost:4200",
   })
 );
+
 app.use(express.json());
+
+app.use("/Auth", require("./controllers-layer/AuthControllers"));
 
 app.use(/.*/, (req, res) => {
   res.status(404).send(`Route not found ${req.originalUrl}`);

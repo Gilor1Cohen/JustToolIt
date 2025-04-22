@@ -7,6 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, RouterModule } from '@angular/router';
+import { AuthServiceService } from '../../Services/Auth/auth-service.service';
 
 @Component({
   selector: 'app-auth-page',
@@ -18,7 +19,11 @@ export class AuthPageComponent implements OnInit {
   isSignUp: boolean = true;
   Form!: FormGroup;
 
-  constructor(private route: ActivatedRoute, private fb: FormBuilder) {}
+  constructor(
+    private route: ActivatedRoute,
+    private fb: FormBuilder,
+    private auth: AuthServiceService
+  ) {}
 
   ngOnInit(): void {
     this.route.url.subscribe((url) => {
@@ -59,6 +64,22 @@ export class AuthPageComponent implements OnInit {
   }
 
   onSubmit(): void {
-    console.log(this.Form.value);
+    this.isSignUp
+      ? this.auth.SignUp(this.Form.value).subscribe({
+          next(value) {
+            console.log(value);
+          },
+          error(err) {
+            console.log(err);
+          },
+        })
+      : this.auth.LogIn(this.Form.value).subscribe({
+          next(value) {
+            console.log(value);
+          },
+          error(err) {
+            console.log(err);
+          },
+        });
   }
 }
