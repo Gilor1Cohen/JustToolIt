@@ -74,8 +74,8 @@ export const routes: Routes = [
   {
     path: 'ChoosePlan',
     loadComponent: () =>
-      import('./Components/choose-plane/choose-plane.component').then(
-        (m) => m.ChoosePlaneComponent
+      import('./Components/choose-plan/choose-plan.component').then(
+        (m) => m.ChoosePlanComponent
       ),
   },
 

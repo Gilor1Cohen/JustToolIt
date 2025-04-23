@@ -101,8 +101,10 @@
         type="submit"
         id="submitBtn"
         [value]="isSignUp ? 'Sign In' : 'Log In'"
-        [disabled]="Form.invalid"
+        [disabled]="Form.invalid || this.Loading"
       />
+
+      <p class="ErrorMessage" *ngIf="this.Error">{{ this.Error }}</p>
     </form>
 
     <ng-container *ngIf="isSignUp; else profileBtn">

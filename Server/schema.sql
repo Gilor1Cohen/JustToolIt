@@ -2,40 +2,74 @@ CREATE DATABASE IF NOT EXISTS JustToolIt;
 
 USE JustToolIt;
 
-CREATE TABLE IF NOT EXISTS subscriptions (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  type VARCHAR(50) NOT NULL COMMENT 'free, monthly, yearly',
-  price DECIMAL(10,2) NOT NULL,
-  subscriptions_interval ENUM('none','month','year') NOT NULL,
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,  
-  subscription_status ENUM('active','inactive','cancelled') DEFAULT 'inactive',
-  UNIQUE KEY uq_subscriptions_type (type)
-);
-
 
 CREATE TABLE IF NOT EXISTS users (
   id INT AUTO_INCREMENT PRIMARY KEY,
   user_name VARCHAR(100) NOT NULL,
   email VARCHAR(255) NOT NULL UNIQUE,
-  password_hash VARCHAR(255) NOT NULL,
-  subscription_id INT DEFAULT NULL,
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  INDEX idx_users_email (email),
-  FOREIGN KEY (subscription_id)
-    REFERENCES subscriptions(id)
-    ON DELETE SET NULL
-    ON UPDATE CASCADE
+  password_hash VARCHAR(255) NOT NULL
 );
+
+
+CREATE TABLE IF NOT EXISTS subscription_plans (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  type VARCHAR(50) NOT NULL UNIQUE, 
+  price DECIMAL(10,2) NOT NULL,
+  billing_interval ENUM('none', 'month', 'year') NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS user_subscriptions (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  user_id INT NOT NULL,
+  plan_id INT NOT NULL,
+  status ENUM('active', 'cancelled', 'expired') DEFAULT 'active',
+  start_date DATE NOT NULL,
+  end_date DATE DEFAULT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
 
 
 CREATE TABLE IF NOT EXISTS payments (
   id INT AUTO_INCREMENT PRIMARY KEY,
   user_id INT NOT NULL,
   subscription_id INT NOT NULL,
-  status ENUM('pending','success','failed') NOT NULL,
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  INDEX idx_payments_user (user_id),
-  INDEX idx_payments_sub (subscription_id),
-  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
-  FOREIGN KEY (subscription_id) REFERENCES subscriptions(id) ON DELETE RESTRICT
+  amount DECIMAL(10,2) NOT NULL,
+  payment_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  status ENUM('pending', 'success', 'failed') DEFAULT 'pending'
 );
+
+
+ALTER TABLE user_subscriptions
+ADD CONSTRAINT fk_user_subscriptions_user_id
+FOREIGN KEY (user_id)
+REFERENCES users(id)
+ON DELETE CASCADE;
+
+ALTER TABLE user_subscriptions
+ADD CONSTRAINT fk_user_subscriptions_plan_id
+FOREIGN KEY (plan_id)
+REFERENCES subscription_plans(id)
+ON DELETE RESTRICT;
+
+ALTER TABLE payments
+ADD CONSTRAINT fk_payments_user_id
+FOREIGN KEY (user_id)
+REFERENCES users(id)
+ON DELETE CASCADE;
+
+ALTER TABLE payments
+ADD CONSTRAINT fk_payments_subscription_id
+FOREIGN KEY (subscription_id)
+REFERENCES user_subscriptions(id)
+ON DELETE CASCADE;
+
+
+INSERT INTO subscription_plans (id, type, price, billing_interval)
+VALUES 
+  (1, 'free', 0.00, 'none'),
+  (2, 'monthly', 9.90, 'month'),
+  (3, 'yearly', 99.90, 'year');
+
+
+

@@ -6,8 +6,9 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { AuthServiceService } from '../../Services/Auth/auth-service.service';
+import { AuthError, LogInRes, SignUpRes } from '../../Models/AuthModel';
 
 @Component({
   selector: 'app-auth-page',
@@ -18,11 +19,14 @@ import { AuthServiceService } from '../../Services/Auth/auth-service.service';
 export class AuthPageComponent implements OnInit {
   isSignUp: boolean = true;
   Form!: FormGroup;
+  Loading: boolean = false;
+  Error: string = '';
 
   constructor(
     private route: ActivatedRoute,
     private fb: FormBuilder,
-    private auth: AuthServiceService
+    private auth: AuthServiceService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -64,21 +68,42 @@ export class AuthPageComponent implements OnInit {
   }
 
   onSubmit(): void {
+    this.Loading = true;
+    this.Error = '';
+
     this.isSignUp
       ? this.auth.SignUp(this.Form.value).subscribe({
-          next(value) {
-            console.log(value);
+          next: (value: SignUpRes) => {
+            this.Loading = false;
+            this.auth.setData(value.token, value.userId, true, null, null);
+            this.Error = '';
+            this.Form.reset();
+            this.router.navigate(['/ChoosePlan']);
           },
-          error(err) {
-            console.log(err);
+          error: (err: AuthError) => {
+            this.Loading = false;
+            this.Error = err.error.message;
           },
         })
       : this.auth.LogIn(this.Form.value).subscribe({
-          next(value) {
-            console.log(value);
+          next: (value: LogInRes) => {
+            this.Loading = false;
+
+            this.Loading ? console.log('Loading...') : console.log('Loaded!');
+
+            this.auth.setData(
+              value.token,
+              value.userId,
+              true,
+              value.planId,
+              value.status
+            );
+            this.Form.reset();
+            this.router.navigate(['/Tools']);
           },
-          error(err) {
-            console.log(err);
+          error: (err: AuthError) => {
+            this.Loading = false;
+            this.Error = err.error.message;
           },
         });
   }
