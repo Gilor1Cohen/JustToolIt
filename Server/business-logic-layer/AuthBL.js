@@ -8,6 +8,7 @@ const {
 const bcrypt = require("bcrypt");
 
 const jwt = require("jsonwebtoken");
+const { end } = require("../data-accsess-layer/Database");
 
 async function LogIn(Email, HashedPassword) {
   try {
@@ -28,15 +29,23 @@ async function LogIn(Email, HashedPassword) {
       Info.data[0].password_hash
     );
 
-    console.log();
-
     if (!IsMatch) {
       throw new Error("Invalid Email or Password");
     }
 
-    const token = jwt.sign({ Email }, process.env.JWT_SECRET, {
-      expiresIn: "15m",
-    });
+    const token = jwt.sign(
+      {
+        Email,
+        id: Info.data[0].id,
+        plan_id: Info.data[0].plan_id,
+        plan_status: Info.data[0].status,
+        end_date: new Date(Info.data[0].end_date).toLocaleDateString(),
+      },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: "15m",
+      }
+    );
 
     return {
       success: true,
@@ -44,8 +53,6 @@ async function LogIn(Email, HashedPassword) {
       data: Info.data[0],
     };
   } catch (error) {
-    console.log(error);
-
     throw new Error(error.message || "Internal server error");
   }
 }

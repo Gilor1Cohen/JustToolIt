@@ -16,18 +16,23 @@ router.post("/LogIn", async (req, res) => {
 
   try {
     const LogInData = await LogIn(Email, Password);
-    console.log(LogInData);
 
     if (LogInData.success === false) {
       return res.status(401).json({ message: "Invalid Email or Password" });
     }
 
+    res.cookie("token", LogInData.token, {
+      httpOnly: true,
+      sameSite: "Lax",
+      maxAge: 15 * 60 * 1000,
+    });
+
     return res.status(200).json({
       message: "Login successful",
-      token: LogInData.token,
       userId: LogInData.data.id,
       planId: LogInData.data.plan_id,
       status: LogInData.data.status,
+      end_date: LogInData.data.end_date,
     });
   } catch (error) {
     return res
@@ -61,14 +66,30 @@ router.post("/SignUp", async (req, res) => {
 
     res.cookie("token", token, {
       httpOnly: true,
-      sameSite: "Strict",
+      sameSite: "Lax",
+      maxAge: 15 * 60 * 1000,
     });
 
     return res.status(201).json({
       message: "User created successfully",
-      token,
       userId,
     });
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ message: error.message || "Internal server error" });
+  }
+});
+
+router.get("/GetToken", async (req, res) => {
+  try {
+    const token = req.cookies.token;
+
+    if (!token) {
+      return res.status(401).json({ message: "Unauthorized" });
+    }
+
+    return res.status(200).json({ token });
   } catch (error) {
     return res
       .status(500)

@@ -36,7 +36,7 @@ async function IsEmailExists(Email) {
 async function GetInfoByEmail(Email) {
   try {
     const [data] = await db.query(
-      "SELECT users.id, users.password_hash ,user_subscriptions.plan_id, user_subscriptions.status FROM users RIGHT JOIN user_subscriptions ON users.id = user_subscriptions.user_id  WHERE email = ?",
+      "SELECT users.id, users.password_hash ,user_subscriptions.plan_id, user_subscriptions.status, user_subscriptions.end_date FROM users RIGHT JOIN user_subscriptions ON users.id = user_subscriptions.user_id  WHERE email = ?",
       [Email]
     );
 

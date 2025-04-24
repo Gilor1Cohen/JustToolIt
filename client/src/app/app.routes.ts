@@ -79,21 +79,5 @@ export const routes: Routes = [
       ),
   },
 
-  {
-    path: 'Privacy-Policy',
-    loadComponent: () =>
-      import('./Components/privacy-policy/privacy-policy.component').then(
-        (m) => m.PrivacyPolicyComponent
-      ),
-  },
-
-  {
-    path: 'Privacy-Policy',
-    loadComponent: () =>
-      import('./Components/privacy-policy/privacy-policy.component').then(
-        (m) => m.PrivacyPolicyComponent
-      ),
-  },
-
   { path: '**', redirectTo: '', pathMatch: 'full' },
 ];

@@ -1,1 +1,20 @@
-<p>profile-page works!</p>
+<section class="profile-page">
+  <h1>Profile</h1>
+
+  <p>
+    Your subscription is:
+    <ng-container [ngSwitch]="UserData?.planId">
+      <span *ngSwitchCase="1" class="plan free">Free subscription</span>
+      <span *ngSwitchCase="2" class="plan monthly">Monthly subscription</span>
+      <span *ngSwitchCase="3" class="plan yearly">Yearly subscription</span>
+      <span *ngSwitchDefault class="plan unknown">Unknown plan</span>
+    </ng-container>
+  </p>
+
+  <p *ngIf="this.UserData?.end_date !== null">End in: {{ this.Date }}</p>
+
+  <div class="btns">
+    <button class="action-btn">Change Subscription</button>
+    <button class="action-btn">Log Out</button>
+  </div>
+</section>

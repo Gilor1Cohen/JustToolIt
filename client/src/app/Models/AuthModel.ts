@@ -11,15 +11,14 @@ export interface SignUpReq {
 
 export interface LogInRes {
   message: string;
-  token: string;
   userId: string;
   planId: number;
   status: 'active' | 'cancelled' | 'expired';
+  end_date: Date;
 }
 
 export interface SignUpRes {
   message: string;
-  token: string;
   userId: string;
 }
 
@@ -40,9 +39,19 @@ export interface AuthError {
 }
 
 export interface AuthData {
-  token: string | null;
   userId: string | null;
   isAuthenticated: boolean;
-  planId?: number | null;
-  status?: 'active' | 'cancelled' | 'expired' | null;
+  planId: number | null;
+  status: 'active' | 'cancelled' | 'expired' | null;
+  end_date: Date | null;
+}
+
+export interface JwtPayload {
+  Email: string;
+  id: string;
+  plan_id: number;
+  plan_status: 'active' | 'cancelled' | 'expired';
+  end_date: Date;
+  iat: number;
+  exp: number;
 }
