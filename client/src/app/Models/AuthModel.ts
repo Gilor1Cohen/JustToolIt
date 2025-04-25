@@ -14,7 +14,7 @@ export interface LogInRes {
   userId: string;
   planId: number;
   status: 'active' | 'cancelled' | 'expired';
-  end_date: Date;
+  end_date: Date | null;
 }
 
 export interface SignUpRes {
@@ -50,8 +50,8 @@ export interface JwtPayload {
   Email: string;
   id: string;
   plan_id: number;
-  plan_status: 'active' | 'cancelled' | 'expired';
-  end_date: Date;
+  plan_status: 'active' | 'cancelled' | 'expired' | null;
+  end_date: string | null;
   iat: number;
   exp: number;
 }

@@ -3,12 +3,12 @@ const {
   IsEmailExists,
   GetInfoByEmail,
   AddNewUser,
+  AddUserToFreePlan,
 } = require("../data-accsess-layer/AuthDAL");
 
 const bcrypt = require("bcrypt");
 
 const jwt = require("jsonwebtoken");
-const { end } = require("../data-accsess-layer/Database");
 
 async function LogIn(Email, HashedPassword) {
   try {
@@ -73,14 +73,32 @@ async function SignUp(FirstName, Email, Password) {
 
     const userId = add.data.insertId;
 
-    const token = jwt.sign({ Email, userId }, process.env.JWT_SECRET, {
-      expiresIn: "15m",
-    });
+    const addFreePlan = await AddUserToFreePlan(userId);
+    if (addFreePlan.success === false) {
+      throw new Error("Failed to add user plan");
+    }
+
+    const token = jwt.sign(
+      {
+        Email,
+        userId,
+        plan_id: 1,
+        plan_status: "active",
+        end_date: null,
+      },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: "15m",
+      }
+    );
 
     return {
       success: true,
       token,
       userId,
+      plan_id: addFreePlan.plan_id,
+      plan_status: addFreePlan.status,
+      end_date: new Date(addFreePlan.end_date).toLocaleDateString(),
     };
   } catch (error) {
     throw new Error(error.message || "Internal server error");

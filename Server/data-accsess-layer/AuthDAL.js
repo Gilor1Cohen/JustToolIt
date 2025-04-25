@@ -8,12 +8,12 @@ async function AddNewUser(FirstName, Email, Password) {
     );
 
     if (data.affectedRows === 0) {
-      throw new Error({ success: false, message: "Failed to add user" });
+      return { success: false, message: "Internal server error" };
     }
 
     return { success: true, data };
   } catch (error) {
-    throw new Error({ success: false, message: "Internal server error" });
+    return { success: false, message: "Internal server error" };
   }
 }
 
@@ -24,12 +24,12 @@ async function IsEmailExists(Email) {
     ]);
 
     if (data.length > 0) {
-      return { success: false, message: "Email already exists" };
+      return { success: false, message: "Internal server error" };
     }
 
     return { success: true, email: data };
   } catch (error) {
-    throw new Error({ success: false, message: "Internal server error" });
+    return { success: false, message: "Internal server error" };
   }
 }
 
@@ -46,8 +46,32 @@ async function GetInfoByEmail(Email) {
 
     return { success: true, data };
   } catch (error) {
-    throw new Error({ success: false, message: "Internal server error" });
+    return { success: false, message: "Internal server error" };
   }
 }
 
-module.exports = { IsEmailExists, GetInfoByEmail, AddNewUser };
+async function AddUserToFreePlan(userId) {
+  try {
+    const [data] = await db.query(
+      "INSERT INTO user_subscriptions (user_id, plan_id, status, start_date, end_date, created_at) VALUES (?, 1, 'active', CURDATE(), NULL, NOW());",
+      [userId]
+    );
+
+    if (data.affectedRows === 0) {
+      return { success: false, message: "Internal server error" };
+    }
+
+    return { success: true };
+
+    ///  console.log();
+  } catch (error) {
+    return { success: false, message: "Internal server error", error };
+  }
+}
+
+module.exports = {
+  IsEmailExists,
+  GetInfoByEmail,
+  AddNewUser,
+  AddUserToFreePlan,
+};

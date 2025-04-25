@@ -97,4 +97,26 @@ router.get("/GetToken", async (req, res) => {
   }
 });
 
+router.get("/LogOut", async (req, res) => {
+  try {
+    const token = req.cookies.token;
+
+    if (!token) {
+      return res.status(401).json({ message: "Unauthorized" });
+    }
+
+    res.clearCookie("token", {
+      httpOnly: true,
+      sameSite: "Lax",
+      maxAge: 15 * 60 * 1000,
+    });
+
+    return res.status(200).json({ token });
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ message: error.message || "Internal server error" });
+  }
+});
+
 module.exports = router;

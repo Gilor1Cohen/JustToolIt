@@ -71,5 +71,3 @@ VALUES
   (2, 'monthly', 9.90, 'month'),
   (3, 'yearly', 99.90, 'year');
 
-
-

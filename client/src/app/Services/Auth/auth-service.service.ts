@@ -16,12 +16,9 @@ import { jwtDecode } from 'jwt-decode';
 })
 export class AuthServiceService {
   private baseUrl: string = 'http://localhost:4201/Auth';
-  private authStatusSubject = new BehaviorSubject<boolean>(false);
-  public authStatus = this.authStatusSubject.asObservable();
-  private userId: string | null = null;
-  private planId: number | null = null;
-  private status: 'active' | 'cancelled' | 'expired' | null = null;
-  private end_date: Date | null = null;
+
+  private userDataSubject = new BehaviorSubject<AuthData | null>(null);
+  public userData = this.userDataSubject.asObservable();
 
   constructor(private http: HttpClient) {}
 
@@ -43,19 +40,36 @@ export class AuthServiceService {
     });
   }
 
+  LogOut(): Observable<any> {
+    return this.http.get(this.baseUrl + '/LogOut', {
+      withCredentials: true,
+    });
+  }
+
   getUserData(token: string): Observable<AuthData | null> {
     return new Observable((observer) => {
       try {
         if (token) {
           const decoded = jwtDecode<JwtPayload>(token);
 
-          observer.next({
+          console.log('Decoded token:', decoded);
+
+          const data: AuthData = {
             userId: decoded.id,
             isAuthenticated: true,
             planId: decoded.plan_id,
             status: decoded.plan_status,
-            end_date: decoded.end_date,
-          });
+            end_date: decoded.end_date
+              ? new Date(
+                  Number(decoded.end_date.split('.')[2]),
+                  Number(decoded.end_date.split('.')[1]) - 1,
+                  Number(decoded.end_date.split('.')[0])
+                )
+              : null,
+          };
+
+          this.userDataSubject.next(data);
+          observer.next(data);
         } else {
           observer.next(null);
         }
@@ -74,20 +88,22 @@ export class AuthServiceService {
     status: 'active' | 'cancelled' | 'expired' | null,
     end_date: Date | null
   ): void {
-    this.userId = userId;
-    this.authStatusSubject.next(authStatus);
-    this.planId = planId;
-    this.status = status;
-    this.end_date = end_date;
+    const data: AuthData = {
+      userId,
+      isAuthenticated: authStatus,
+      planId,
+      status,
+      end_date,
+    };
+
+    this.userDataSubject.next(data);
   }
 
-  sendData(): AuthData {
-    return {
-      userId: this.userId,
-      isAuthenticated: this.authStatusSubject.getValue(),
-      planId: this.planId,
-      status: this.status,
-      end_date: this.end_date! ? this.end_date : new Date(),
-    };
+  sendData(): AuthData | null {
+    return this.userDataSubject.getValue();
+  }
+
+  clearUserData(): void {
+    this.userDataSubject.next(null);
   }
 }

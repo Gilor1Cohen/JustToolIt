@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthServiceService } from '../../Services/Auth/auth-service.service';
 import { AuthData } from '../../Models/AuthModel';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile-page',
@@ -12,15 +13,29 @@ import { CommonModule } from '@angular/common';
 export class ProfilePageComponent implements OnInit {
   UserData: AuthData | null = null;
 
-  Date: Date | null = null;
+  endDate: Date | null = null;
 
   ngOnInit(): void {
-    this.UserData = this.auth.sendData();
+    console.log('Profile Page Component Initialized');
 
-    if (this.UserData.end_date) {
-      this.Date = new Date(this.UserData.end_date);
-    }
+    this.auth.userData.subscribe((data) => {
+      this.UserData = data;
+
+      this.endDate = new Date(this.UserData!.end_date!);
+    });
   }
 
-  constructor(private auth: AuthServiceService) {}
+  constructor(private auth: AuthServiceService, private router: Router) {}
+
+  LogOut(): void {
+    this.auth.LogOut().subscribe({
+      next: (res: any) => {
+        this.auth.clearUserData();
+        this.router.navigate(['/']);
+      },
+      error: (err: any) => {
+        console.error('Logout failed:', err);
+      },
+    });
+  }
 }

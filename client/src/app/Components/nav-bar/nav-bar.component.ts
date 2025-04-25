@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { AuthServiceService } from '../../Services/Auth/auth-service.service';
+import { AuthData } from '../../Models/AuthModel';
 
 @Component({
   selector: 'app-nav-bar',
@@ -11,12 +12,12 @@ import { AuthServiceService } from '../../Services/Auth/auth-service.service';
 })
 export class NavBarComponent implements OnInit {
   ngOnInit(): void {
-    this.auth.authStatus.subscribe((status: boolean) => {
-      this.Auth = status;
+    this.auth.userData.subscribe((data: AuthData | null) => {
+      this.Auth = data?.isAuthenticated;
     });
   }
 
   constructor(private auth: AuthServiceService) {}
 
-  Auth: boolean | null = null;
+  Auth: boolean | undefined = false;
 }
