@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { AuthServiceService } from '../../Services/Auth/auth-service.service';
 
 @Component({
   selector: 'app-home-page',
@@ -9,6 +10,10 @@ import { RouterModule } from '@angular/router';
   styleUrl: './home-page.component.css',
 })
 export class HomePageComponent implements OnInit {
+  constructor(private auth: AuthServiceService) {}
+
+  isAuthenticated: boolean = false;
+
   features = [
     {
       title: 'Efficiency',
@@ -54,6 +59,8 @@ export class HomePageComponent implements OnInit {
 
   ngOnInit(): void {
     this.intervalAnimate();
+
+    this.isAuthenticated = this.auth.sendData()?.isAuthenticated ?? false;
   }
 
   intervalAnimate(): void {

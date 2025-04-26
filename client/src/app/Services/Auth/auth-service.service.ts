@@ -52,20 +52,20 @@ export class AuthServiceService {
         if (token) {
           const decoded = jwtDecode<JwtPayload>(token);
 
-          console.log('Decoded token:', decoded);
-
           const data: AuthData = {
             userId: decoded.id,
             isAuthenticated: true,
             planId: decoded.plan_id,
             status: decoded.plan_status,
-            end_date: decoded.end_date
-              ? new Date(
-                  Number(decoded.end_date.split('.')[2]),
-                  Number(decoded.end_date.split('.')[1]) - 1,
-                  Number(decoded.end_date.split('.')[0])
-                )
-              : null,
+            end_date:
+              typeof decoded.end_date === 'string' &&
+              /^\d{1,2}\.\d{1,2}\.\d{4}$/.test(decoded.end_date)
+                ? new Date(
+                    Number(decoded.end_date.split('.')[2]),
+                    Number(decoded.end_date.split('.')[1]) - 1,
+                    Number(decoded.end_date.split('.')[0])
+                  )
+                : null,
           };
 
           this.userDataSubject.next(data);

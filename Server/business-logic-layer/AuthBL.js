@@ -39,7 +39,10 @@ async function LogIn(Email, HashedPassword) {
         id: Info.data[0].id,
         plan_id: Info.data[0].plan_id,
         plan_status: Info.data[0].status,
-        end_date: new Date(Info.data[0].end_date).toLocaleDateString(),
+        end_date:
+          Info.data[0].end_date === null
+            ? null
+            : new Date(Info.data[0].end_date).toLocaleDateString(),
       },
       process.env.JWT_SECRET,
       {

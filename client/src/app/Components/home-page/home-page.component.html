@@ -14,6 +14,7 @@
       class="HomePageBtns"
       id="get-started-btn"
       [routerLink]="['/SignUp']"
+      *ngIf="isAuthenticated === false"
     >
       Get Started
     </button>

@@ -1,0 +1,182 @@
+#choose-plan-section {
+  width: 100%;
+  height: 100vh;
+  text-align: center;
+  padding-top: 2.5rem;
+  margin: 3rem auto;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+#choose-plan-title {
+  font-size: 36px;
+  color: #000;
+  margin-bottom: 40px;
+}
+
+#choose-plan-description {
+  max-width: 800px;
+  margin: 0 auto 2rem auto;
+  font-size: 1.125rem;
+  line-height: 1.7;
+  color: #333;
+  text-align: center;
+}
+
+#choose-plan-description strong {
+  color: #1b5fe0;
+  font-weight: 600;
+}
+
+.Boxes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.plan-box-free,
+.plan-box-monthly,
+.plan-box-annual {
+  background: #ffffff;
+  border: 2px solid #1b5fe0;
+  border-radius: 12px;
+  padding: 30px 20px;
+  width: 300px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.plan-box-free h1,
+.plan-box-monthly h1,
+.plan-box-annual h1 {
+  font-size: 24px;
+  color: #000;
+  margin-bottom: 15px;
+}
+
+#free-plan-description,
+#monthly-plan-description,
+#annual-plan-description {
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+#free-plan-features,
+#monthly-plan-features,
+#annual-plan-features {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0;
+}
+
+.feature-item {
+  font-size: 16px;
+  color: #333;
+  margin: 10px 0;
+}
+
+#free-plan-price,
+#monthly-plan-price,
+#annual-plan-price {
+  font-size: 22px;
+  color: #1b5fe0;
+  margin-top: 20px;
+}
+
+.ChoosePlanBtn {
+  margin-top: 25px;
+  background-color: #1b5fe0;
+  color: #ffffff;
+  border: none;
+  padding: 12px 24px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.ChoosePlanBtn:hover {
+  background-color: #1548b0;
+  transform: scale(1.05);
+}
+
+@media (max-width: 1200px) {
+  .Boxes {
+    gap: 15px;
+  }
+}
+
+@media (max-width: 992px) {
+  #choose-plan-title {
+    font-size: 30px;
+  }
+
+  #choose-plan-description {
+    font-size: 1rem;
+  }
+
+  .plan-box-free,
+  .plan-box-monthly,
+  .plan-box-annual {
+    width: 260px;
+    padding: 25px 15px;
+  }
+
+  .plan-box-free h1,
+  .plan-box-monthly h1,
+  .plan-box-annual h1 {
+    font-size: 22px;
+  }
+
+  #free-plan-description,
+  #monthly-plan-description,
+  #annual-plan-description,
+  .feature-item {
+    font-size: 15px;
+  }
+
+  #free-plan-price,
+  #monthly-plan-price,
+  #annual-plan-price {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .Boxes {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .plan-box-free,
+  .plan-box-monthly,
+  .plan-box-annual {
+    width: 80%;
+    max-width: 400px;
+  }
+}
+
+@media (max-width: 576px) {
+  #choose-plan-title {
+    font-size: 26px;
+  }
+
+  #choose-plan-description {
+    font-size: 0.95rem;
+    padding: 0 1rem;
+  }
+
+  .ChoosePlanBtn {
+    width: 100%;
+    font-size: 15px;
+    padding: 10px 20px;
+  }
+
+  .plan-box-free,
+  .plan-box-monthly,
+  .plan-box-annual {
+    padding: 20px 15px;
+  }
+}

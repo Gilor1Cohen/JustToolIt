@@ -14,7 +14,9 @@
   <p *ngIf="UserData?.end_date">End in: {{ endDate | date : "mediumDate" }}</p>
 
   <div class="btns">
-    <button class="action-btn">Change Subscription</button>
+    <button class="action-btn" routerLink="/ChoosePlan">
+      Change Subscription
+    </button>
     <button class="action-btn" (click)="LogOut()">Log Out</button>
   </div>
 </section>

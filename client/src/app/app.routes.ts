@@ -67,6 +67,7 @@ export const routes: Routes = [
   },
   {
     path: 'ChoosePlan',
+    canActivate: [authGuard],
     loadComponent: () =>
       import('./Components/choose-plan/choose-plan.component').then(
         (m) => m.ChoosePlanComponent

@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { AuthServiceService } from '../../Services/Auth/auth-service.service';
 import { AuthData } from '../../Models/AuthModel';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-profile-page',
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './profile-page.component.html',
   styleUrl: './profile-page.component.css',
 })
@@ -16,12 +16,14 @@ export class ProfilePageComponent implements OnInit {
   endDate: Date | null = null;
 
   ngOnInit(): void {
-    console.log('Profile Page Component Initialized');
-
     this.auth.userData.subscribe((data) => {
       this.UserData = data;
 
-      this.endDate = new Date(this.UserData!.end_date!);
+      if (this.UserData?.end_date) {
+        this.endDate = new Date(this.UserData.end_date);
+      } else {
+        this.endDate = null;
+      }
     });
   }
 
