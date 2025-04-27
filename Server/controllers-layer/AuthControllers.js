@@ -21,8 +21,6 @@ router.post("/LogIn", async (req, res) => {
       return res.status(401).json({ message: "Invalid Email or Password" });
     }
 
-    console.log(LogInData);
-
     res.cookie("token", LogInData.token, {
       httpOnly: true,
       sameSite: "Lax",
@@ -75,6 +73,9 @@ router.post("/SignUp", async (req, res) => {
     return res.status(201).json({
       message: "User created successfully",
       userId,
+      planId: 1,
+      status: "active",
+      end_date: null,
     });
   } catch (error) {
     return res

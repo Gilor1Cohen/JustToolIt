@@ -8,7 +8,7 @@ import {
 } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { AuthServiceService } from '../../Services/Auth/auth-service.service';
-import { AuthError, LogInRes, SignUpRes } from '../../Models/AuthModel';
+import { AuthError, AuthRes } from '../../Models/AuthModel';
 
 @Component({
   selector: 'app-auth-page',
@@ -73,9 +73,15 @@ export class AuthPageComponent implements OnInit {
 
     this.isSignUp
       ? this.auth.SignUp(this.Form.value).subscribe({
-          next: (value: SignUpRes) => {
+          next: (value: AuthRes) => {
             this.Loading = false;
-            this.auth.setData(value.userId, true, null, null, null);
+            this.auth.setData(
+              value.userId,
+              true,
+              value.planId,
+              value.status,
+              value.end_date
+            );
             this.Error = '';
             this.Form.reset();
             this.router.navigate(['/ChoosePlan']);
@@ -86,7 +92,7 @@ export class AuthPageComponent implements OnInit {
           },
         })
       : this.auth.LogIn(this.Form.value).subscribe({
-          next: (value: LogInRes) => {
+          next: (value: AuthRes) => {
             this.Loading = false;
 
             this.Loading ? console.log('Loading...') : console.log('Loaded!');

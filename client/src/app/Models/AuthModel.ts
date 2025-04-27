@@ -9,17 +9,12 @@ export interface SignUpReq {
   Password: string;
 }
 
-export interface LogInRes {
+export interface AuthRes {
   message: string;
   userId: string;
   planId: number;
   status: 'active' | 'cancelled' | 'expired';
   end_date: Date | null;
-}
-
-export interface SignUpRes {
-  message: string;
-  userId: string;
 }
 
 export interface AuthError {

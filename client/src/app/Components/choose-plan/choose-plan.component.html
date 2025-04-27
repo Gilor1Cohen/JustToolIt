@@ -22,7 +22,16 @@
       </ul>
       <h3 id="free-plan-price">$0 / month</h3>
 
-      <button class="ChoosePlanBtn">Choose Plan</button>
+      <button
+        [disabled]="this.plan === 1 && this.planStatus === 'active'"
+        class="ChoosePlanBtn"
+      >
+        {{
+          this.plan === 1 && this.planStatus === "active"
+            ? "Current Plan"
+            : "Choose Plan"
+        }}
+      </button>
     </div>
 
     <div class="plan-box-monthly">
@@ -38,7 +47,16 @@
       </ul>
       <h3 id="monthly-plan-price">$9.99 / month</h3>
 
-      <button class="ChoosePlanBtn">Choose Plan</button>
+      <button
+        [disabled]="this.plan === 2 && this.planStatus === 'active'"
+        class="ChoosePlanBtn"
+      >
+        {{
+          this.plan === 2 && this.planStatus === "active"
+            ? "Current Plan"
+            : "Choose Plan"
+        }}
+      </button>
     </div>
 
     <div class="plan-box-annual">
@@ -56,7 +74,16 @@
       </ul>
       <h3 id="annual-plan-price">$99.99 / year</h3>
 
-      <button class="ChoosePlanBtn">Choose Plan</button>
+      <button
+        [disabled]="this.plan === 3 && this.planStatus === 'active'"
+        class="ChoosePlanBtn"
+      >
+        {{
+          this.plan === 3 && this.planStatus === "active"
+            ? "Current Plan"
+            : "Choose Plan"
+        }}
+      </button>
     </div>
   </div>
 </section>

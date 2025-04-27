@@ -2,9 +2,8 @@ import { Injectable } from '@angular/core';
 import {
   AuthData,
   LogInReq,
-  LogInRes,
+  AuthRes,
   SignUpReq,
-  SignUpRes,
   JwtPayload,
 } from '../../Models/AuthModel';
 import { HttpClient } from '@angular/common/http';
@@ -22,14 +21,14 @@ export class AuthServiceService {
 
   constructor(private http: HttpClient) {}
 
-  LogIn(data: LogInReq): Observable<LogInRes> {
-    return this.http.post<LogInRes>(this.baseUrl + '/LogIn', data, {
+  LogIn(data: LogInReq): Observable<AuthRes> {
+    return this.http.post<AuthRes>(this.baseUrl + '/LogIn', data, {
       withCredentials: true,
     });
   }
 
-  SignUp(data: SignUpReq): Observable<SignUpRes> {
-    return this.http.post<SignUpRes>(this.baseUrl + '/SignUp', data, {
+  SignUp(data: SignUpReq): Observable<AuthRes> {
+    return this.http.post<AuthRes>(this.baseUrl + '/SignUp', data, {
       withCredentials: true,
     });
   }

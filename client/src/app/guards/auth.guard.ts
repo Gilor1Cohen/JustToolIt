@@ -11,9 +11,6 @@ export const authGuard: CanActivateFn = (route, state) => {
 
   const currentUrl = state.url;
 
-  console.log('%c[Guard] currentUrl:', 'color: orange', currentUrl);
-  console.log('%c[Guard] isLoggedIn:', 'color: orange', isLoggedIn);
-
   if ((currentUrl === '/SignUp' || currentUrl === '/LogIn') && isLoggedIn) {
     router.navigate(['/']);
     return false;
