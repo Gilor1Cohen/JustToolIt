@@ -23,7 +23,10 @@
       <h3 id="free-plan-price">$0 / month</h3>
 
       <button
-        [disabled]="this.plan === 1 && this.planStatus === 'active'"
+        [disabled]="
+          (this.plan === 1 && this.planStatus === 'active') || this.Loading
+        "
+        (click)="this.choosePlan(1)"
         class="ChoosePlanBtn"
       >
         {{
@@ -48,7 +51,10 @@
       <h3 id="monthly-plan-price">$9.99 / month</h3>
 
       <button
-        [disabled]="this.plan === 2 && this.planStatus === 'active'"
+        [disabled]="
+          (this.plan === 2 && this.planStatus === 'active') || this.Loading
+        "
+        (click)="this.choosePlan(2)"
         class="ChoosePlanBtn"
       >
         {{
@@ -75,7 +81,10 @@
       <h3 id="annual-plan-price">$99.99 / year</h3>
 
       <button
-        [disabled]="this.plan === 3 && this.planStatus === 'active'"
+        [disabled]="
+          (this.plan === 3 && this.planStatus === 'active') || this.Loading
+        "
+        (click)="this.choosePlan(3)"
         class="ChoosePlanBtn"
       >
         {{

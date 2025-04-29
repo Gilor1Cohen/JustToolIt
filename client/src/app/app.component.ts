@@ -18,31 +18,55 @@ export class AppComponent implements OnInit {
     this.auth.getToken().subscribe({
       next: (data: { token: string }) => {
         if (!data.token) {
-          this.auth.setData(null, false, null, null, null);
+          this.auth.setData({
+            userId: null,
+            isAuthenticated: false,
+            planId: null,
+            status: null,
+            end_date: null,
+          });
           return;
         }
 
         this.auth.getUserData(data.token).subscribe({
           next: (data: AuthData | null) => {
             if (data) {
-              this.auth.setData(
-                data.userId?.toString() ?? null,
-                data.isAuthenticated,
-                data.planId,
-                data.status,
-                data.end_date
-              );
+              this.auth.setData({
+                userId: data.userId?.toString() ?? null,
+                isAuthenticated: data.isAuthenticated,
+                planId: data.planId,
+                status: data.status,
+                end_date: data.end_date,
+              });
             } else {
-              this.auth.setData(null, false, null, null, null);
+              this.auth.setData({
+                userId: null,
+                isAuthenticated: false,
+                planId: null,
+                status: null,
+                end_date: null,
+              });
             }
           },
-          error: (err: any) => {
-            this.auth.setData(null, false, null, null, null);
+          error: () => {
+            this.auth.setData({
+              userId: null,
+              isAuthenticated: false,
+              planId: null,
+              status: null,
+              end_date: null,
+            });
           },
         });
       },
-      error: (err: any) => {
-        this.auth.setData(null, false, null, null, null);
+      error: () => {
+        this.auth.setData({
+          userId: null,
+          isAuthenticated: false,
+          planId: null,
+          status: null,
+          end_date: null,
+        });
       },
     });
   }

@@ -50,3 +50,16 @@ export interface JwtPayload {
   iat: number;
   exp: number;
 }
+
+export interface PlanChangeResponse {
+  success: boolean;
+  message: string;
+  data: {
+    user_id: string;
+    plan_id: number;
+    status: 'active' | 'cancelled' | 'expired';
+    start_date: string;
+    end_date: string;
+    created_at: string;
+  };
+}

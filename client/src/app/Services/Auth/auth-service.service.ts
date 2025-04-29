@@ -80,22 +80,15 @@ export class AuthServiceService {
     });
   }
 
-  setData(
-    userId: string | null,
-    authStatus: boolean,
-    planId: number | null,
-    status: 'active' | 'cancelled' | 'expired' | null,
-    end_date: Date | null
-  ): void {
-    const data: AuthData = {
-      userId,
-      isAuthenticated: authStatus,
-      planId,
-      status,
-      end_date,
+  setData(update: Partial<AuthData>): void {
+    const current = this.userDataSubject.value ?? {
+      userId: null,
+      isAuthenticated: false,
+      planId: null,
+      status: null,
+      end_date: null,
     };
-
-    this.userDataSubject.next(data);
+    this.userDataSubject.next({ ...current, ...update });
   }
 
   sendData(): AuthData | null {

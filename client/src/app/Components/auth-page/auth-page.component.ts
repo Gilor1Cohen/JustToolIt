@@ -75,13 +75,13 @@ export class AuthPageComponent implements OnInit {
       ? this.auth.SignUp(this.Form.value).subscribe({
           next: (value: AuthRes) => {
             this.Loading = false;
-            this.auth.setData(
-              value.userId,
-              true,
-              value.planId,
-              value.status,
-              value.end_date
-            );
+            this.auth.setData({
+              userId: value.userId?.toString() ?? null,
+              isAuthenticated: true,
+              planId: value.planId,
+              status: value.status,
+              end_date: value.end_date,
+            });
             this.Error = '';
             this.Form.reset();
             this.router.navigate(['/ChoosePlan']);
@@ -97,13 +97,13 @@ export class AuthPageComponent implements OnInit {
 
             this.Loading ? console.log('Loading...') : console.log('Loaded!');
 
-            this.auth.setData(
-              value.userId,
-              true,
-              value.planId,
-              value.status,
-              value.end_date
-            );
+            this.auth.setData({
+              userId: value.userId?.toString() ?? null,
+              isAuthenticated: true,
+              planId: value.planId,
+              status: value.status,
+              end_date: value.end_date,
+            });
             this.Form.reset();
             this.router.navigate(['/Tools']);
           },

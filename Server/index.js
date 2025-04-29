@@ -15,6 +15,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use("/Auth", require("./controllers-layer/AuthControllers"));
+app.use("/Payment", require("./controllers-layer/PaymentControllers"));
 
 app.use(/.*/, (req, res) => {
   res.status(404).send(`Route not found ${req.originalUrl}`);

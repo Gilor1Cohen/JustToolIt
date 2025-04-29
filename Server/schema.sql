@@ -29,7 +29,6 @@ CREATE TABLE IF NOT EXISTS user_subscriptions (
 );
 
 
-
 CREATE TABLE IF NOT EXISTS payments (
   id INT AUTO_INCREMENT PRIMARY KEY,
   user_id INT NOT NULL,
@@ -65,9 +64,34 @@ REFERENCES user_subscriptions(id)
 ON DELETE CASCADE;
 
 
-INSERT INTO subscription_plans (id, type, price, billing_interval)
+INSERT INTO subscription_plans (type, price, billing_interval)
 VALUES 
-  (1, 'free', 0.00, 'none'),
-  (2, 'monthly', 9.90, 'month'),
-  (3, 'yearly', 99.90, 'year');
+  ( 'free', 0.00, 'none'),
+  ( 'monthly', 9.90, 'month'),
+  ( 'yearly', 99.90, 'year');
 
+
+
+INSERT INTO users (user_name, email, password_hash)
+VALUES ('Gilor', 'gilor6811@gmail.com', '$2b$10$0uXxKXR4MZmknRkK77UlGuGBQrhCpS5J48VJN05yeP1xAqMhJlrUG'), -- password: 123456789
+
+ ('Gil', 'gilor6812@gmail.com', '$2b$10$0uXxKXR4MZmknRkK77UlGuGBQrhCpS5J48VJN05yeP1xAqMhJlrUG'), -- password: 123456789
+
+ ('Or', 'gilor6813@gmail.com', '$2b$10$0uXxKXR4MZmknRkK77UlGuGBQrhCpS5J48VJN05yeP1xAqMhJlrUG'); -- password: 123456789
+
+
+
+
+INSERT INTO user_subscriptions (user_id, plan_id, status, start_date, end_date)
+VALUES
+  (1, 1, 'active', CURDATE(), NULL),
+  (2, 2, 'active', CURDATE(), DATE_ADD(CURDATE(), INTERVAL 1 MONTH)),
+  (3, 3, 'active', CURDATE(), DATE_ADD(CURDATE(), INTERVAL 1 YEAR));
+
+
+
+INSERT INTO payments (user_id, subscription_id, amount, status)
+VALUES
+  (2, 2, 9.90, 'success'),
+  (3, 3, 99.90, 'success');
+  

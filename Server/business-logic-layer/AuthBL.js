@@ -3,8 +3,9 @@ const {
   IsEmailExists,
   GetInfoByEmail,
   AddNewUser,
-  AddUserToFreePlan,
 } = require("../data-accsess-layer/AuthDAL");
+
+const { CreateNewSubscription } = require("../data-accsess-layer/PaymentDAL");
 
 const bcrypt = require("bcrypt");
 
@@ -76,7 +77,13 @@ async function SignUp(FirstName, Email, Password) {
 
     const userId = add.data.insertId;
 
-    const addFreePlan = await AddUserToFreePlan(userId);
+    const addFreePlan = await CreateNewSubscription(
+      userId,
+      1,
+      new Date(),
+      null
+    );
+
     if (addFreePlan.success === false) {
       throw new Error("Failed to add user plan");
     }
@@ -99,9 +106,9 @@ async function SignUp(FirstName, Email, Password) {
       success: true,
       token,
       userId,
-      plan_id: addFreePlan.plan_id,
-      plan_status: addFreePlan.status,
-      end_date: new Date(addFreePlan.end_date).toLocaleDateString(),
+      plan_id: addFreePlan.data.plan_id,
+      plan_status: addFreePlan.data.status,
+      end_date: new Date(addFreePlan.data.end_date).toLocaleDateString(),
     };
   } catch (error) {
     throw new Error(error.message || "Internal server error");
