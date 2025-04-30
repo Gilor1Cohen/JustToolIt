@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthServiceService } from '../../Services/Auth/auth-service.service';
-import { AuthData, AuthRes, PlanChangeResponse } from '../../Models/AuthModel';
+import { AuthServiceService } from '../../../Core/Services/Auth/auth-service.service';
+import { AuthData, PlanChangeResponse } from '../../../Core/Models/AuthModel';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { PaymentService } from '../../Services/Payment/payment.service';
+import { PaymentService } from '../../../Core/Services/Payment/payment.service';
 
 @Component({
   selector: 'app-choose-plan',

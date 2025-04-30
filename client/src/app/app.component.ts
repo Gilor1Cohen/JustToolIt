@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { NavBarComponent } from './Components/nav-bar/nav-bar.component';
-import { FooterComponent } from './Components/footer/footer.component';
+import { FooterComponent } from './Components/Layout/footer/footer.component';
+import { NavBarComponent } from './Components/Layout/nav-bar/nav-bar.component';
 import { AuthServiceService } from './Services/Auth/auth-service.service';
-import { AuthData } from './Models/AuthModel';
+import { AuthData } from './Core/Models/AuthModel';
 
 @Component({
   selector: 'app-root',

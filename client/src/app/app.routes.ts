@@ -1,18 +1,18 @@
 import { Routes } from '@angular/router';
-import { authGuard } from './guards/auth.guard';
+import { authGuard } from './Core/guards/auth.guard';
 
 export const routes: Routes = [
   {
     path: '',
     loadComponent: () =>
-      import('./Components/home-page/home-page.component').then(
+      import('./Components/Pages/home-page/home-page.component').then(
         (m) => m.HomePageComponent
       ),
   },
   {
     path: 'Tools',
     loadComponent: () =>
-      import('./Components/tools-page/tools-page.component').then(
+      import('./Components/Pages/tools-page/tools-page.component').then(
         (m) => m.ToolsPageComponent
       ),
   },
@@ -20,7 +20,7 @@ export const routes: Routes = [
   {
     path: 'Pricing',
     loadComponent: () =>
-      import('./Components/pricing-page/pricing-page.component').then(
+      import('./Components/Pages/pricing-page/pricing-page.component').then(
         (m) => m.PricingPageComponent
       ),
   },
@@ -28,22 +28,22 @@ export const routes: Routes = [
   {
     path: 'FAQs',
     loadComponent: () =>
-      import('./Components/faqs-page/faqs-page.component').then(
+      import('./Components/Pages/faqs-page/faqs-page.component').then(
         (m) => m.FAQsPageComponent
       ),
   },
   {
     path: 'Terms-Of-Service',
     loadComponent: () =>
-      import('./Components/terms-of-service/terms-of-service.component').then(
-        (m) => m.TermsOfServiceComponent
-      ),
+      import(
+        './Components/Pages/terms-of-service/terms-of-service.component'
+      ).then((m) => m.TermsOfServiceComponent),
   },
 
   {
     path: 'Privacy-Policy',
     loadComponent: () =>
-      import('./Components/privacy-policy/privacy-policy.component').then(
+      import('./Components/Pages/privacy-policy/privacy-policy.component').then(
         (m) => m.PrivacyPolicyComponent
       ),
   },

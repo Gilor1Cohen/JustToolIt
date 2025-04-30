@@ -5,7 +5,7 @@ import {
   AuthRes,
   SignUpReq,
   JwtPayload,
-} from '../../Models/AuthModel';
+} from '../../Core/Models/AuthModel';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { jwtDecode } from 'jwt-decode';

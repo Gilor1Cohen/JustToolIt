@@ -7,8 +7,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { AuthServiceService } from '../../Services/Auth/auth-service.service';
-import { AuthError, AuthRes } from '../../Models/AuthModel';
+import { AuthServiceService } from '../../../Core/Services/Auth/auth-service.service';
+import { AuthError, AuthRes } from '../../../Core/Models/AuthModel';
 
 @Component({
   selector: 'app-auth-page',
