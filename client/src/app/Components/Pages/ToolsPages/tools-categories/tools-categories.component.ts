@@ -4,8 +4,6 @@ import { Component } from '@angular/core';
   selector: 'app-tools-categories',
   imports: [],
   templateUrl: './tools-categories.component.html',
-  styleUrl: './tools-categories.component.css'
+  styleUrl: './tools-categories.component.css',
 })
-export class ToolsCategoriesComponent {
-
-}
+export class ToolsCategoriesComponent {}

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { FooterComponent } from './Components/Layout/footer/footer.component';
 import { NavBarComponent } from './Components/Layout/nav-bar/nav-bar.component';
-import { AuthServiceService } from './Services/Auth/auth-service.service';
+import { AuthServiceService } from './Core/Services/Auth/auth-service.service';
 import { AuthData } from './Core/Models/AuthModel';
 
 @Component({

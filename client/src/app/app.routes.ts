@@ -9,13 +9,6 @@ export const routes: Routes = [
         (m) => m.HomePageComponent
       ),
   },
-  {
-    path: 'Tools',
-    loadComponent: () =>
-      import('./Components/Pages/tools-page/tools-page.component').then(
-        (m) => m.ToolsPageComponent
-      ),
-  },
 
   {
     path: 'Pricing',
@@ -52,7 +45,7 @@ export const routes: Routes = [
     path: 'SignUp',
     canActivate: [authGuard],
     loadComponent: () =>
-      import('./Components/auth-page/auth-page.component').then(
+      import('./Components/Pages/auth-page/auth-page.component').then(
         (m) => m.AuthPageComponent
       ),
   },
@@ -61,7 +54,7 @@ export const routes: Routes = [
     path: 'LogIn',
     canActivate: [authGuard],
     loadComponent: () =>
-      import('./Components/auth-page/auth-page.component').then(
+      import('./Components/Pages/auth-page/auth-page.component').then(
         (m) => m.AuthPageComponent
       ),
   },
@@ -69,7 +62,7 @@ export const routes: Routes = [
     path: 'ChoosePlan',
     canActivate: [authGuard],
     loadComponent: () =>
-      import('./Components/choose-plan/choose-plan.component').then(
+      import('./Components/Pages/choose-plan/choose-plan.component').then(
         (m) => m.ChoosePlanComponent
       ),
   },
@@ -77,7 +70,28 @@ export const routes: Routes = [
     path: 'Profile',
     canActivate: [authGuard],
     loadComponent: () =>
-      import('./Components/profile-page/profile-page.component').then(
+      import('./Components/Pages/profile-page/profile-page.component').then(
+        (m) => m.ProfilePageComponent
+      ),
+  },
+  {
+    path: 'tools',
+    loadComponent: () =>
+      import(
+        './Components/Pages/ToolsPages/tools-categories/tools-categories.component'
+      ).then((m) => m.ToolsCategoriesComponent),
+  },
+  {
+    path: 'tools/:category',
+    loadComponent: () =>
+      import(
+        './Components/Pages/ToolsPages/tools-categories-details/tools-categories-details.component'
+      ).then((m) => m.ToolsCategoriesDetailsComponent),
+  },
+  {
+    path: 'tools/:category/:tool',
+    loadComponent: () =>
+      import('./Components/Pages/profile-page/profile-page.component').then(
         (m) => m.ProfilePageComponent
       ),
   },
