@@ -1,1 +1,27 @@
-<p>tools-categories works!</p>
+<section id="ToolsSection">
+  <h1>Tools Categories</h1>
+
+  <div class="tools-categories-container">
+    <ng-container *ngIf="toolsCategories && toolsCategories.length > 0">
+      <div class="tools-category-card" *ngFor="let category of toolsCategories">
+        <div class="category-box">
+          <div class="left-category-box">
+            <img
+              [src]="'./assets/images/' + category.image_url"
+              alt="{{ category.name }}"
+              class="category-image"
+            />
+            <p class="category-name">{{ category.name }}</p>
+          </div>
+
+          <button
+            [routerLink]="['/Tools', toSlug(category.name)]"
+            class="category-button"
+          >
+            Go to the category
+          </button>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</section>

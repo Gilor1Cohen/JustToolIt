@@ -75,21 +75,21 @@ export const routes: Routes = [
       ),
   },
   {
-    path: 'tools',
+    path: 'Tools',
     loadComponent: () =>
       import(
         './Components/Pages/ToolsPages/tools-categories/tools-categories.component'
       ).then((m) => m.ToolsCategoriesComponent),
   },
   {
-    path: 'tools/:category',
+    path: 'Tools/:category',
     loadComponent: () =>
       import(
         './Components/Pages/ToolsPages/tools-categories-details/tools-categories-details.component'
       ).then((m) => m.ToolsCategoriesDetailsComponent),
   },
   {
-    path: 'tools/:category/:tool',
+    path: 'Tools/:category/:tool',
     loadComponent: () =>
       import('./Components/Pages/profile-page/profile-page.component').then(
         (m) => m.ProfilePageComponent

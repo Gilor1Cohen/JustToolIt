@@ -1,0 +1,128 @@
+#ToolsSection {
+  padding: 3rem;
+  max-width: 800px;
+  margin: 1.5rem auto;
+}
+
+#ToolsSection h1 {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.tools-categories-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.tools-category-card {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 0 0 1px #e0e0e0;
+  transition: box-shadow 0.2s ease;
+}
+
+.category-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.left-category-box {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.category-image {
+  width: 4rem;
+  height: 4rem;
+}
+
+.category-name {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #111;
+}
+
+.category-button {
+  background-color: #0066ff;
+  color: white;
+  border: none;
+  padding: 0.5rem 1.2rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.category-button:hover {
+  background-color: #0052cc;
+}
+
+@media (max-width: 480px) {
+  #ToolsSection {
+    padding: 4rem 0.125rem;
+    margin-top: 5rem;
+  }
+
+  #ToolsSection h1 {
+    font-size: 1.5rem;
+  }
+
+  .tools-category-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .category-box {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.8rem;
+  }
+
+  .left-category-box {
+    flex-direction: row;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .category-image {
+    width: 3rem;
+    height: 3rem;
+  }
+
+  .category-button {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@media (max-width: 768px) {
+  #ToolsSection h1 {
+    font-size: 1.75rem;
+  }
+
+  .tools-categories-container {
+    gap: 0.8rem;
+  }
+
+  .category-image {
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+
+  .category-button {
+    padding: 0.45rem 1rem;
+    font-size: 0.9rem;
+  }
+}
