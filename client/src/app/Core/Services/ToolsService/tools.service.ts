@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ToolCategory } from '../../Models/ToolsModel';
+import { ToolCategory, ToolDetails } from '../../Models/ToolsModel';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -15,7 +15,7 @@ export class ToolsService {
     return this.http.get<ToolCategory[]>(this.Url + 'GetToolsCategories');
   }
 
-  getToolsList(): Observable<any[]> {
-    return this.http.get<any[]>(this.Url + 'GetToolsList');
+  getToolsList(name: string): Observable<ToolDetails[]> {
+    return this.http.get<ToolDetails[]>(this.Url + 'GetToolsList/' + name);
   }
 }

@@ -21,15 +21,23 @@ router.get("/GetToolsCategories", async (req, res) => {
   }
 });
 
-router.get("/GetToolsList", async (req, res) => {
+router.get("/GetToolsList/:name", async (req, res) => {
   try {
-    const list = await GetToolsList();
+    const { name } = req.params;
 
-    if (!list || list.length === 0) {
+    console.log(`name: ${name}`);
+
+    if (!name) {
+      return res.status(400).json({ message: "Category name is required" });
+    }
+
+    const list = await GetToolsList(`${name.replace(/-/g, " ")}`);
+
+    if (!list || list.success === false) {
       return res.status(404).json({ message: "No categories found" });
     }
 
-    return res.status(200).json(categories);
+    return res.status(200).json(list);
   } catch (error) {
     res.status(500).json({ error: error.message | "Internal server error" });
   }

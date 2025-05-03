@@ -1,0 +1,110 @@
+#tools-categories-details {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 100vh;
+  margin: 2rem 0;
+  padding: 2rem;
+}
+
+#tools-categories-details button {
+  background-color: #1a73e8;
+  color: #fff;
+  border: none;
+  border-radius: 2rem;
+  padding: 0.6rem 1.5rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+#tools-categories-details button:hover {
+  background-color: #0c58d0;
+}
+
+.Tools {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.ToolBox {
+  background-color: #fff;
+  border-radius: 1rem;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.ToolBox button {
+  align-self: flex-start;
+}
+
+.ToolBox h3 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: #202124;
+}
+
+.ToolBox p {
+  font-size: 1rem;
+  color: #5f6368;
+  flex-grow: 1;
+  margin-bottom: 1.5rem;
+}
+
+#loading h1 {
+  font-size: 1.5rem;
+  color: #5f6368;
+  text-align: center;
+}
+
+#error-btn {
+  margin-top: 1rem;
+}
+
+@media (max-width: 1024px) {
+  .Tools {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  #tools-categories-details {
+    padding: 1.75rem 1rem;
+    margin-top: 5rem;
+  }
+
+  .Tools {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .ToolBox {
+    padding: 1.5rem;
+  }
+
+  .ToolBox h3 {
+    font-size: 1.2rem;
+  }
+
+  .ToolBox p {
+    font-size: 0.95rem;
+  }
+
+  #tools-categories-details button {
+    font-size: 0.9rem;
+    padding: 0.5rem 1.2rem;
+  }
+}

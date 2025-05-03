@@ -1,1 +1,26 @@
-<p>tools-categories-details works!</p>
+<section id="tools-categories-details">
+  <ng-container [ngSwitch]="loading">
+    <div id="loading" *ngSwitchCase="true">
+      <h1>Loading data...</h1>
+    </div>
+
+    <ng-container *ngSwitchCase="false">
+      <ng-container *ngIf="toolsList && toolsList.length > 0; else noTools">
+        <div class="Tools">
+          <div class="ToolBox" *ngFor="let tool of toolsList">
+            <h3>{{ tool.name }}</h3>
+            <p>{{ tool.description }}</p>
+            <button>Go to the tool</button>
+          </div>
+        </div>
+      </ng-container>
+
+      <ng-template #noTools>
+        <p *ngIf="error">{{ error }}</p>
+        <p *ngIf="!error">No tools found.</p>
+
+        <button id="error-btn" routerLink="/Tools">Tools Page</button>
+      </ng-template>
+    </ng-container>
+  </ng-container>
+</section>

@@ -98,7 +98,6 @@ VALUES
 CREATE TABLE IF NOT EXISTS tools_categories (
   id INT AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(100) NOT NULL UNIQUE,
-  description TEXT NOT NULL,
   image_url VARCHAR(255) NOT NULL
 );
 
@@ -119,31 +118,31 @@ ALTER TABLE tools_details
 
 
 
-INSERT INTO tools_categories (name, description, image_url) VALUES
-  ("Student Tools", "Interactive and intelligent utilities that help students calculate, translate and practice topics for enhanced learning.", "student-tools.png"),
-  ("Teacher Tools", "A suite of tools designed to streamline and automate teachers’ workflows, from test creation to multimedia recommendations.", "teacher-tools.png"),
-  ("Developer Tools", "A collection of practical coding assistants and format converters to speed up development and debugging tasks.", "developer-tools.png"),
-  ("Content Creator Tools", "Creative helpers for generating names, audio files, and precise read-time estimates to optimize content production.", "content-creator-tools.png"),
-  ("Food and Health Tools", "Lifestyle calculators and trackers for managing BMI, water intake, calories and personalized fitness goals.", "food-health-tools.png"),
-  ("Cooking and Baking Tools", "Kitchen assistants that convert units, suggest recipes, and calculate accurate baking times for perfect results.", "cooking-baking-tools.png"),
-  ("Online Ordering Tools", "Verification utilities to check product availability, read reviews, and ensure secure shopping on e-commerce sites.", "online-ordering-tools.png"),
-  ("Accessibility Tools", "Diagnostic and translation services to evaluate website and public accessibility, including sign-language conversion.", "accessibility-tools.png"),
-  ("Parenting Tools", "Comprehensive planners and trackers for baby sleep, feeding schedules, developmental milestones and child activities.", "parenting-tools.png"),
-  ("Religious Tools", "Faith-based utilities providing prayer times, scripture search, fasting calculators and nearby worship locations.", "religious-tools.png"),
-  ("Women’s Tools", "Health-focused calculators for fertility tracking, pregnancy progression, and checking cosmetic ingredients safely.", "womens-tools.png"),
-  ("Kids Tools", "Fun and educational generators to create puzzles, stories, jokes and playful “horoscope” forecasts for children.", "kids-tools.png"),
-  ("Football Tools", "Live updates, statistical insights and trivia quizzes to engage football fans with real-time and historical data.", "football-tools.png"),
-  ("Finance and Money Tools", "Financial calculators and converters that help manage currency exchange, interest projections and investments.", "finance-money-tools.png"),
-  ("Vehicle Tools", "Automotive assistants for checking fuel efficiency, locating gas stations, and comparing tire and used-car specs.", "vehicle-tools.png"),
-  ("Physics Tools", "Scientific calculators covering mechanics, energy, thermodynamics and motion to support students and professionals.", "physics-tools.png"),
-  ("Astronomy and Astrophysics Tools", "Space science utilities for computing planetary weights, escape velocities, and lunar phases at any location.", "astronomy-tools.png"),
-  ("Chemistry Tools", "Molecular and gas-law calculators, visual formula parsers, and SMILES reconstructions for chemists.", "chemistry-tools.png"),
-  ("Math Tools", "Advanced mathematical tools for graph plotting, equation solving, probability and calculus operations.", "math-tools.png"),
-  ("Weather Tools", "Meteorological utilities offering current weather checks, 7-day forecasts and astronomical cycle calculations.", "weather-tools.png"),
-  ("History Tools", "Interactive history helpers delivering fun facts, trivia quizzes and period-distance calculators between events.", "history-tools.png"),
-  ("Music Tools", "Musical assistants such as chord converters and more to support musicians in composition and practice.", "music-tools.png"),
-  ("Random Tools", "Generative fun utilities that produce facts, jokes, quotes and relaxing music to entertain and inspire.", "random-tools.png"),
-  ("Other Tools", "A broad miscellaneous category including converters, downloaders, QR code generators and utility managers.", "other-tools.png");
+INSERT INTO tools_categories (name, image_url) VALUES
+  ("Student Tools", "student-tools.png"),
+  ("Teacher Tools", "teacher-tools.png"),
+  ("Developer Tools", "developer-tools.png"),
+  ("Content Creator Tools", "content-creator-tools.png"),
+  ("Food and Health Tools", "food-health-tools.png"),
+  ("Cooking and Baking Tools", "cooking-baking-tools.png"),
+  ("Online Ordering Tools", "online-ordering-tools.png"),
+  ("Accessibility Tools", "accessibility-tools.png"),
+  ("Parenting Tools", "parenting-tools.png"),
+  ("Religious Tools", "religious-tools.png"),
+  ("Women’s Tools", "womens-tools.png"),
+  ("Kids Tools", "kids-tools.png"),
+  ("Football Tools", "football-tools.png"),
+  ("Finance and Money Tools", "finance-money-tools.png"),
+  ("Vehicle Tools", "vehicle-tools.png"),
+  ("Physics Tools", "physics-tools.png"),
+  ("Astronomy and Astrophysics Tools", "astronomy-tools.png"),
+  ("Chemistry Tools", "chemistry-tools.png"),
+  ("Math Tools", "math-tools.png"),
+  ("Weather Tools", "weather-tools.png"),
+  ("History Tools", "history-tools.png"),
+  ("Music Tools", "music-tools.png"),
+  ("Random Tools", "random-tools.png"),
+  ("Other Tools", "other-tools.png");
 
 
 INSERT INTO tools_details (name, description, category_id, endpoint) VALUES
@@ -169,7 +168,7 @@ INSERT INTO tools_details (name, description, category_id, endpoint) VALUES
 
 INSERT INTO tools_details (name, description, category_id, endpoint) VALUES
   ("Name Generator", "Randomly crafts brand or project names based on keywords, themes and language preferences.", 4, "name-generator"),
-  ("Text-to-Audio Converter (gTTS.js)", "Transforms written text into natural-sounding speech using Google's TTS engine for podcasts or videos.", 4, "text-to-audio-converter"),
+  ("Text-to-Audio Converter", "Transforms written text into natural-sounding speech using Google's TTS engine for podcasts or videos.", 4, "text-to-audio-converter"),
   ("Read Time Estimate Calculator", "Calculates how long an average reader would take to finish a given text, optimizing content length.", 4, "read-time-estimate-calculator")
 ;
 

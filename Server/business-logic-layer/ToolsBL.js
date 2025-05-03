@@ -1,5 +1,6 @@
 const {
   ToolsCategories,
+  ToolsCategoriesIDByName,
   ToolsList,
 } = require("../data-accsess-layer/ToolsDAL");
 
@@ -11,9 +12,18 @@ async function GetToolsCategories() {
   }
 }
 
-async function GetToolsList() {
+async function GetToolsList(name) {
   try {
-    return await ToolsList();
+    const CategoriesId = await ToolsCategoriesIDByName(name);
+
+    if (CategoriesId.success === false) {
+      return {
+        success: false,
+        message: CategoriesId.message,
+      };
+    }
+
+    return await ToolsList(CategoriesId);
   } catch (error) {
     throw error;
   }
