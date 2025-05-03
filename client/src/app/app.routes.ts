@@ -1,5 +1,6 @@
-import { Routes } from '@angular/router';
+import { ActivatedRouteSnapshot, Routes } from '@angular/router';
 import { authGuard } from './Core/guards/auth.guard';
+import { toolsMap } from './Core/Mapping/ToolsMap';
 
 export const routes: Routes = [
   {
@@ -76,24 +77,27 @@ export const routes: Routes = [
   },
   {
     path: 'Tools',
-    loadComponent: () =>
-      import(
-        './Components/Pages/ToolsPages/tools-categories/tools-categories.component'
-      ).then((m) => m.ToolsCategoriesComponent),
-  },
-  {
-    path: 'Tools/:category',
-    loadComponent: () =>
-      import(
-        './Components/Pages/ToolsPages/tools-categories-details/tools-categories-details.component'
-      ).then((m) => m.ToolsCategoriesDetailsComponent),
-  },
-  {
-    path: 'Tools/:category/:tool',
-    loadComponent: () =>
-      import('./Components/Pages/profile-page/profile-page.component').then(
-        (m) => m.ProfilePageComponent
-      ),
+    children: [
+      {
+        path: '',
+        loadComponent: () =>
+          import(
+            './Components/Pages/ToolsPages/tools-categories/tools-categories.component'
+          ).then((m) => m.ToolsCategoriesComponent),
+      },
+      {
+        path: ':category',
+        loadComponent: () =>
+          import(
+            './Components/Pages/ToolsPages/tools-categories-details/tools-categories-details.component'
+          ).then((m) => m.ToolsCategoriesDetailsComponent),
+      },
+
+      ...Object.entries(toolsMap).map(([slug, loader]) => ({
+        path: `:category/${slug}`,
+        loadComponent: loader,
+      })),
+    ],
   },
 
   { path: '**', redirectTo: '', pathMatch: 'full' },

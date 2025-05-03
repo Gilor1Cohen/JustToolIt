@@ -52,7 +52,7 @@ export class HomePageComponent implements OnInit {
   Users: number = 0;
 
   UsersTarget: number = 50000;
-  ToolsTarget: number = 15;
+  ToolsTarget: number = 130;
   RatingTarget: number = 10;
 
   interval: any = null;

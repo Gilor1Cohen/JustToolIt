@@ -10,7 +10,9 @@
           <div class="ToolBox" *ngFor="let tool of toolsList">
             <h3>{{ tool.name }}</h3>
             <p>{{ tool.description }}</p>
-            <button>Go to the tool</button>
+            <button [routerLink]="['/Tools', tool.endpoint]">
+              Go to the tool
+            </button>
           </div>
         </div>
       </ng-container>

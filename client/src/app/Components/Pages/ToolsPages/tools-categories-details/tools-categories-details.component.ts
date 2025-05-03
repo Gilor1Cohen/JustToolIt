@@ -33,6 +33,8 @@ export class ToolsCategoriesDetailsComponent implements OnInit {
     this.tools.getToolsList(this.categoryName).subscribe({
       next: (value: ToolDetails[]) => {
         this.toolsList = value;
+        console.log(value[0].endpoint);
+
         this.loading = false;
       },
 
