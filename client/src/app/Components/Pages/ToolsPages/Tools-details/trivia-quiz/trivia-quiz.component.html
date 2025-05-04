@@ -1,0 +1,118 @@
+<section id="TriviaPage">
+  <h1>Trivia</h1>
+
+  <form (ngSubmit)="onSubmit()" [formGroup]="Form" id="form">
+    <div class="Form-Box">
+      <select formControlName="category" name="category" id="categorySelect">
+        <option value="" disabled selected hidden>Choose category</option>
+        <option *ngFor="let category of categories" [value]="category.id">
+          {{ category.name }}
+        </option>
+
+        <ng-template *ngIf="this.categoriesLoading">
+          <option value="">Loading...</option>
+        </ng-template>
+
+        <ng-template *ngIf="this.categoriesError">
+          <option value="">No categories found</option>
+        </ng-template>
+      </select>
+
+      <p
+        *ngIf="Form.get('category')?.touched && Form.get('category')?.errors?.['required']"
+      >
+        This field is required.
+      </p>
+    </div>
+
+    <div class="Form-Box">
+      <select
+        formControlName="difficulty"
+        name="difficulty"
+        id="difficultySelect"
+      >
+        <option value="" disabled selected hidden>Choose difficulty</option>
+        <option value="easy">easy</option>
+        <option value="medium">medium</option>
+        <option value="hard">hard</option>
+      </select>
+
+      <p
+        *ngIf="Form.get('difficulty')?.touched && Form.get('difficulty')?.errors?.['required']"
+      >
+        This field is required.
+      </p>
+    </div>
+
+    <div class="Form-Box">
+      <input
+        formControlName="amount"
+        type="number"
+        name="number"
+        id="number"
+        placeholder="Number of questions"
+      />
+
+      <p
+        *ngIf="Form.get('amount')?.touched && Form.get('amount')?.errors?.['required']"
+      >
+        This field is required.
+      </p>
+      <p
+        *ngIf="Form.get('amount')?.touched && Form.get('amount')?.errors?.['min']"
+      >
+        Minimum number is 1.
+      </p>
+      <p
+        *ngIf="Form.get('amount')?.touched && Form.get('amount')?.errors?.['max']"
+      >
+        Maximum number is 49.
+      </p>
+    </div>
+
+    <input [disabled]="Form.invalid" id="submit" type="submit" value="submit" />
+  </form>
+
+  <div id="data">
+    <ng-container *ngIf="FormLoading; else notLoading">
+      <p>Loading...</p>
+    </ng-container>
+
+    <ng-template #notLoading>
+      <ng-container *ngIf="FormError; else showData">
+        <p>{{ FormError }}</p>
+      </ng-container>
+    </ng-template>
+
+    <ng-template #showData>
+      <ng-container *ngIf="FormData && FormData.length > 0">
+        <div *ngIf="FormData && FormData.length > 0">
+          <div
+            *ngFor="let question of getCurrentPageQuestions(); let i = index"
+            class="question-box"
+          >
+            <h3>{{ question.value }}</h3>
+            <ul>
+              <li *ngFor="let answer of question.allAnswers">{{ answer }}</li>
+            </ul>
+            <p><strong>Correct Answer:</strong> {{ question.correctAnswer }}</p>
+          </div>
+
+          <!-- כפתורים לדפדוף -->
+          <div class="pagination">
+            <button (click)="prevPage()" [disabled]="currentPage === 1">
+              Prev
+            </button>
+            <span>Page {{ currentPage }} of {{ totalPages }}</span>
+            <button
+              (click)="nextPage()"
+              [disabled]="currentPage === totalPages"
+            >
+              Next
+            </button>
+          </div>
+        </div>
+      </ng-container>
+    </ng-template>
+  </div>
+</section>

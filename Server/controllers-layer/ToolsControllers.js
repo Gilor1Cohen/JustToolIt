@@ -3,6 +3,8 @@ const express = require("express");
 const {
   GetToolsCategories,
   GetToolsList,
+  getTriviaCategories,
+  getTriviaQuestions,
 } = require("../business-logic-layer/ToolsBL");
 
 const router = express.Router();
@@ -25,8 +27,6 @@ router.get("/GetToolsList/:name", async (req, res) => {
   try {
     const { name } = req.params;
 
-    console.log(`name: ${name}`);
-
     if (!name) {
       return res.status(400).json({ message: "Category name is required" });
     }
@@ -42,5 +42,46 @@ router.get("/GetToolsList/:name", async (req, res) => {
     res.status(500).json({ error: error.message | "Internal server error" });
   }
 });
+
+router.get("/getTriviaCategories", async (req, res) => {
+  try {
+    const Categories = await getTriviaCategories();
+
+    if (!Categories.length === 0 || Categories.success === false) {
+      return res.status(404).json({ message: "No categories found" });
+    }
+
+    return res.status(200).json(Categories.categories);
+  } catch (error) {
+    res.status(500).json({ error: error.message | "Internal server error" });
+  }
+});
+
+router.get(
+  "/getTriviaQuestions/:category/:difficulty/:amount",
+  async (req, res) => {
+    try {
+      const { category, difficulty, amount } = req.params;
+
+      if (!category || !difficulty || !amount || amount < 0 || amount > 49) {
+        return res
+          .status(400)
+          .json({ message: "Missing category or amount parameter" });
+      }
+
+      const Questions = await getTriviaQuestions(
+        +category,
+        difficulty,
+        +amount
+      );
+
+      return res.status(200).json(Questions);
+    } catch (error) {
+      console.log(error);
+
+      res.status(500).json({ error: error.message | "Internal server error" });
+    }
+  }
+);
 
 module.exports = router;

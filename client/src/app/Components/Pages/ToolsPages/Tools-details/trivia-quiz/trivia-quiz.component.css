@@ -1,0 +1,254 @@
+#TriviaPage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  min-height: 100vh;
+  margin: 4rem 0;
+  padding: 1rem;
+}
+
+#TriviaPage h1 {
+  font-size: 2.25rem;
+  color: #000;
+  margin-bottom: 2rem;
+}
+
+#form {
+  border: 1px solid #ddd;
+  border-radius: 1rem;
+  padding: 2rem;
+  width: 100%;
+  max-width: 400px;
+}
+
+.Form-Box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+select,
+input[type="number"] {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s;
+  gap: 1rem;
+}
+
+select:focus,
+input[type="number"]:focus {
+  border-color: #1b5fe0;
+}
+
+.Form-Box p {
+  margin-top: 0.25rem;
+  font-size: 0.875rem;
+  color: #d93025;
+}
+
+#submit {
+  background-color: #1b5fe0;
+  color: white;
+  border: none;
+  padding: 0.75rem;
+  border-radius: 1.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  width: 100%;
+}
+
+#submit:hover {
+  background-color: #1669c1;
+}
+
+#submit:disabled {
+  background-color: #a9c2f2;
+  cursor: not-allowed;
+}
+
+#data {
+  margin-top: 2rem;
+  width: 100%;
+  max-width: 800px;
+}
+
+.question-box {
+  border: 1px solid #ddd;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  background-color: #ffffff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+.question-box h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.75rem;
+  color: #333;
+}
+
+.question-box ul {
+  list-style-type: none;
+  padding-left: 0;
+  margin: 0 0 1rem;
+}
+
+.question-box li {
+  padding: 0.5rem 1rem;
+  margin-bottom: 0.4rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  background-color: #f4f7fb;
+}
+
+.question-box p {
+  margin: 0.25rem 0;
+  font-size: 0.95rem;
+  color: #444;
+}
+
+.question-box p strong {
+  color: #1b5fe0;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.pagination button {
+  padding: 0.5rem 1rem;
+  border: none;
+  background-color: #1b5fe0;
+  color: white;
+  border-radius: 1rem;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.pagination button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+@media (max-width: 900px) {
+  #TriviaPage {
+    padding: 1rem;
+    margin: 3rem 0;
+  }
+
+  #TriviaPage h1 {
+    font-size: 2rem;
+    text-align: center;
+  }
+
+  #form {
+    padding: 1.75rem;
+    max-width: 90%;
+  }
+
+  select,
+  input[type="number"] {
+    font-size: 1rem;
+    padding: 0.7rem;
+  }
+
+  #submit {
+    font-size: 1rem;
+    padding: 0.7rem;
+  }
+
+  .question-box {
+    padding: 1.25rem;
+  }
+
+  .question-box h3 {
+    font-size: 1.2rem;
+  }
+
+  .question-box li {
+    font-size: 1rem;
+  }
+
+  .pagination {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .pagination button {
+    font-size: 1rem;
+    padding: 0.6rem 1rem;
+  }
+
+  #data {
+    padding: 0 1rem;
+  }
+}
+
+@media (max-width: 600px) {
+  #TriviaPage {
+    margin: 2rem 0;
+    padding: 0.5rem;
+  }
+
+  #TriviaPage h1 {
+    font-size: 1.75rem;
+    text-align: center;
+  }
+
+  #form {
+    padding: 1.5rem;
+    max-width: 100%;
+  }
+
+  select,
+  input[type="number"] {
+    font-size: 0.95rem;
+    padding: 0.65rem;
+  }
+
+  #submit {
+    font-size: 0.95rem;
+    padding: 0.65rem;
+  }
+
+  .question-box {
+    padding: 1rem;
+  }
+
+  .question-box h3 {
+    font-size: 1.1rem;
+  }
+
+  .question-box li {
+    font-size: 0.95rem;
+  }
+
+  .pagination {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .pagination button {
+    width: 100%;
+    font-size: 0.95rem;
+  }
+
+  #data {
+    padding: 0 0.5rem;
+  }
+}

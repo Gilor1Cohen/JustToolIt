@@ -28,3 +28,27 @@ export interface HttpErrorResponseDetails {
     [key: string]: any;
   };
 }
+
+export interface TriviaCategory {
+  id: number;
+  name: string;
+}
+
+export interface getTriviaQuestionsData {
+  category: number;
+  difficulty: string;
+  amount: number;
+}
+
+export interface TriviaQuestion {
+  value: string;
+  category: {
+    id: number;
+    name: string;
+  };
+  type: 'multiple';
+  difficulty: 'easy' | 'medium' | 'hard';
+  correctAnswer: string;
+  incorrectAnswers: string[];
+  allAnswers: string[];
+}
