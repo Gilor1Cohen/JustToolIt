@@ -4,6 +4,8 @@ const {
   ToolsList,
 } = require("../data-accsess-layer/ToolsDAL");
 
+const regexTokenList = require("../assets/Regex");
+
 const { Category, CategoryNames, getQuestions } = require("open-trivia-db");
 
 async function GetToolsCategories() {
@@ -73,9 +75,61 @@ async function getTriviaQuestions(category, difficulty, amount) {
   }
 }
 
+function Base64SizeCalc(base64) {
+  if (typeof base64 !== "string" || !base64.trim()) {
+    throw new Error("Invalid input: expected non-empty Base64 string");
+  }
+
+  const cleaned = base64.replace(/\s+/g, "");
+  const raw = cleaned.includes(",") ? cleaned.split(",").pop() : cleaned;
+  if (!/^[A-Za-z0-9+/]+={0,2}$/.test(raw)) {
+    throw new Error("Invalid Base64 format");
+  }
+
+  const padding = (raw.match(/=+$/) || [""])[0].length;
+  const bytes = Math.round((raw.length * 3) / 4 - padding);
+  const kilobytes = Math.round((bytes / 1024) * 100) / 100;
+  return { bytes, kilobytes };
+}
+
+function RegexTest(pattern) {
+  try {
+    new RegExp(pattern);
+
+    const explanations = [];
+
+    for (const entry of regexTokenList) {
+      const tokenRegex = new RegExp(
+        entry.token.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
+      );
+
+      if (tokenRegex.test(pattern)) {
+        explanations.push({
+          token: entry.token,
+          explanation: `${entry.token} ➝ ${entry.description}`,
+          category: entry.category,
+        });
+      }
+    }
+
+    return {
+      pattern,
+      explanationCount: explanations.length,
+      explanations,
+    };
+  } catch (err) {
+    return {
+      pattern,
+      error: "Invalid regular expression: " + err.message,
+    };
+  }
+}
+
 module.exports = {
   GetToolsCategories,
   GetToolsList,
   getTriviaCategories,
   getTriviaQuestions,
+  Base64SizeCalc,
+  RegexTest,
 };

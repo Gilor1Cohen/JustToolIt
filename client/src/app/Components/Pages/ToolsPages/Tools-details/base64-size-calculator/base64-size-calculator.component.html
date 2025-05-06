@@ -1,1 +1,50 @@
-<p>base64-size-calculator works!</p>
+<section id="base64-size-calculator">
+  <h1>Base64 Size Calculator</h1>
+
+  <form
+    id="base64-size-calculator-form"
+    [formGroup]="Form"
+    (ngSubmit)="onSubmit()"
+  >
+    <textarea
+      formControlName="base64"
+      name="base64-textarea"
+      id="base64-textarea"
+      placeholder="Paste your Base64 string here..."
+    ></textarea>
+    <input
+      type="submit"
+      value="calculate"
+      [disabled]="Form.invalid || Loading"
+    />
+  </form>
+
+  <div id="data-base64" class="base64-container">
+    <div
+      *ngIf="Loading"
+      id="loading-container"
+      class="status-container loading"
+    >
+      <p id="loading-text" class="status-text">Loading...</p>
+    </div>
+
+    <div
+      *ngIf="!Loading && Error"
+      id="error-container"
+      class="status-container error"
+    >
+      <p id="error-text" class="status-text">{{ Error }}</p>
+    </div>
+
+    <div
+      *ngIf="!Loading && !Error && Base64Size"
+      id="result-container"
+      class="status-container result"
+    >
+      <p id="result-kilobytes" class="result-text">
+        Kilobytes: {{ Base64Size.kilobytes }}
+      </p>
+      <p id="result-bytes" class="result-text">Bytes: {{ Base64Size.bytes }}</p>
+    </div>
+  </div>
+</section>

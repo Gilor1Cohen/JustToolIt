@@ -1,0 +1,28 @@
+<section id="jwt-token-decoder">
+  <form [formGroup]="Form" class="jwt-form">
+    <label for="token">Paste JWT here:</label>
+    <textarea
+      id="token"
+      formControlName="token"
+      rows="5"
+      placeholder="e.g.: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+    ></textarea>
+    <div *ngIf="ErrorMessage" class="error">
+      <p>{{ ErrorMessage }}</p>
+    </div>
+
+    <div *ngIf="FormLoading">
+      <p>Decoding....</p>
+    </div>
+  </form>
+
+  <div *ngIf="DecodedPayload" class="result">
+    <h3>Decoded Payload:</h3>
+    <div class="json-container">
+      <button type="button" class="copy-btn" (click)="copyPayload()">
+        Copy JSON
+      </button>
+      <code class="json-code">{{ DecodedPayload | json }}</code>
+    </div>
+  </div>
+</section>

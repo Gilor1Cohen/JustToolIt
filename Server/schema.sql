@@ -139,7 +139,6 @@ INSERT INTO tools_categories (name, image_url) VALUES
   ("Math Tools", "math-tools.png"),
   ("Weather Tools", "weather-tools.png"),
   ("History Tools", "history-tools.png"),
-  ("Music Tools", "music-tools.png"),
   ("Random Tools", "random-tools.png"),
   ("Other Tools", "other-tools.png");
 
@@ -151,9 +150,10 @@ INSERT INTO tools_details (name, description, category_id, endpoint) VALUES
 
 INSERT INTO tools_details (name, description, category_id, endpoint) VALUES
   ("Base64 Size Calculator", "Estimates the exact size of data when encoded to Base64, aiding in storage and transmission planning.", 2, "developer-tools/base64-size-calculator"),
-  ("Binary Code Generator", "developer-tools/Converts text or numbers into binary sequences for low-level programming and learning purposes.", 2, "developer-tools/binary-code-generator"),
+  ("Binary Code Generator", "Converts text or numbers into binary sequences for low-level programming and learning purposes.", 2, "developer-tools/binary-code-generator"),
   ("Regex Tester with Explanations", "Allows testing regular expressions and provides detailed breakdowns of each matching group.", 2, "developer-tools/regex-tester-with-explanations"),
-  ("JWT Token Decoder", "Decodes JSON Web Tokens to reveal payload claims and validate token integrity for debugging auth flows.", 2, "developer-tools/jwt-token-decoder");
+  ("JWT Token Decoder", "Decodes JSON Web Tokens to reveal payload claims and validate token integrity for debugging auth flows.", 2, "developer-tools/jwt-token-decoder"),
+  ("Image to Base64 Converter", "Converts uploaded image files into Base64-encoded strings for embedding or API transfer purposes.", 2, "developer-tools/image-to-base64-converter");
 
 
 
@@ -331,27 +331,21 @@ INSERT INTO tools_details (name, description, category_id, endpoint) VALUES
 
 
 INSERT INTO tools_details (name, description, category_id, endpoint) VALUES
-  ("Chord Converter", "Transposes chords between keys and formats chord charts for easy reading by performers.", 23, "music-tools/chord-converter")
-;
-
-
-
-INSERT INTO tools_details (name, description, category_id, endpoint) VALUES
-  ("Random Fact", "Generates unexpected random facts across various topics to entertain and educate.", 22, "random-tools/random-fact"),
-  ("Random Sentence", "Creates quirky sentences for creative inspiration.", 22, "random-tools/random-sentence"),
-  ("Random Joke", "Serves up a fresh joke to lighten the mood.", 22, "random-tools/random-joke"),
-  ("random-tools/Scientific Fact Generator", "Provides verifiable scientific trivia about the natural world.", 22, "scientific-fact-generator"),
-  ("Philosophical Quote Generator", "Delivers thought-provoking quotes from philosophers to stimulate reflection.", 22, "random-tools/philosophical-quote-generator"),
-  ("Date-based Fun Fact", "Offers historical trivia based on dates for variety in random facts.", 22, "random-tools/date-based-fun-fact"),
-  ("Inspirational Sentence Generator", "Produces motivational sentences to boost productivity and confidence.", 22, "random-tools/inspirational-sentence-generator"),
-  ("Relaxing Music Generator", "Composes short ambient music clips for relaxation sessions.", 22, "random-tools/relaxing-music-generator")
+  ("Random Fact", "Generates unexpected random facts across various topics to entertain and educate.", 21, "random-tools/random-fact"),
+  ("Random Sentence", "Creates quirky sentences for creative inspiration.", 21, "random-tools/random-sentence"),
+  ("Random Joke", "Serves up a fresh joke to lighten the mood.", 21, "random-tools/random-joke"),
+  ("random-tools/Scientific Fact Generator", "Provides verifiable scientific trivia about the natural world.", 21, "scientific-fact-generator"),
+  ("Philosophical Quote Generator", "Delivers thought-provoking quotes from philosophers to stimulate reflection.", 21, "random-tools/philosophical-quote-generator"),
+  ("Date-based Fun Fact", "Offers historical trivia based on dates for variety in random facts.", 21, "random-tools/date-based-fun-fact"),
+  ("Inspirational Sentence Generator", "Produces motivational sentences to boost productivity and confidence.", 21, "random-tools/inspirational-sentence-generator"),
+  ("Relaxing Music Generator", "Composes short ambient music clips for relaxation sessions.", 21, "random-tools/relaxing-music-generator")
 ;
 
 
 INSERT INTO tools_details (name, description, category_id, endpoint) VALUES
-  ("Video Downloader", "Downloads videos for offline viewing and archiving.", 23, "other-tools/video-downloader"),
-  ("File Converter", "Converts files between formats while preserving layout and quality.", 23, "other-tools/file-converter"),
-  ("QR Code Generator", "Creates customizable QR codes with logos and color options for marketing materials.", 23, "other-tools/qr-code-generator"),
-  ("Color Blindness Simulator", "Simulates various types of color blindness to test design accessibility.", 23, "other-tools/color-blindness-simulator"),
-  ("Password Generator", "Generates secure, random passwords with configurable length and character sets.", 23, "other-tools/password-generator")
+  ("Video Downloader", "Downloads videos for offline viewing and archiving.", 22, "other-tools/video-downloader"),
+  ("File Converter", "Converts files between formats while preserving layout and quality.", 22, "other-tools/file-converter"),
+  ("QR Code Generator", "Creates customizable QR codes with logos and color options for marketing materials.", 22, "other-tools/qr-code-generator"),
+  ("Color Blindness Simulator", "Simulates various types of color blindness to test design accessibility.", 22, "other-tools/color-blindness-simulator"),
+  ("Password Generator", "Generates secure, random passwords with configurable length and character sets.", 22, "other-tools/password-generator")
 ;

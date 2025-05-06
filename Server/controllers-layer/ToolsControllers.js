@@ -5,6 +5,8 @@ const {
   GetToolsList,
   getTriviaCategories,
   getTriviaQuestions,
+  Base64SizeCalc,
+  RegexTest,
 } = require("../business-logic-layer/ToolsBL");
 
 const router = express.Router();
@@ -77,11 +79,45 @@ router.get(
 
       return res.status(200).json(Questions);
     } catch (error) {
-      console.log(error);
-
-      res.status(500).json({ error: error.message | "Internal server error" });
+      res.status(500).json({ error: error.message || "Internal server error" });
     }
   }
 );
+
+router.post("/Base64SizeCalc", async (req, res) => {
+  try {
+    const { base64 } = req.body;
+
+    const size = Base64SizeCalc(base64);
+
+    return res.status(200).json(size);
+  } catch (error) {
+    res.status(500).json({ error: error.message || "Internal server error" });
+  }
+});
+
+router.post("/RegexTesterWithExplanations", (req, res) => {
+  try {
+    const { pattern } = req.body;
+
+    if (typeof pattern !== "string" || !pattern.trim()) {
+      return res
+        .status(400)
+        .json({ error: "Pattern must be a non-empty string." });
+    }
+
+    const Test = RegexTest(pattern);
+
+    if (Test.error) {
+      return res.status(400).json({
+        message: Test.error,
+      });
+    }
+
+    return res.status(200).json(Test);
+  } catch (error) {
+    res.status(500).json({ error: error.message || "Internal server error" });
+  }
+});
 
 module.exports = router;

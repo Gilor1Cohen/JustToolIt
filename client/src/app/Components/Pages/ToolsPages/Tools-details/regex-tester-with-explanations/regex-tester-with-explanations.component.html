@@ -1,0 +1,43 @@
+<section id="regex-tester-with-explanations">
+  <h1>Regex Tester</h1>
+  <form [formGroup]="Form" (ngSubmit)="onSubmit()">
+    <input formControlName="pattern" placeholder="e.g. \\d+" />
+
+    <button type="submit" [disabled]="Form.invalid || FormLoading">Test</button>
+  </form>
+
+  <p class="loading" *ngIf="FormLoading">loading...</p>
+  <p class="error" *ngIf="FormError">{{ FormError }}</p>
+
+  <div id="regex-data-container" *ngIf="FormData">
+    <p class="regex-pattern">
+      <strong>Pattern:</strong> {{ FormData.pattern }}
+    </p>
+    <p class="regex-count">
+      <strong>Total Explanations:</strong> {{ FormData.explanationCount }}
+    </p>
+
+    <table class="regex-table" *ngIf="FormData.explanations?.length">
+      <thead class="regex-table-header">
+        <tr class="regex-table-header-row">
+          <th class="regex-header-token">Token</th>
+          <th class="regex-header-explanation">Explanation</th>
+          <th class="regex-header-category">Category</th>
+        </tr>
+      </thead>
+      <tbody class="regex-table-body">
+        <tr class="regex-table-row" *ngFor="let item of FormData.explanations">
+          <td class="regex-cell-token">
+            <code>{{ item.token }}</code>
+          </td>
+          <td class="regex-cell-explanation">
+            {{ item.explanation }}
+          </td>
+          <td class="regex-cell-category">
+            {{ item.category }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>

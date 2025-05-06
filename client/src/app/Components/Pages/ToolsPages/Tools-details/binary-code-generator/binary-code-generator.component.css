@@ -1,0 +1,144 @@
+#binary-code-generator {
+  width: 100%;
+  min-height: 100vh;
+  padding: 2rem 1rem;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #202124;
+}
+
+#binary-code-generator h1 {
+  font-size: 2rem;
+  font-weight: 500;
+  margin-bottom: 2rem;
+}
+
+form[formGroup] {
+  width: 100%;
+  max-width: 500px;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+textarea[formControlName="text"] {
+  width: 400px;
+  height: 150px;
+  padding: 1rem;
+  font-size: 1rem;
+  border: 1px solid #dadce0;
+  border-radius: 8px;
+  resize: vertical;
+  transition: border-color 0.2s ease-in-out;
+}
+
+textarea[formControlName="text"]:focus {
+  border-color: #1a73e8;
+  outline: none;
+}
+
+#binary-code-generator h2 {
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+
+#binary-code-generator p {
+  white-space: pre-wrap;
+  word-break: break-word;
+  max-width: 100%;
+  width: 100%;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 0.95rem;
+  background-color: #fff;
+  padding: 1.25rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  overflow-y: auto;
+  max-height: 300px;
+  line-height: 1.5;
+  text-align: left;
+}
+
+#copy-btn {
+  margin-top: 1rem;
+  padding: 0.5rem 1.25rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  background-color: #1a73e8;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#copy-btn:hover {
+  background-color: #1669c1;
+}
+
+@media (max-width: 768px) {
+  #binary-code-generator {
+    padding: 1.5rem 1rem;
+  }
+
+  textarea[formControlName="text"] {
+    width: 100%;
+    height: 140px;
+    font-size: 1rem;
+  }
+
+  form[formGroup] {
+    padding: 1.5rem;
+  }
+
+  #binary-code-generator h1 {
+    font-size: 1.75rem;
+  }
+
+  #binary-code-generator h2 {
+    font-size: 1.125rem;
+  }
+
+  #binary-code-generator p {
+    max-width: 100%;
+    font-size: 0.95rem;
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  #binary-code-generator {
+    padding: 1rem 0.5rem;
+  }
+
+  textarea[formControlName="text"] {
+    height: 130px;
+    font-size: 0.95rem;
+    padding: 0.75rem;
+  }
+
+  form[formGroup] {
+    padding: 1rem;
+  }
+
+  #binary-code-generator h1 {
+    font-size: 1.5rem;
+  }
+
+  #binary-code-generator h2 {
+    font-size: 1rem;
+  }
+
+  #binary-code-generator p {
+    font-size: 0.9rem;
+    padding: 0.75rem;
+  }
+}

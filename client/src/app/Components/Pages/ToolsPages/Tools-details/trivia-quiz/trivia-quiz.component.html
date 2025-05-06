@@ -70,7 +70,12 @@
       </p>
     </div>
 
-    <input [disabled]="Form.invalid" id="submit" type="submit" value="submit" />
+    <input
+      [disabled]="Form.invalid || FormLoading"
+      id="submit"
+      type="submit"
+      value="submit"
+    />
   </form>
 
   <div id="data">
@@ -98,7 +103,6 @@
             <p><strong>Correct Answer:</strong> {{ question.correctAnswer }}</p>
           </div>
 
-          <!-- כפתורים לדפדוף -->
           <div class="pagination">
             <button (click)="prevPage()" [disabled]="currentPage === 1">
               Prev

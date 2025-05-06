@@ -1,11 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {
+  Base64Data,
+  Base64SizeResult,
   getTriviaQuestionsData,
   ToolCategory,
   ToolDetails,
   TriviaCategory,
   TriviaQuestion,
+  RegexTestRequest,
 } from '../../Models/ToolsModel';
 import { Observable } from 'rxjs';
 
@@ -35,5 +38,13 @@ export class ToolsService {
     return this.http.get<TriviaQuestion[]>(
       `${this.Url}getTriviaQuestions/${data.category}/${data.difficulty}/${data.amount}`
     );
+  }
+
+  Base64SizeCalc(data: Base64Data): Observable<Base64SizeResult> {
+    return this.http.post<Base64SizeResult>(`${this.Url}Base64SizeCalc`, data);
+  }
+
+  RegexTesterWithExplanations(data: RegexTestRequest): Observable<any> {
+    return this.http.post<any>(`${this.Url}RegexTesterWithExplanations`, data);
   }
 }

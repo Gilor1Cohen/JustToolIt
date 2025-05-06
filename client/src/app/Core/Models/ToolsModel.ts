@@ -52,3 +52,28 @@ export interface TriviaQuestion {
   incorrectAnswers: string[];
   allAnswers: string[];
 }
+
+export interface Base64Data {
+  base64: string;
+}
+
+export interface Base64SizeResult {
+  bytes: number;
+  kilobytes: number;
+}
+
+export interface RegexTestRequest {
+  pattern: string;
+}
+
+export interface RegexExplanationResult {
+  pattern: string;
+  explanationCount: number;
+  explanations: RegexTokenExplanation[];
+}
+
+interface RegexTokenExplanation {
+  token: string;
+  explanation: string;
+  category: string;
+}
