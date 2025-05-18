@@ -22,6 +22,8 @@ export class ToolsCategoriesComponent implements OnInit {
         this.toolsCategories = res;
       },
       error: (err: any) => {
+        console.log(err);
+
         this.error.error = err;
       },
     });

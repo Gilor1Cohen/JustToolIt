@@ -1,0 +1,25 @@
+<section id="binary-code-generator">
+  <h1>Binary Code Generator</h1>
+
+  <form [formGroup]="Form" (ngSubmit)="onSubmit()">
+    <textarea
+      formControlName="text"
+      placeholder="Enter text..."
+      rows="5"
+    ></textarea>
+
+    <input type="submit" value="submit" [disabled]="Loading || Form.invalid" />
+  </form>
+
+  <div class="binary-code-data">
+    <p *ngIf="Loading">Loading...</p>
+
+    <p *ngIf="!Loading && Error">{{ Error }}</p>
+
+    <div *ngIf="!Loading && !Error && BinaryResult">
+      <h2>Binary Code:</h2>
+      <p>{{ BinaryResult }}</p>
+      <button (click)="copyToClipboard()" id="copy-btn">Copy</button>
+    </div>
+  </div>
+</section>

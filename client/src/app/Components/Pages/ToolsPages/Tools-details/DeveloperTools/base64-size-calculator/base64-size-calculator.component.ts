@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ToolsService } from '../../../../../Core/Services/ToolsService/tools.service';
+import { ToolsService } from '../../../../../../Core/Services/ToolsService/tools.service';
 import {
   FormBuilder,
   FormGroup,
@@ -10,7 +10,8 @@ import { CommonModule } from '@angular/common';
 import {
   Base64SizeResult,
   HttpErrorResponseDetails,
-} from '../../../../../Core/Models/ToolsModel';
+} from '../../../../../../Core/Models/ToolsModel';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-base64-size-calculator',
@@ -25,7 +26,11 @@ export class Base64SizeCalculatorComponent implements OnInit {
   Loading: boolean = false;
   Error: string | null = null;
 
-  constructor(private tools: ToolsService, private fb: FormBuilder) {}
+  constructor(
+    private tools: ToolsService,
+    private fb: FormBuilder,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.formInitializing();
@@ -47,6 +52,9 @@ export class Base64SizeCalculatorComponent implements OnInit {
         this.Loading = false;
       },
       error: (err: HttpErrorResponseDetails) => {
+        if (err.error.message === 'Missing token.') {
+          this.router.navigateByUrl('/LogIn');
+        }
         this.Error = err.error.message;
         this.Loading = false;
       },

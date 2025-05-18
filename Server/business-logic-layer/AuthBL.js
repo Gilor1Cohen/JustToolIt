@@ -3,6 +3,7 @@ const {
   IsEmailExists,
   GetInfoByEmail,
   AddNewUser,
+  incrementUserActionCountToday,
 } = require("../data-accsess-layer/AuthDAL");
 
 const { CreateNewSubscription } = require("../data-accsess-layer/PaymentDAL");
@@ -115,4 +116,8 @@ async function SignUp(FirstName, Email, Password) {
   }
 }
 
-module.exports = { LogIn, SignUp };
+async function handleFreeUserUsage(user) {
+  await incrementUserActionCountToday(user.userId);
+}
+
+module.exports = { LogIn, SignUp, handleFreeUserUsage };

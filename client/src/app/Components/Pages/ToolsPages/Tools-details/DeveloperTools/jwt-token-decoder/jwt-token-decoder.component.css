@@ -106,6 +106,31 @@
   margin: 0;
 }
 
+#jwt-token-decoder input[type="submit"] {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #fff;
+  background-color: #1a73e8;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 1px 3px rgba(60, 64, 67, 0.3);
+}
+
+#jwt-token-decoder input[type="submit"]:hover {
+  background-color: #1669c1;
+  box-shadow: 0 2px 6px rgba(60, 64, 67, 0.4);
+}
+
+#jwt-token-decoder input[type="submit"]:disabled {
+  background-color: #e0e0e0;
+  color: #9e9e9e;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
 @media (max-width: 868px) {
   #jwt-token-decoder {
     padding: 2rem 0.125rem;

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {
   Base64Data,
@@ -9,6 +9,9 @@ import {
   TriviaCategory,
   TriviaQuestion,
   RegexTestRequest,
+  BinaryCodeGeneratorReq,
+  JwtTokenDecoderReq,
+  RegexExplanationResult,
 } from '../../Models/ToolsModel';
 import { Observable } from 'rxjs';
 
@@ -36,15 +39,40 @@ export class ToolsService {
     data: getTriviaQuestionsData
   ): Observable<TriviaQuestion[]> {
     return this.http.get<TriviaQuestion[]>(
-      `${this.Url}getTriviaQuestions/${data.category}/${data.difficulty}/${data.amount}`
+      `${this.Url}getTriviaQuestions/${data.category}/${data.difficulty}/${data.amount}`,
+      {
+        withCredentials: true,
+      }
     );
   }
 
   Base64SizeCalc(data: Base64Data): Observable<Base64SizeResult> {
-    return this.http.post<Base64SizeResult>(`${this.Url}Base64SizeCalc`, data);
+    return this.http.post<Base64SizeResult>(`${this.Url}Base64SizeCalc`, data, {
+      withCredentials: true,
+    });
   }
 
-  RegexTesterWithExplanations(data: RegexTestRequest): Observable<any> {
-    return this.http.post<any>(`${this.Url}RegexTesterWithExplanations`, data);
+  BinaryCodeGenerator(data: BinaryCodeGeneratorReq): Observable<string> {
+    return this.http.post<string>(`${this.Url}BinaryCodeGenerator`, data, {
+      withCredentials: true,
+    });
+  }
+
+  RegexTesterWithExplanations(
+    data: RegexTestRequest
+  ): Observable<RegexExplanationResult> {
+    return this.http.post<RegexExplanationResult>(
+      `${this.Url}RegexTesterWithExplanations`,
+      data,
+      {
+        withCredentials: true,
+      }
+    );
+  }
+
+  decodeToken(data: JwtTokenDecoderReq): Observable<any> {
+    return this.http.post<any>(`${this.Url}JwtTokenDecoder`, data, {
+      withCredentials: true,
+    });
   }
 }

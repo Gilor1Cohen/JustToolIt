@@ -39,6 +39,15 @@ CREATE TABLE IF NOT EXISTS payments (
 );
 
 
+CREATE TABLE free_user_actions (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  user_id INT NOT NULL,
+  count INT NOT NULL DEFAULT 1,
+  action_date DATE NOT NULL,
+  UNIQUE KEY unique_user_day (user_id, action_date)
+);
+
+
 ALTER TABLE user_subscriptions
 ADD CONSTRAINT fk_user_subscriptions_user_id
 FOREIGN KEY (user_id)
@@ -143,6 +152,30 @@ INSERT INTO tools_categories (name, image_url) VALUES
   ("Other Tools", "other-tools.png");
 
 
+-- 
+-- 
+-- 
+-- FoodAndHealthTools
+-- CookingAndBakingTools
+-- OnlineOrderingTools
+-- AccessibilityTools
+-- ParentingTools
+-- ReligiousTools
+-- WomensTools
+-- KidsTools
+-- FootballTools
+-- FinanceAndMoneyTools
+-- VehicleTools
+-- PhysicsTools
+-- AstronomyAndAstrophysicsTools
+-- ChemistryTools
+-- MathTools
+-- WeatherTools
+-- HistoryTools
+-- RandomTools
+-- OtherTools
+
+
 INSERT INTO tools_details (name, description, category_id, endpoint) VALUES
  ("Topic Trivia Quiz", "Generates randomized quizzes on selected subjects to test knowledge retention in a fun, engaging way.", 1, "teacher-tools/topic-trivia-quiz");
 
@@ -152,8 +185,7 @@ INSERT INTO tools_details (name, description, category_id, endpoint) VALUES
   ("Base64 Size Calculator", "Estimates the exact size of data when encoded to Base64, aiding in storage and transmission planning.", 2, "developer-tools/base64-size-calculator"),
   ("Binary Code Generator", "Converts text or numbers into binary sequences for low-level programming and learning purposes.", 2, "developer-tools/binary-code-generator"),
   ("Regex Tester with Explanations", "Allows testing regular expressions and provides detailed breakdowns of each matching group.", 2, "developer-tools/regex-tester-with-explanations"),
-  ("JWT Token Decoder", "Decodes JSON Web Tokens to reveal payload claims and validate token integrity for debugging auth flows.", 2, "developer-tools/jwt-token-decoder"),
-  ("Image to Base64 Converter", "Converts uploaded image files into Base64-encoded strings for embedding or API transfer purposes.", 2, "developer-tools/image-to-base64-converter");
+  ("JWT Token Decoder", "Decodes JSON Web Tokens to reveal payload claims and validate token integrity for debugging auth flows.", 2, "developer-tools/jwt-token-decoder");
 
 
 

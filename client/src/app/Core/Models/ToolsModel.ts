@@ -62,6 +62,12 @@ export interface Base64SizeResult {
   kilobytes: number;
 }
 
+export interface BinaryCodeGeneratorReq {
+  text: string;
+}
+
+export interface BinaryCodeGeneratorRes {}
+
 export interface RegexTestRequest {
   pattern: string;
 }
@@ -76,4 +82,8 @@ interface RegexTokenExplanation {
   token: string;
   explanation: string;
   category: string;
+}
+
+export interface JwtTokenDecoderReq {
+  token: string;
 }

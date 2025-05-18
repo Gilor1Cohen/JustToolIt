@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ToolsService } from '../../../../../Core/Services/ToolsService/tools.service';
+import { ToolsService } from '../../../../../../Core/Services/ToolsService/tools.service';
 import {
   HttpErrorResponseDetails,
   TriviaCategory,
   TriviaQuestion,
-} from '../../../../../Core/Models/ToolsModel';
+} from '../../../../../../Core/Models/ToolsModel';
 import { CommonModule } from '@angular/common';
 import {
   FormBuilder,
@@ -12,6 +12,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-trivia-quiz',
@@ -32,7 +33,11 @@ export class TriviaQuizComponent implements OnInit {
   questionsPerPage = 10;
   currentPage = 1;
 
-  constructor(private tools: ToolsService, private fb: FormBuilder) {}
+  constructor(
+    private tools: ToolsService,
+    private fb: FormBuilder,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.categoriesLoading = true;
@@ -80,6 +85,10 @@ export class TriviaQuizComponent implements OnInit {
       },
       error: (err: HttpErrorResponseDetails) => {
         this.FormLoading = false;
+
+        if (err.error.message === 'Missing token.') {
+          this.router.navigateByUrl('/LogIn');
+        }
         this.FormError = err.error.message;
       },
     });

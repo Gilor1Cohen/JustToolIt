@@ -92,6 +92,28 @@ function Base64SizeCalc(base64) {
   return { bytes, kilobytes };
 }
 
+function BinaryCodeGenerator(text) {
+  return text
+    .split("")
+    .map((char) => char.charCodeAt(0).toString(2).padStart(8, "0"))
+    .join(" ");
+}
+
+function JwtTokenDecoder(token) {
+  const parts = token.split(".");
+  if (parts.length !== 3) {
+    throw new Error("Invalid JWT structure");
+  }
+
+  const payloadBase64 =
+    parts[1].replace(/-/g, "+").replace(/_/g, "/") +
+    "=".repeat((4 - (parts[1].length % 4)) % 4);
+
+  const payloadBuffer = Buffer.from(payloadBase64, "base64");
+  const json = payloadBuffer.toString("utf8");
+  return JSON.parse(json);
+}
+
 function RegexTest(pattern) {
   try {
     new RegExp(pattern);
@@ -131,5 +153,7 @@ module.exports = {
   getTriviaCategories,
   getTriviaQuestions,
   Base64SizeCalc,
+  BinaryCodeGenerator,
+  JwtTokenDecoder,
   RegexTest,
 };

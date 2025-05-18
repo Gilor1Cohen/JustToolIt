@@ -5,9 +5,10 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { ToolsService } from '../../../../../Core/Services/ToolsService/tools.service';
-import { RegexExplanationResult } from '../../../../../Core/Models/ToolsModel';
+import { ToolsService } from '../../../../../../Core/Services/ToolsService/tools.service';
+import { RegexExplanationResult } from '../../../../../../Core/Models/ToolsModel';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-regex-tester-with-explanations',
@@ -21,7 +22,11 @@ export class RegexTesterWithExplanationsComponent implements OnInit {
   FormLoading: boolean = false;
   FormError: string | null = null;
 
-  constructor(private fb: FormBuilder, private tools: ToolsService) {}
+  constructor(
+    private fb: FormBuilder,
+    private tools: ToolsService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.Form = this.fb.group({
@@ -40,7 +45,11 @@ export class RegexTesterWithExplanationsComponent implements OnInit {
         this.FormLoading = false;
       },
       error: (err: any) => {
-        this.FormError = 'Error';
+        if (err.error.message === 'Missing token.') {
+          this.router.navigateByUrl('/LogIn');
+        }
+
+        this.FormError = err.error.message;
         this.FormLoading = false;
       },
     });

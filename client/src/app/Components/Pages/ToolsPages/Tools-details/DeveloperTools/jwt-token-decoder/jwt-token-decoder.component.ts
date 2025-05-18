@@ -6,6 +6,9 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { ToolsService } from '../../../../../../Core/Services/ToolsService/tools.service';
+import { HttpErrorResponseDetails } from '../../../../../../Core/Models/ToolsModel';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-jwt-token-decoder',
@@ -19,50 +22,36 @@ export class JwtTokenDecoderComponent implements OnInit {
   DecodedPayload: any = null;
   ErrorMessage: string | null = null;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private tools: ToolsService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.Form = this.fb.group({
       token: ['', Validators.required],
     });
-
-    this.Form.get('token')!.valueChanges.subscribe((token) => {
-      if (!token) {
-        this.DecodedPayload = null;
-        this.ErrorMessage = null;
-        this.FormLoading = false;
-        return;
-      }
-
-      this.FormLoading = true;
-      this.decodeToken(token);
-    });
   }
 
-  decodeToken(token: string): void {
-    try {
-      const parts = token.split('.');
-      if (parts.length !== 3) throw new Error();
+  onSubmit(): void {
+    this.DecodedPayload = null;
+    this.ErrorMessage = null;
+    this.FormLoading = true;
 
-      const payloadBase64 =
-        parts[1].replace(/-/g, '+').replace(/_/g, '/') +
-        '='.repeat((4 - (parts[1].length % 4)) % 4);
-
-      const json = decodeURIComponent(
-        atob(payloadBase64)
-          .split('')
-          .map((c) => '%' + c.charCodeAt(0).toString(16).padStart(2, '0'))
-          .join('')
-      );
-
-      this.DecodedPayload = JSON.parse(json);
-      this.ErrorMessage = null;
-    } catch {
-      this.DecodedPayload = null;
-      this.ErrorMessage = 'JWT is invalid';
-    } finally {
-      this.FormLoading = false;
-    }
+    this.tools.decodeToken(this.Form.value).subscribe({
+      next: (value: any) => {
+        this.DecodedPayload = value;
+        this.FormLoading = false;
+      },
+      error: (err: any) => {
+        this.ErrorMessage = err.error.error;
+        if (err.error.message === 'Missing token.') {
+          this.router.navigateByUrl('/LogIn');
+        }
+        this.FormLoading = false;
+      },
+    });
   }
 
   copyPayload(): void {

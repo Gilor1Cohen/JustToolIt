@@ -6,6 +6,9 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { ToolsService } from '../../../../../../Core/Services/ToolsService/tools.service';
+import { HttpErrorResponseDetails } from '../../../../../../Core/Models/ToolsModel';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-binary-code-generator',
@@ -15,26 +18,41 @@ import {
 })
 export class BinaryCodeGeneratorComponent implements OnInit {
   Form!: FormGroup;
-
+  Loading: boolean = false;
+  Error: string | null = null;
   BinaryResult: string | null = null;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private tools: ToolsService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.Form = this.fb.group({
       text: ['', [Validators.required]],
     });
-
-    this.Form.get('text')?.valueChanges.subscribe((value) => {
-      this.BinaryResult = this.convertToBinary(value);
-    });
   }
 
-  convertToBinary(text: string): string {
-    return text
-      .split('')
-      .map((char) => char.charCodeAt(0).toString(2).padStart(8, '0'))
-      .join(' ');
+  onSubmit(): void {
+    this.Loading = true;
+    this.Error = null;
+
+    this.tools.BinaryCodeGenerator(this.Form.value).subscribe({
+      next: (value: string) => {
+        console.log(value);
+
+        this.BinaryResult = value;
+        this.Loading = false;
+      },
+      error: (err: HttpErrorResponseDetails) => {
+        if (err.error.message === 'Missing token.') {
+          this.router.navigateByUrl('/LogIn');
+        }
+        this.Error = err.error.message;
+        this.Loading = false;
+      },
+    });
   }
 
   copyToClipboard(): void {

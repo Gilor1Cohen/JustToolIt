@@ -6,8 +6,14 @@ const {
   getTriviaCategories,
   getTriviaQuestions,
   Base64SizeCalc,
+  BinaryCodeGenerator,
+  JwtTokenDecoder,
   RegexTest,
 } = require("../business-logic-layer/ToolsBL");
+
+const { handleFreeUserUsage } = require("../business-logic-layer/AuthBL");
+
+const checkUserAccess = require("../middlewares/ToolsActions ");
 
 const router = express.Router();
 
@@ -61,6 +67,7 @@ router.get("/getTriviaCategories", async (req, res) => {
 
 router.get(
   "/getTriviaQuestions/:category/:difficulty/:amount",
+  checkUserAccess,
   async (req, res) => {
     try {
       const { category, difficulty, amount } = req.params;
@@ -77,6 +84,10 @@ router.get(
         +amount
       );
 
+      if (req.user.plan_id === 1 && req.user.plan_status === "active") {
+        await handleFreeUserUsage(req.user);
+      }
+
       return res.status(200).json(Questions);
     } catch (error) {
       res.status(500).json({ error: error.message || "Internal server error" });
@@ -84,40 +95,83 @@ router.get(
   }
 );
 
-router.post("/Base64SizeCalc", async (req, res) => {
+router.post("/Base64SizeCalc", checkUserAccess, async (req, res) => {
   try {
     const { base64 } = req.body;
 
     const size = Base64SizeCalc(base64);
 
+    if (req.user.plan_id === 1 && req.user.plan_status === "active") {
+      await handleFreeUserUsage(req.user);
+    }
     return res.status(200).json(size);
   } catch (error) {
     res.status(500).json({ error: error.message || "Internal server error" });
   }
 });
 
-router.post("/RegexTesterWithExplanations", (req, res) => {
+router.post("/BinaryCodeGenerator", checkUserAccess, async (req, res) => {
   try {
-    const { pattern } = req.body;
+    const { text } = req.body;
 
-    if (typeof pattern !== "string" || !pattern.trim()) {
-      return res
-        .status(400)
-        .json({ error: "Pattern must be a non-empty string." });
+    const BinaryCode = BinaryCodeGenerator(text);
+
+    if (req.user.plan_id === 1 && req.user.plan_status === "active") {
+      await handleFreeUserUsage(req.user);
     }
+    return res.status(200).json(BinaryCode);
+  } catch (error) {
+    console.log(error);
 
-    const Test = RegexTest(pattern);
+    res.status(500).json({ error: error.message || "Internal server error" });
+  }
+});
 
-    if (Test.error) {
-      return res.status(400).json({
-        message: Test.error,
-      });
+router.post("/JwtTokenDecoder", checkUserAccess, async (req, res) => {
+  try {
+    const { token } = req.body;
+
+    const TokenDecoder = JwtTokenDecoder(token);
+
+    if (req.user.plan_id === 1 && req.user.plan_status === "active") {
+      await handleFreeUserUsage(req.user);
     }
-
-    return res.status(200).json(Test);
+    return res.status(200).json(TokenDecoder);
   } catch (error) {
     res.status(500).json({ error: error.message || "Internal server error" });
   }
 });
+
+router.post(
+  "/RegexTesterWithExplanations",
+  checkUserAccess,
+  async (req, res) => {
+    try {
+      const { pattern } = req.body;
+
+      if (typeof pattern !== "string" || !pattern.trim()) {
+        return res
+          .status(400)
+          .json({ error: "Pattern must be a non-empty string." });
+      }
+
+      const Test = RegexTest(pattern);
+
+      if (Test.error) {
+        return res.status(400).json({
+          message: Test.error,
+        });
+      }
+
+      if (req.user.plan_id === 1 && req.user.plan_status === "active") {
+        await handleFreeUserUsage(req.user);
+      }
+
+      return res.status(200).json(Test);
+    } catch (error) {
+      res.status(500).json({ error: error.message || "Internal server error" });
+    }
+  }
+);
 
 module.exports = router;

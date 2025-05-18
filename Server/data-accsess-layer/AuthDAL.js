@@ -50,8 +50,42 @@ async function GetInfoByEmail(Email) {
   }
 }
 
+async function getUserActionCountToday(id) {
+  try {
+    const [data] = await db.query(
+      "SELECT count from free_user_actions WHERE user_id = ? AND action_date = CURDATE();",
+      [id]
+    );
+
+    if (data.length > 0) {
+      return { success: true, count: data[0].count };
+    } else {
+      return { success: true, count: 0 };
+    }
+  } catch (error) {
+    return { success: false, message: "Internal server error" };
+  }
+}
+
+async function incrementUserActionCountToday(userId) {
+  try {
+    const [data] = await db.query(
+      `INSERT INTO free_user_actions (user_id, action_date, count)
+       VALUES (?, CURDATE(), 1)
+       ON DUPLICATE KEY UPDATE count = count + 1;`,
+      [userId]
+    );
+
+    return { success: true };
+  } catch (error) {
+    return { success: false, message: "Failed to update action count." };
+  }
+}
+
 module.exports = {
   IsEmailExists,
   GetInfoByEmail,
   AddNewUser,
+  getUserActionCountToday,
+  incrementUserActionCountToday,
 };
