@@ -87,3 +87,34 @@ interface RegexTokenExplanation {
 export interface JwtTokenDecoderReq {
   token: string;
 }
+
+export interface NameGeneratorReq {
+  typeOfName: string;
+}
+
+export interface ReadTimeEstimateCalculatorReq {
+  Text: string;
+}
+
+export interface ReadTimeStats {
+  text: string;
+  minutes: number;
+  time: number;
+  words: number;
+}
+
+export interface QrCodeGeneratorReq {
+  URL: string;
+}
+
+export interface BmiReq {
+  Weight: number;
+  Height: number;
+  Age: number;
+  Gender: 'male' | 'female';
+}
+
+export interface BmiResult {
+  BMI: number;
+  category: 'Underweight' | 'Normal weight' | 'Overweight';
+}

@@ -9,6 +9,10 @@ const {
   BinaryCodeGenerator,
   JwtTokenDecoder,
   RegexTest,
+  NameGenerator,
+  ReadTimeEstimateCalculator,
+  QrCodeGenerator,
+  BmiCalculator,
 } = require("../business-logic-layer/ToolsBL");
 
 const { handleFreeUserUsage } = require("../business-logic-layer/AuthBL");
@@ -27,7 +31,7 @@ router.get("/GetToolsCategories", async (req, res) => {
 
     return res.status(200).json(categories);
   } catch (error) {
-    res.status(500).json({ error: error.message | "Internal server error" });
+    res.status(500).json({ message: error.message | "Internal server error" });
   }
 });
 
@@ -47,7 +51,7 @@ router.get("/GetToolsList/:name", async (req, res) => {
 
     return res.status(200).json(list);
   } catch (error) {
-    res.status(500).json({ error: error.message | "Internal server error" });
+    res.status(500).json({ message: error.message | "Internal server error" });
   }
 });
 
@@ -61,7 +65,7 @@ router.get("/getTriviaCategories", async (req, res) => {
 
     return res.status(200).json(Categories.categories);
   } catch (error) {
-    res.status(500).json({ error: error.message | "Internal server error" });
+    res.status(500).json({ message: error.message | "Internal server error" });
   }
 });
 
@@ -90,7 +94,9 @@ router.get(
 
       return res.status(200).json(Questions);
     } catch (error) {
-      res.status(500).json({ error: error.message || "Internal server error" });
+      res
+        .status(500)
+        .json({ message: error.message || "Internal server error" });
     }
   }
 );
@@ -106,7 +112,7 @@ router.post("/Base64SizeCalc", checkUserAccess, async (req, res) => {
     }
     return res.status(200).json(size);
   } catch (error) {
-    res.status(500).json({ error: error.message || "Internal server error" });
+    res.status(500).json({ message: error.message || "Internal server error" });
   }
 });
 
@@ -123,7 +129,7 @@ router.post("/BinaryCodeGenerator", checkUserAccess, async (req, res) => {
   } catch (error) {
     console.log(error);
 
-    res.status(500).json({ error: error.message || "Internal server error" });
+    res.status(500).json({ message: error.message || "Internal server error" });
   }
 });
 
@@ -138,7 +144,7 @@ router.post("/JwtTokenDecoder", checkUserAccess, async (req, res) => {
     }
     return res.status(200).json(TokenDecoder);
   } catch (error) {
-    res.status(500).json({ error: error.message || "Internal server error" });
+    res.status(500).json({ message: error.message || "Internal server error" });
   }
 });
 
@@ -152,7 +158,7 @@ router.post(
       if (typeof pattern !== "string" || !pattern.trim()) {
         return res
           .status(400)
-          .json({ error: "Pattern must be a non-empty string." });
+          .json({ message: "Pattern must be a non-empty string." });
       }
 
       const Test = RegexTest(pattern);
@@ -169,9 +175,105 @@ router.post(
 
       return res.status(200).json(Test);
     } catch (error) {
-      res.status(500).json({ error: error.message || "Internal server error" });
+      res
+        .status(500)
+        .json({ message: error.message || "Internal server error" });
     }
   }
 );
+
+router.post("/NameGenerator", checkUserAccess, async (req, res) => {
+  try {
+    const { typeOfName } = req.body;
+
+    if (!typeOfName) {
+      return res.status(404).json({ message: "No categories of name found" });
+    }
+
+    const name = NameGenerator(typeOfName);
+
+    if (!name) {
+      return res.status(404).json({ message: "No categories of name found" });
+    }
+
+    if (req.user.plan_id === 1 && req.user.plan_status === "active") {
+      await handleFreeUserUsage(req.user);
+    }
+
+    return res.status(200).json(name);
+  } catch (error) {
+    res.status(500).json({ message: error.message || "Internal server error" });
+  }
+});
+
+router.post(
+  "/ReadTimeEstimateCalculator",
+  checkUserAccess,
+  async (req, res) => {
+    try {
+      const { Text } = req.body;
+
+      if (!Text) {
+        return res.status(404).json({ message: "No text found" });
+      }
+
+      const data = ReadTimeEstimateCalculator(Text);
+
+      if (req.user.plan_id === 1 && req.user.plan_status === "active") {
+        await handleFreeUserUsage(req.user);
+      }
+
+      return res.status(200).json(data);
+    } catch (error) {
+      res
+        .status(500)
+        .json({ message: error.message || "Internal server error" });
+    }
+  }
+);
+
+router.post("/QrCodeGenerator", checkUserAccess, async (req, res) => {
+  try {
+    const { URL } = req.body;
+
+    if (!URL) {
+      return res.status(404).json({ message: "No URL found" });
+    }
+
+    const data = await QrCodeGenerator(URL);
+
+    if (req.user.plan_id === 1 && req.user.plan_status === "active") {
+      await handleFreeUserUsage(req.user);
+    }
+
+    return res.status(200).json(data);
+  } catch (error) {
+    res.status(500).json({ message: error.message || "Internal server error" });
+  }
+});
+
+router.post("/BmiCalculator", checkUserAccess, async (req, res) => {
+  try {
+    const { Weight, Height, Age, Gender } = req.body;
+
+    if (!Weight || !Height || !Age || !Gender) {
+      return res.status(400).json({ message: "Missing required fields." });
+    }
+
+    if (Weight <= 0 || Height <= 0 || Age <= 0) {
+      return res.status(400).json({ message: "Invalid input values." });
+    }
+
+    const data = BmiCalculator(Weight, Height, Age, Gender);
+
+    if (req.user.plan_id === 1 && req.user.plan_status === "active") {
+      await handleFreeUserUsage(req.user);
+    }
+
+    return res.status(200).json(data);
+  } catch (error) {
+    res.status(500).json({ message: error.message || "Internal server error" });
+  }
+});
 
 module.exports = router;

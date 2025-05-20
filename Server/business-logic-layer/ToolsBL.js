@@ -4,9 +4,17 @@ const {
   ToolsList,
 } = require("../data-accsess-layer/ToolsDAL");
 
+const readingTime = require("reading-time");
+
 const regexTokenList = require("../assets/Regex");
 
 const { Category, CategoryNames, getQuestions } = require("open-trivia-db");
+
+const { faker } = require("@faker-js/faker");
+
+const QRCode = require("qrcode");
+
+const ageGroups = require("../assets/BmiAgesGroups");
 
 async function GetToolsCategories() {
   try {
@@ -147,6 +155,44 @@ function RegexTest(pattern) {
   }
 }
 
+function NameGenerator(typeOfName) {
+  if (typeOfName === "FirstName") {
+    return faker.person.firstName();
+  } else if (typeOfName === "LastName") {
+    return faker.person.lastName();
+  } else if (typeOfName === "StupidName") {
+    return faker.internet.username();
+  } else {
+    return null;
+  }
+}
+
+function ReadTimeEstimateCalculator(Text) {
+  return readingTime(Text);
+}
+
+async function QrCodeGenerator(URL) {
+  return await QRCode.toDataURL(URL);
+}
+
+function BmiCalculator(Weight, Height, Age, Gender) {
+  const heightInMeters = Height / 100;
+  const bmi = Weight / (heightInMeters * heightInMeters);
+  const bmiRounded = parseFloat(bmi.toFixed(2));
+  let category = "";
+
+  const group = ageGroups.find((g) => Age >= g.min && Age <= g.max);
+  if (!group) return { BMI: bmiRounded, category: "Unknown" };
+
+  const [min, max] = Gender === "male" ? group.male : group.female;
+
+  if (bmi < min) category = "Underweight";
+  else if (bmi > max) category = "Overweight";
+  else category = "Normal weight";
+
+  return { BMI: bmiRounded, category };
+}
+
 module.exports = {
   GetToolsCategories,
   GetToolsList,
@@ -156,4 +202,8 @@ module.exports = {
   BinaryCodeGenerator,
   JwtTokenDecoder,
   RegexTest,
+  NameGenerator,
+  ReadTimeEstimateCalculator,
+  QrCodeGenerator,
+  BmiCalculator,
 };

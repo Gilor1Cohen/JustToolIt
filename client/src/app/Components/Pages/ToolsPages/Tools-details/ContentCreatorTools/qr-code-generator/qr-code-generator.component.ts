@@ -1,22 +1,22 @@
-import { Component, OnInit } from '@angular/core';
-import { ToolsService } from '../../../../../../Core/Services/ToolsService/tools.service';
+import { Component } from '@angular/core';
+import { HttpErrorResponseDetails } from '../../../../../../Core/Models/ToolsModel';
 import {
   FormBuilder,
   FormGroup,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { CommonModule } from '@angular/common';
-import { HttpErrorResponseDetails } from '../../../../../../Core/Models/ToolsModel';
 import { Router } from '@angular/router';
+import { ToolsService } from '../../../../../../Core/Services/ToolsService/tools.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-name-generator',
+  selector: 'app-qr-code-generator',
   imports: [ReactiveFormsModule, CommonModule],
-  templateUrl: './name-generator.component.html',
-  styleUrl: './name-generator.component.css',
+  templateUrl: './qr-code-generator.component.html',
+  styleUrl: './qr-code-generator.component.css',
 })
-export class NameGeneratorComponent implements OnInit {
+export class QrCodeGeneratorComponent {
   constructor(
     private tools: ToolsService,
     private fb: FormBuilder,
@@ -26,10 +26,10 @@ export class NameGeneratorComponent implements OnInit {
   Form!: FormGroup;
   Error: string | null = null;
   Loading: boolean = false;
-  Data: string | null = null;
+  Data: any | null = null;
 
   ngOnInit(): void {
-    this.Form = this.fb.group({ typeOfName: ['', Validators.required] });
+    this.Form = this.fb.group({ URL: ['', Validators.required] });
   }
 
   onSubmit(): void {
@@ -37,8 +37,8 @@ export class NameGeneratorComponent implements OnInit {
     this.Error = null;
     this.Data = null;
 
-    this.tools.NameGenerator(this.Form.value).subscribe({
-      next: (value: string) => {
+    this.tools.QrCodeGenerator(this.Form.value).subscribe({
+      next: (value: any) => {
         this.Data = value;
         this.Loading = false;
       },
@@ -51,5 +51,12 @@ export class NameGeneratorComponent implements OnInit {
         this.Loading = false;
       },
     });
+  }
+
+  downloadQrCode(): void {
+    const link = document.createElement('a');
+    link.href = this.Data;
+    link.download = 'qr-code.png';
+    link.click();
   }
 }

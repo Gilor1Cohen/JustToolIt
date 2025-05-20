@@ -1,14 +1,25 @@
 <section id="name-generator">
   <h1>Name Generator</h1>
 
-  <form action="NameGeneratorForm">
-    <select id="SelectCategory">
+  <form id="NameGeneratorForm" [formGroup]="Form" (ngSubmit)="onSubmit()">
+    <select id="SelectCategory" formControlName="typeOfName">
       <option value="" hidden selected disabled>Select category</option>
       <option value="StupidName">Stupid name</option>
       <option value="FirstName">First name</option>
       <option value="LastName">Last name</option>
     </select>
 
-    <input id="submit" type="submit" value="Generate" />
+    <input
+      id="submit"
+      type="submit"
+      value="Generate"
+      [disabled]="Loading || Form.invalid"
+    />
   </form>
+
+  <div class="DataArea">
+    <p *ngIf="Loading">Loading...</p>
+    <p *ngIf="Error">{{ Error }}</p>
+    <p *ngIf="Data">Name: {{ Data }}</p>
+  </div>
 </section>

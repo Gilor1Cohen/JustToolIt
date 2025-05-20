@@ -1,0 +1,83 @@
+<section id="BmiCalculator">
+  <h1>BMI Calculator</h1>
+
+  <form [formGroup]="Form" (ngSubmit)="onSubmit()" id="BmiForm">
+    <input type="number" formControlName="Weight" placeholder="Weight (kg)" />
+    <div
+      *ngIf="Form.controls['Weight'].touched && Form.controls['Weight'].invalid"
+      class="error"
+    >
+      <small *ngIf="Form.controls['Weight'].errors?.['required']"
+        >Weight is required.</small
+      >
+      <small *ngIf="Form.controls['Weight'].errors?.['min']"
+        >Weight must be a positive number.</small
+      >
+    </div>
+
+    <input type="number" formControlName="Height" placeholder="Height (cm)" />
+    <div
+      *ngIf="Form.controls['Height'].touched && Form.controls['Height'].invalid"
+      class="error"
+    >
+      <small *ngIf="Form.controls['Height'].errors?.['required']"
+        >Height is required.</small
+      >
+      <small *ngIf="Form.controls['Height'].errors?.['min']"
+        >Height must be a positive number.</small
+      >
+    </div>
+
+    <input type="number" formControlName="Age" placeholder="Age" />
+    <div
+      *ngIf="Form.controls['Age'].touched && Form.controls['Age'].invalid"
+      class="error"
+    >
+      <small *ngIf="Form.controls['Age'].errors?.['required']"
+        >Age is required.</small
+      >
+      <small *ngIf="Form.controls['Age'].errors?.['min']"
+        >Age must be a positive number.</small
+      >
+      <small *ngIf="Form.controls['Age'].errors?.['max']"
+        >Age can't be over 120.</small
+      >
+    </div>
+
+    <select formControlName="Gender">
+      <option value="" disabled selected hidden>Select Gender</option>
+      <option value="male">Male</option>
+      <option value="female">Female</option>
+    </select>
+    <div
+      *ngIf="Form.controls['Gender'].touched && Form.controls['Gender'].invalid"
+      class="error"
+    >
+      <small *ngIf="Form.controls['Gender'].errors?.['required']"
+        >Gender is required.</small
+      >
+    </div>
+
+    <input
+      type="submit"
+      value="Calculate BMI"
+      [disabled]="Loading || Form.invalid"
+    />
+  </form>
+
+  <div class="DataArea">
+    <p *ngIf="Error" class="error-message">
+      {{ Error }}
+    </p>
+
+    <p *ngIf="Loading" class="loading-message">Loading...</p>
+
+    <div *ngIf="Data" class="bmi-result">
+      <h2>BMI Result</h2>
+      <div class="bmi-value"><strong>BMI:</strong> {{ Data.BMI }}</div>
+      <div class="bmi-category">
+        <strong>Category:</strong> {{ Data.category }}
+      </div>
+    </div>
+  </div>
+</section>

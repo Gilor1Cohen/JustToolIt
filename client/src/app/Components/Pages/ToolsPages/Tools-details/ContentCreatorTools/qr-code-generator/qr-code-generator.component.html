@@ -1,0 +1,18 @@
+<section id="QrCodeGenerator">
+  <h1>Qr Code Generator</h1>
+
+  <form [formGroup]="Form" (ngSubmit)="onSubmit()" id="QrCodeGenerator-Form">
+    <input type="text" formControlName="URL" placeholder="URL here" />
+    <input type="submit" value="submit" [disabled]="Loading || Form.invalid" />
+  </form>
+
+  <div id="dataArea">
+    <p *ngIf="Error">{{ Error }}</p>
+    <p *ngIf="Loading">Loading...</p>
+    <div class="dataBox" *ngIf="Data">
+      <img [src]="Data" /><button (click)="downloadQrCode()">
+        Download QR Code
+      </button>
+    </div>
+  </div>
+</section>

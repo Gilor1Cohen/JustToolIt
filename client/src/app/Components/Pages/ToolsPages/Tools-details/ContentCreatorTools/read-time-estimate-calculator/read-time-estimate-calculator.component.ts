@@ -1,44 +1,47 @@
 import { Component, OnInit } from '@angular/core';
-import { ToolsService } from '../../../../../../Core/Services/ToolsService/tools.service';
 import {
   FormBuilder,
   FormGroup,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { ToolsService } from '../../../../../../Core/Services/ToolsService/tools.service';
 import { CommonModule } from '@angular/common';
-import { HttpErrorResponseDetails } from '../../../../../../Core/Models/ToolsModel';
+import {
+  HttpErrorResponseDetails,
+  ReadTimeStats,
+} from '../../../../../../Core/Models/ToolsModel';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-name-generator',
+  selector: 'app-read-time-estimate-calculator',
   imports: [ReactiveFormsModule, CommonModule],
-  templateUrl: './name-generator.component.html',
-  styleUrl: './name-generator.component.css',
+  templateUrl: './read-time-estimate-calculator.component.html',
+  styleUrl: './read-time-estimate-calculator.component.css',
 })
-export class NameGeneratorComponent implements OnInit {
+export class ReadTimeEstimateCalculatorComponent implements OnInit {
+  Error: string | null = null;
+  Loading: boolean = false;
+  Data: ReadTimeStats | null = null;
+
+  Form!: FormGroup;
+
   constructor(
-    private tools: ToolsService,
     private fb: FormBuilder,
+    private tools: ToolsService,
     private router: Router
   ) {}
 
-  Form!: FormGroup;
-  Error: string | null = null;
-  Loading: boolean = false;
-  Data: string | null = null;
-
   ngOnInit(): void {
-    this.Form = this.fb.group({ typeOfName: ['', Validators.required] });
+    this.Form = this.fb.group({ Text: ['', Validators.required] });
   }
 
   onSubmit(): void {
     this.Loading = true;
     this.Error = null;
-    this.Data = null;
 
-    this.tools.NameGenerator(this.Form.value).subscribe({
-      next: (value: string) => {
+    this.tools.ReadTimeEstimateCalculator(this.Form.value).subscribe({
+      next: (value: ReadTimeStats) => {
         this.Data = value;
         this.Loading = false;
       },

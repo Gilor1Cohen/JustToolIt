@@ -25,10 +25,23 @@ export const toolsMap: Record<string, () => Promise<Type<any>>> = {
     import(
       '../../Components/Pages/ToolsPages/Tools-details/ContentCreatorTools/name-generator/name-generator.component'
     ).then((m) => m.NameGeneratorComponent),
+  'read-time-estimate-calculator': () =>
+    import(
+      '../../Components/Pages/ToolsPages/Tools-details/ContentCreatorTools/read-time-estimate-calculator/read-time-estimate-calculator.component'
+    ).then((m) => m.ReadTimeEstimateCalculatorComponent),
+  'qr-code-generator': () =>
+    import(
+      '../../Components/Pages/ToolsPages/Tools-details/ContentCreatorTools/qr-code-generator/qr-code-generator.component'
+    ).then((m) => m.QrCodeGeneratorComponent),
+  'bmi-calculator': () =>
+    import(
+      '../../Components/Pages/ToolsPages/Tools-details/FoodAndHealthTools/bmi-calculator/bmi-calculator.component'
+    ).then((m) => m.BmiCalculatorComponent),
 };
 
 ///   '': () => import('../../Components/Pages/ToolsPages/Tools-details/').then((m) => m.),
 ///
 
-/// ng g c Components/Pages/ToolsPages/Tools-details/
-///
+/// ng g c Components/Pages/ToolsPages/Tools-details
+
+/// FoodAndHealthTools

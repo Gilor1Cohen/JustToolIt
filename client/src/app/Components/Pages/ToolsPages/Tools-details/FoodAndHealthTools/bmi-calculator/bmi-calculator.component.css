@@ -1,0 +1,153 @@
+#BmiCalculator {
+  width: 100%;
+  min-height: 100vh;
+  padding: 2rem 1rem;
+  margin: 2rem auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #202124;
+}
+
+#BmiCalculator h1 {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  color: #000;
+}
+
+#BmiForm {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+#BmiForm input[type="number"],
+#BmiForm select {
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  background-color: #fff;
+  transition: all 0.2s ease;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+#BmiForm input[type="number"]:focus,
+#BmiForm select:focus {
+  border-color: #007aff;
+  box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.2);
+  outline: none;
+}
+
+#BmiForm input[type="submit"] {
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  background-color: #007aff;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#BmiForm input[type="submit"]:hover {
+  background-color: #005ecb;
+}
+
+#BmiForm input[type="submit"]:disabled {
+  background-color: #c7c7cc;
+  cursor: not-allowed;
+}
+
+.error {
+  color: #d93025;
+  font-size: 0.85rem;
+  margin-top: -0.5rem;
+  margin-bottom: 0.5rem;
+  padding-left: 0.5rem;
+}
+
+.DataArea {
+  width: 100%;
+  max-width: 400px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: Arial, sans-serif;
+}
+
+.error-message {
+  color: #d93025;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.loading-message {
+  color: #5f6368;
+  margin-bottom: 1rem;
+}
+
+.bmi-result {
+  width: 100%;
+  padding: 1rem;
+  border: 1px solid #dadce0;
+  border-radius: 8px;
+  background-color: #f1f3f4;
+  text-align: center;
+}
+
+.bmi-result h2 {
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+  color: #202124;
+}
+
+.bmi-value,
+.bmi-category {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  color: #3c4043;
+}
+
+@media (max-width: 600px) {
+  #BmiCalculator {
+    padding: 1.5rem 1rem;
+  }
+
+  #BmiCalculator h1 {
+    font-size: 1.6rem;
+    text-align: center;
+  }
+
+  #BmiForm {
+    max-width: 100%;
+    gap: 0.75rem;
+  }
+
+  #BmiForm input[type="number"],
+  #BmiForm select,
+  #BmiForm input[type="submit"] {
+    font-size: 0.95rem;
+    padding: 0.65rem 0.9rem;
+  }
+
+  .DataArea {
+    padding: 1rem;
+  }
+
+  .bmi-result h2 {
+    font-size: 1.2rem;
+  }
+
+  .bmi-value,
+  .bmi-category {
+    font-size: 1rem;
+  }
+}

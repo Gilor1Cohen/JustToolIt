@@ -12,6 +12,12 @@ import {
   BinaryCodeGeneratorReq,
   JwtTokenDecoderReq,
   RegexExplanationResult,
+  NameGeneratorReq,
+  ReadTimeEstimateCalculatorReq,
+  QrCodeGeneratorReq,
+  ReadTimeStats,
+  BmiReq,
+  BmiResult,
 } from '../../Models/ToolsModel';
 import { Observable } from 'rxjs';
 
@@ -72,6 +78,36 @@ export class ToolsService {
 
   decodeToken(data: JwtTokenDecoderReq): Observable<any> {
     return this.http.post<any>(`${this.Url}JwtTokenDecoder`, data, {
+      withCredentials: true,
+    });
+  }
+
+  NameGenerator(data: NameGeneratorReq): Observable<string> {
+    return this.http.post<string>(`${this.Url}NameGenerator`, data, {
+      withCredentials: true,
+    });
+  }
+
+  ReadTimeEstimateCalculator(
+    data: ReadTimeEstimateCalculatorReq
+  ): Observable<ReadTimeStats> {
+    return this.http.post<ReadTimeStats>(
+      `${this.Url}ReadTimeEstimateCalculator`,
+      data,
+      {
+        withCredentials: true,
+      }
+    );
+  }
+
+  QrCodeGenerator(data: QrCodeGeneratorReq): Observable<any> {
+    return this.http.post<any>(`${this.Url}QrCodeGenerator`, data, {
+      withCredentials: true,
+    });
+  }
+
+  BmiCalculator(data: BmiReq): Observable<BmiResult> {
+    return this.http.post<BmiResult>(`${this.Url}BmiCalculator`, data, {
       withCredentials: true,
     });
   }

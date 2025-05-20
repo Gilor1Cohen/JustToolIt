@@ -1,0 +1,23 @@
+<section id="ReadTimeEstimateCalculator">
+  <h1>Read Time Estimate Calculator</h1>
+  <form id="ReadTimeForm" [formGroup]="Form" (ngSubmit)="onSubmit()">
+    <textarea
+      id="ReadTimeForm-textarea"
+      formControlName="Text"
+      placeholder="Your text here"
+    ></textarea>
+    <input
+      type="submit"
+      value="Calculate"
+      [disabled]="Loading || Form.invalid"
+    />
+  </form>
+
+  <div id="DataArea">
+    <p *ngIf="Error">{{ Error }}</p>
+    <p *ngIf="Loading">Loading...</p>
+    <div *ngIf="Data">
+      <p>{{ Data.text }} ({{ Data.words }} words)</p>
+    </div>
+  </div>
+</section>
