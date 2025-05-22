@@ -1,0 +1,126 @@
+#WaterCalculator {
+  width: 100%;
+  min-height: 100vh;
+  padding: 2rem 1rem;
+  margin: 2rem auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #202124;
+}
+
+#WaterCalculator h1 {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+#WaterCalculator form {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+#WaterCalculator input[type="number"],
+#WaterCalculator select {
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  background-color: #fff;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+#WaterCalculator input[type="number"]:focus,
+#WaterCalculator select:focus {
+  border-color: #1a73e8;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.2);
+}
+
+#WaterCalculator button[type="submit"] {
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 12px;
+  background-color: #1a73e8;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+#WaterCalculator button[type="submit"]:hover {
+  background-color: #1669c1;
+}
+
+#WaterCalculator button[disabled] {
+  background-color: #9bbcf7;
+  cursor: not-allowed;
+}
+
+.error {
+  color: #d93025;
+  font-size: 0.875rem;
+  margin-top: -0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+#DataArea {
+  margin-top: 2rem;
+  text-align: center;
+  font-size: 1.1rem;
+}
+
+@media (max-width: 768px) {
+  #WaterCalculator {
+    padding: 2rem 1rem;
+  }
+
+  #WaterCalculator h1 {
+    font-size: 1.75rem;
+    margin-bottom: 2rem;
+  }
+
+  #WaterCalculator form {
+    padding: 1.5rem;
+    gap: 1rem;
+    border-radius: 12px;
+  }
+
+  #WaterCalculator input[type="number"],
+  #WaterCalculator select,
+  #WaterCalculator button[type="submit"] {
+    font-size: 0.95rem;
+    padding: 0.75rem 0.9rem;
+  }
+
+  #DataArea {
+    font-size: 1rem;
+    margin-top: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  #WaterCalculator h1 {
+    font-size: 1.5rem;
+  }
+
+  #WaterCalculator form {
+    padding: 1.2rem;
+  }
+
+  #WaterCalculator input[type="number"],
+  #WaterCalculator select,
+  #WaterCalculator button[type="submit"] {
+    font-size: 0.9rem;
+    padding: 0.7rem 0.85rem;
+  }
+
+  #DataArea {
+    font-size: 0.95rem;
+  }
+}

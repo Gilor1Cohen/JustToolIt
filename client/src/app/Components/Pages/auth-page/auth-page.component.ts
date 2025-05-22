@@ -21,6 +21,7 @@ export class AuthPageComponent implements OnInit {
   Form!: FormGroup;
   Loading: boolean = false;
   Error: string = '';
+  returnUrl: string = '/Tools';
 
   constructor(
     private route: ActivatedRoute,
@@ -35,6 +36,9 @@ export class AuthPageComponent implements OnInit {
     });
 
     this.FormInitialization();
+
+    const returnParam = this.route.snapshot.queryParamMap.get('returnUrl');
+    this.returnUrl = returnParam ? decodeURIComponent(returnParam) : '/Tools';
   }
 
   FormInitialization(): void {
@@ -95,8 +99,6 @@ export class AuthPageComponent implements OnInit {
           next: (value: AuthRes) => {
             this.Loading = false;
 
-            this.Loading ? console.log('Loading...') : console.log('Loaded!');
-
             this.auth.setData({
               userId: value.userId?.toString() ?? null,
               isAuthenticated: true,
@@ -104,9 +106,11 @@ export class AuthPageComponent implements OnInit {
               status: value.status,
               end_date: value.end_date,
             });
+
             this.Form.reset();
-            this.router.navigate(['/Tools']);
+            this.router.navigateByUrl(this.returnUrl);
           },
+
           error: (err: AuthError) => {
             this.Loading = false;
             this.Error = err.error.message;

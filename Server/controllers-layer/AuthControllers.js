@@ -1,7 +1,13 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
 
-const { LogIn, SignUp } = require("../business-logic-layer/AuthBL");
+const {
+  LogIn,
+  SignUp,
+  handleFreeUserUsage,
+} = require("../business-logic-layer/AuthBL");
+
+const checkUserAccess = require("../middlewares/ToolsActions ");
 
 const router = express.Router();
 
@@ -115,6 +121,30 @@ router.get("/LogOut", async (req, res) => {
     });
 
     return res.status(200).json({ token });
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ message: error.message || "Internal server error" });
+  }
+});
+
+router.get("/checkUser", checkUserAccess, (req, res) => {
+  try {
+    return res.status(200).json({ message: "OK" });
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ message: error.message || "Internal server error" });
+  }
+});
+
+router.get("/addFreeUserAction", checkUserAccess, async (req, res) => {
+  try {
+    if (req.user.plan_id === 1 && req.user.plan_status === "active") {
+      await handleFreeUserUsage(req.user);
+    }
+
+    return res.status(200).json({ message: "OK" });
   } catch (error) {
     return res
       .status(500)

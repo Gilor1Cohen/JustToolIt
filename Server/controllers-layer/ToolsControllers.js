@@ -13,6 +13,9 @@ const {
   ReadTimeEstimateCalculator,
   QrCodeGenerator,
   BmiCalculator,
+  DailyWaterIntakeCalculator,
+  calculateCalories,
+  calculateBodyFat,
 } = require("../business-logic-layer/ToolsBL");
 
 const { handleFreeUserUsage } = require("../business-logic-layer/AuthBL");
@@ -275,5 +278,93 @@ router.post("/BmiCalculator", checkUserAccess, async (req, res) => {
     res.status(500).json({ message: error.message || "Internal server error" });
   }
 });
+
+router.post(
+  "/DailyWaterIntakeCalculator",
+  checkUserAccess,
+  async (req, res) => {
+    try {
+      const { Weight, activityLevel, climate } = req.body;
+
+      if (!Weight || !activityLevel || !climate) {
+        return res.status(400).json({ message: "Missing required fields." });
+      }
+
+      if (Weight <= 0) {
+        return res.status(400).json({ message: "Invalid input values." });
+      }
+
+      const data = DailyWaterIntakeCalculator(Weight, activityLevel, climate);
+
+      if (req.user.plan_id === 1 && req.user.plan_status === "active") {
+        await handleFreeUserUsage(req.user);
+      }
+
+      return res.status(200).json(data);
+    } catch (error) {
+      res
+        .status(500)
+        .json({ message: error.message || "Internal server error" });
+    }
+  }
+);
+
+router.post("/DailyCalorieCalculator", checkUserAccess, async (req, res) => {
+  try {
+    const { Weight, Height, Age, ActivityLevel, Gender } = req.body;
+
+    if (!Age || !Gender || !Height || !Weight || !ActivityLevel) {
+      return res.status(400).json({ message: "Missing required fields" });
+    }
+
+    if (Weight <= 0 || Height <= 0 || Age <= 0) {
+      return res.status(400).json({ message: "Invalid input values." });
+    }
+
+    const data = calculateCalories(Weight, Height, Age, ActivityLevel, Gender);
+
+    if (req.user.plan_id === 1 && req.user.plan_status === "active") {
+      await handleFreeUserUsage(req.user);
+    }
+
+    return res.status(200).json(data);
+  } catch (error) {
+    res.status(500).json({ message: error.message || "Internal server error" });
+  }
+});
+
+router.post(
+  "/BodyFatPercentageCalculator",
+  checkUserAccess,
+  async (req, res) => {
+    try {
+      const { Gender, Waist, Neck, Height, Hip } = req.body;
+
+      if (!Gender || !Waist || !Height || !Neck || !Hip) {
+        return res.status(400).json({ message: "Missing required fields" });
+      }
+
+      if (Waist <= 0 || Height <= 0 || Neck <= 0 || Hip <= 0) {
+        return res.status(400).json({ message: "Invalid input values." });
+      }
+
+      const data = calculateBodyFat(Gender, Waist, Neck, Height, Hip);
+
+      if (!data.success) {
+        return res.status(400).json({ message: data.message });
+      }
+
+      if (req.user.plan_id === 1 && req.user.plan_status === "active") {
+        await handleFreeUserUsage(req.user);
+      }
+
+      return res.status(200).json(data.bodyFat);
+    } catch (error) {
+      res
+        .status(500)
+        .json({ message: error.message || "Internal server error" });
+    }
+  }
+);
 
 module.exports = router;

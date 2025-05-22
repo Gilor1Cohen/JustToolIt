@@ -186,18 +186,16 @@ INSERT INTO tools_details (name, description, category_id, endpoint) VALUES
   ("BMI Calculator", "Determines Body Mass Index from height and weight, offering health-based category guidance.", 4, "food-and-health-tools/bmi-calculator"),
   ("Daily Water Intake Calculator", "Recommends optimal daily water consumption based on weight, activity level and climate.", 4, "food-and-health-tools/daily-water-intake-calculator"),
   ("Daily Calorie Calculator", "Estimates daily caloric needs by factoring in age, sex, height, weight and exercise habits.", 4, "food-and-health-tools/daily-calorie-calculator"),
-  ("Body Fat Percentage Calculator", "Calculates body fat using common formulas and measures, providing personalized fitness targets.", 4, "food-and-health-tools/body-fat-percentage-calculator"),
-  ("Muscle Mass and Fitness Plan Calculator", "Suggests muscle-building routines and nutrition plans tailored to specific fitness goals.", 4, "food-and-health-tools/muscle-mass-and-fitness-plan-calculator")
+  ("Body Fat Percentage Calculator", "Calculates body fat using common formulas and measures, providing personalized fitness targets.", 4, "food-and-health-tools/body-fat-percentage-calculator")
 ;
 
 
 INSERT INTO tools_details (name, description, category_id, endpoint) VALUES
-  ("Random Recipe Generator", "Suggests new recipes based on cuisine type or dietary preferences for meal inspiration.", 5, "random-recipe-generator"),
+  ("Random Recipe Generator", "Suggests new recipes based on cuisine type or dietary preferences for meal inspiration.", 5, "cooking-and-baking-tools/random-recipe-generator"),
   ("Temperature Converter", "Quickly converts between Celsius, Fahrenheit and Kelvin to ensure precise cooking temperatures.", 5, "cooking-and-baking-tools/temperature-converter"),
   ("Ingredient Quantity Calculator", "Adjusts ingredient amounts proportionally for any number of servings to avoid miscalculations.", 5, "cooking-and-baking-tools/ingredient-quantity-calculator"),
   ("Total Baking Time Calculator", "Estimates complete baking durations by summing prep, rise and bake times for accurate scheduling.", 5, "cooking-and-baking-tools/total-baking-time-calculator"),
   ("Unit Converter for Ingredients (teaspoons/cups/grams etc.)", "Translates between common kitchen measurement units to simplify recipe scaling.", 5, "cooking-and-baking-tools/unit-converter-ingredients"),
-  ("Recipe Finder by Available Ingredients", "Finds recipes that use only the ingredients you have at home, reducing waste and grocery trips.", 5, "cooking-and-baking-tools/recipe-finder-by-available-ingredients"),
   ("Nutritional Values Checker", "Provides macro and micronutrient breakdowns for ingredients to plan balanced meals.", 5, "cooking-and-baking-tools/nutritional-values-checker"),
   ("Cake/Pastry Ideas Generator by Category", "Offers themed cake and pastry suggestions based on occasion or flavor preferences.", 5, "cooking-and-baking-tools/cake-pastry-ideas-generator")
 ;

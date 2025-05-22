@@ -1,0 +1,59 @@
+<section id="WaterCalculator">
+  <h1>Daily Water Intake Calculator</h1>
+
+  <form [formGroup]="Form" (ngSubmit)="onSubmit()" novalidate>
+    <input type="number" formControlName="Weight" placeholder="Weight (kg)" />
+    <div
+      class="error"
+      *ngIf="Form.get('Weight')?.touched && Form.get('Weight')?.invalid"
+    >
+      <small *ngIf="Form.get('Weight')?.errors?.['required']"
+        >Weight is required.</small
+      >
+      <small *ngIf="Form.get('Weight')?.errors?.['min']"
+        >Weight must be positive.</small
+      >
+    </div>
+
+    <select formControlName="activityLevel">
+      <option value="" disabled hidden>Activity Level</option>
+      <option value="low">Low</option>
+      <option value="moderate">Moderate</option>
+      <option value="high">High</option>
+    </select>
+    <div
+      class="error"
+      *ngIf="
+        Form.get('activityLevel')?.touched && Form.get('activityLevel')?.invalid
+      "
+    >
+      <small>Activity level is required.</small>
+    </div>
+
+    <select formControlName="climate">
+      <option value="" disabled hidden>Climate</option>
+      <option value="cold">Cold</option>
+      <option value="moderate">Moderate</option>
+      <option value="hot">Hot</option>
+    </select>
+    <div
+      class="error"
+      *ngIf="Form.get('climate')?.touched && Form.get('climate')?.invalid"
+    >
+      <small>Climate is required.</small>
+    </div>
+
+    <button type="submit" [disabled]="Loading || Form.invalid">
+      Calculate
+    </button>
+  </form>
+
+  <div id="DataArea">
+    <p *ngIf="Loading">Loading...</p>
+    <p *ngIf="Error">{{ Error }}</p>
+
+    <p *ngIf="Data">
+      You should drink approximately {{ Data }} liters of water per day.
+    </p>
+  </div>
+</section>

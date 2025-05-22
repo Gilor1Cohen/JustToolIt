@@ -47,8 +47,12 @@ export class JwtTokenDecoderComponent implements OnInit {
       error: (err: any) => {
         this.ErrorMessage = err.error.error;
         if (err.error.message === 'Missing token.') {
-          this.router.navigateByUrl('/LogIn');
+          const currentUrl = this.router.url;
+          this.router.navigate(['/LogIn'], {
+            queryParams: { returnUrl: currentUrl },
+          });
         }
+
         this.FormLoading = false;
       },
     });

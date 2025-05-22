@@ -1,0 +1,84 @@
+<section id="BodyFatCalculator">
+  <h1>Body Fat Percentage Calculator</h1>
+
+  <form [formGroup]="Form" (ngSubmit)="onSubmit()" novalidate>
+    <select formControlName="Gender">
+      <option value="" disabled selected hidden>Select Gender</option>
+      <option value="male">Male</option>
+      <option value="female">Female</option>
+    </select>
+    <div
+      class="error"
+      *ngIf="Form.get('Gender')?.touched && Form.get('Gender')?.invalid"
+    >
+      <small *ngIf="Form.get('Gender')?.errors?.['required']">
+        Gender is required.
+      </small>
+    </div>
+
+    <input type="number" formControlName="Waist" placeholder="Waist (cm)" />
+    <div
+      class="error"
+      *ngIf="Form.get('Waist')?.touched && Form.get('Waist')?.invalid"
+    >
+      <small *ngIf="Form.get('Waist')?.errors?.['required']">
+        Waist is required.
+      </small>
+      <small *ngIf="Form.get('Waist')?.errors?.['min']">
+        Must be positive.
+      </small>
+    </div>
+
+    <input type="number" formControlName="Neck" placeholder="Neck (cm)" />
+    <div
+      class="error"
+      *ngIf="Form.get('Neck')?.touched && Form.get('Neck')?.invalid"
+    >
+      <small *ngIf="Form.get('Neck')?.errors?.['required']">
+        Neck is required.
+      </small>
+      <small *ngIf="Form.get('Neck')?.errors?.['min']">
+        Must be positive.
+      </small>
+    </div>
+
+    <input type="number" formControlName="Height" placeholder="Height (cm)" />
+    <div
+      class="error"
+      *ngIf="Form.get('Height')?.touched && Form.get('Height')?.invalid"
+    >
+      <small *ngIf="Form.get('Height')?.errors?.['required']">
+        Height is required.
+      </small>
+      <small *ngIf="Form.get('Height')?.errors?.['min']">
+        Must be positive.
+      </small>
+    </div>
+
+    <input type="number" formControlName="Hip" placeholder="Hip (cm)" />
+    <div
+      class="error"
+      *ngIf="Form.get('Hip')?.touched && Form.get('Hip')?.invalid"
+    >
+      <small *ngIf="Form.get('Hip')?.errors?.['required']">
+        Hip is required.
+      </small>
+      <small *ngIf="Form.get('Hip')?.errors?.['min']">
+        Must be positive.
+      </small>
+    </div>
+
+    <input
+      type="submit"
+      value="Calculate"
+      [disabled]="Form.invalid || Loading"
+    />
+  </form>
+
+  <div id="DataArea">
+    <p *ngIf="Loading">Loading...</p>
+    <p *ngIf="Error">{{ Error }}</p>
+
+    <p *ngIf="Data">Your Body Fat Percentage is: {{ Data }}</p>
+  </div>
+</section>

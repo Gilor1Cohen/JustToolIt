@@ -6,23 +6,20 @@ import {
   Validators,
 } from '@angular/forms';
 import { ToolsService } from '../../../../../../Core/Services/ToolsService/tools.service';
-import { CommonModule } from '@angular/common';
-import {
-  HttpErrorResponseDetails,
-  ReadTimeStats,
-} from '../../../../../../Core/Models/ToolsModel';
 import { Router } from '@angular/router';
+import { HttpErrorResponseDetails } from '../../../../../../Core/Models/ToolsModel';
+import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-read-time-estimate-calculator',
-  imports: [ReactiveFormsModule, CommonModule],
-  templateUrl: './read-time-estimate-calculator.component.html',
-  styleUrl: './read-time-estimate-calculator.component.css',
+  selector: 'app-body-fat-percentage-calculator',
+  imports: [CommonModule, ReactiveFormsModule],
+  templateUrl: './body-fat-percentage-calculator.component.html',
+  styleUrl: './body-fat-percentage-calculator.component.css',
 })
-export class ReadTimeEstimateCalculatorComponent implements OnInit {
+export class BodyFatPercentageCalculatorComponent implements OnInit {
   Error: string | null = null;
   Loading: boolean = false;
-  Data: ReadTimeStats | null = null;
+  Data: any | null = null;
 
   Form!: FormGroup;
 
@@ -33,15 +30,23 @@ export class ReadTimeEstimateCalculatorComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.Form = this.fb.group({ Text: ['', Validators.required] });
+    this.Form = this.fb.group({
+      Gender: ['', [Validators.required]],
+      Waist: ['', [Validators.required, Validators.min(0)]],
+      Neck: ['', [Validators.required, Validators.min(0)]],
+      Height: ['', [Validators.required, Validators.min(0)]],
+      Hip: ['', [Validators.required, Validators.min(0)]],
+    });
   }
 
   onSubmit(): void {
     this.Loading = true;
     this.Error = null;
 
-    this.tools.ReadTimeEstimateCalculator(this.Form.value).subscribe({
-      next: (value: ReadTimeStats) => {
+    this.tools.BodyFatPercentageCalculator(this.Form.value).subscribe({
+      next: (value: any) => {
+        console.log(value);
+
         this.Data = value;
         this.Loading = false;
       },
@@ -52,6 +57,8 @@ export class ReadTimeEstimateCalculatorComponent implements OnInit {
             queryParams: { returnUrl: currentUrl },
           });
         }
+
+        console.log(err);
 
         this.Error = err.error.message;
         this.Loading = false;

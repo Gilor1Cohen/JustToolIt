@@ -98,4 +98,16 @@ export class AuthServiceService {
   clearUserData(): void {
     this.userDataSubject.next(null);
   }
+
+  checkUser(): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/checkUser`, {
+      withCredentials: true,
+    });
+  }
+
+  addFreeUserAction(): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/addFreeUserAction`, {
+      withCredentials: true,
+    });
+  }
 }

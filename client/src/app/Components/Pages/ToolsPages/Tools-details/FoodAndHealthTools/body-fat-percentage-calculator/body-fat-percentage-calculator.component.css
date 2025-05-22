@@ -1,0 +1,99 @@
+#BodyFatCalculator {
+  width: 100%;
+  min-height: 100vh;
+  padding: 2rem 1rem;
+  margin: 2rem auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: "Roboto", sans-serif;
+  background-color: #fff;
+  color: #000;
+}
+
+#BodyFatCalculator h1 {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  color: #000;
+  text-align: center;
+}
+
+#BodyFatCalculator form {
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+#BodyFatCalculator input[type="number"],
+#BodyFatCalculator select {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  color: #000;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  transition: border-color 0.2s ease;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+#BodyFatCalculator input[type="number"]:focus,
+#BodyFatCalculator select:focus {
+  border-color: #1a73e8;
+  outline: none;
+}
+
+#BodyFatCalculator input[type="submit"] {
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  font-weight: 500;
+  background-color: #1a73e8;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+#BodyFatCalculator input[type="submit"]:hover:not(:disabled) {
+  background-color: #1765c1;
+}
+
+#BodyFatCalculator input[type="submit"]:disabled {
+  background-color: #c6dafc;
+  cursor: not-allowed;
+}
+
+#BodyFatCalculator .error {
+  color: #d93025;
+  font-size: 0.85rem;
+  margin-top: -0.8rem;
+  margin-bottom: -0.8rem;
+}
+
+#DataArea {
+  margin-top: 2rem;
+  text-align: center;
+  font-size: 1.1rem;
+}
+
+@media (max-width: 600px) {
+  #BodyFatCalculator {
+    padding: 1.5rem 1rem;
+  }
+
+  #BodyFatCalculator h1 {
+    font-size: 1.6rem;
+  }
+
+  #BodyFatCalculator input,
+  #BodyFatCalculator select,
+  #BodyFatCalculator input[type="submit"] {
+    font-size: 0.95rem;
+  }
+}

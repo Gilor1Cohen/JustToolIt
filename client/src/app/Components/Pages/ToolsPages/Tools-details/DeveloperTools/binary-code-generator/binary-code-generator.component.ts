@@ -47,8 +47,12 @@ export class BinaryCodeGeneratorComponent implements OnInit {
       },
       error: (err: HttpErrorResponseDetails) => {
         if (err.error.message === 'Missing token.') {
-          this.router.navigateByUrl('/LogIn');
+          const currentUrl = this.router.url;
+          this.router.navigate(['/LogIn'], {
+            queryParams: { returnUrl: currentUrl },
+          });
         }
+
         this.Error = err.error.message;
         this.Loading = false;
       },

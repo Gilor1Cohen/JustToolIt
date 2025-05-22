@@ -37,11 +37,25 @@ export const toolsMap: Record<string, () => Promise<Type<any>>> = {
     import(
       '../../Components/Pages/ToolsPages/Tools-details/FoodAndHealthTools/bmi-calculator/bmi-calculator.component'
     ).then((m) => m.BmiCalculatorComponent),
+  'daily-water-intake-calculator': () =>
+    import(
+      '../../Components/Pages/ToolsPages/Tools-details/FoodAndHealthTools/daily-water-intake-calculator/daily-water-intake-calculator.component'
+    ).then((m) => m.DailyWaterIntakeCalculatorComponent),
+  'daily-calorie-calculator': () =>
+    import(
+      '../../Components/Pages/ToolsPages/Tools-details/FoodAndHealthTools/daily-calorie-calculator/daily-calorie-calculator.component'
+    ).then((m) => m.DailyCalorieCalculatorComponent),
+  'body-fat-percentage-calculator': () =>
+    import(
+      '../../Components/Pages/ToolsPages/Tools-details/FoodAndHealthTools/body-fat-percentage-calculator/body-fat-percentage-calculator.component'
+    ).then((m) => m.BodyFatPercentageCalculatorComponent),
+  'random-recipe-generator': () =>
+    import(
+      '../../Components/Pages/ToolsPages/Tools-details/CookingAndBakingTools/random-recipe-generator/random-recipe-generator.component'
+    ).then((m) => m.RandomRecipeGeneratorComponent),
 };
 
 ///   '': () => import('../../Components/Pages/ToolsPages/Tools-details/').then((m) => m.),
 ///
 
-/// ng g c Components/Pages/ToolsPages/Tools-details
-
-/// FoodAndHealthTools
+/// ng g c Components/Pages/ToolsPages/Tools-details/CookingAndBakingTools

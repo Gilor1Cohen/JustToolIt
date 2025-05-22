@@ -46,7 +46,10 @@ export class RegexTesterWithExplanationsComponent implements OnInit {
       },
       error: (err: any) => {
         if (err.error.message === 'Missing token.') {
-          this.router.navigateByUrl('/LogIn');
+          const currentUrl = this.router.url;
+          this.router.navigate(['/LogIn'], {
+            queryParams: { returnUrl: currentUrl },
+          });
         }
 
         this.FormError = err.error.message;

@@ -87,8 +87,12 @@ export class TriviaQuizComponent implements OnInit {
         this.FormLoading = false;
 
         if (err.error.message === 'Missing token.') {
-          this.router.navigateByUrl('/LogIn');
+          const currentUrl = this.router.url;
+          this.router.navigate(['/LogIn'], {
+            queryParams: { returnUrl: currentUrl },
+          });
         }
+
         this.FormError = err.error.message;
       },
     });

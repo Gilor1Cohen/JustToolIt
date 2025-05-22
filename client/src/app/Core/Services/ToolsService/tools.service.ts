@@ -18,6 +18,10 @@ import {
   ReadTimeStats,
   BmiReq,
   BmiResult,
+  WaterIntakeReq,
+  DailyCalorieReq,
+  AreaResponse,
+  SimpleMealRes,
 } from '../../Models/ToolsModel';
 import { Observable } from 'rxjs';
 
@@ -110,5 +114,49 @@ export class ToolsService {
     return this.http.post<BmiResult>(`${this.Url}BmiCalculator`, data, {
       withCredentials: true,
     });
+  }
+
+  DailyWaterIntakeCalculator(data: WaterIntakeReq): Observable<number> {
+    return this.http.post<number>(
+      `${this.Url}DailyWaterIntakeCalculator`,
+      data,
+      {
+        withCredentials: true,
+      }
+    );
+  }
+
+  DailyCalorieCalculator(data: DailyCalorieReq): Observable<number> {
+    return this.http.post<number>(`${this.Url}DailyCalorieCalculator`, data, {
+      withCredentials: true,
+    });
+  }
+
+  BodyFatPercentageCalculator(data: DailyCalorieReq): Observable<number> {
+    return this.http.post<number>(
+      `${this.Url}BodyFatPercentageCalculator`,
+      data,
+      {
+        withCredentials: true,
+      }
+    );
+  }
+
+  GetRecipesCategory(): Observable<AreaResponse> {
+    return this.http.get<AreaResponse>(
+      'https://www.themealdb.com/api/json/v1/1/list.php?a=list'
+    );
+  }
+
+  GetRecipe(Category: string): Observable<SimpleMealRes> {
+    return this.http.get<SimpleMealRes>(
+      `https://www.themealdb.com/api/json/v1/1/filter.php?a=${Category}`
+    );
+  }
+
+  getDataOfRecipe(idMeal: string): Observable<any> {
+    return this.http.get<any>(
+      `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${idMeal}`
+    );
   }
 }

@@ -193,6 +193,77 @@ function BmiCalculator(Weight, Height, Age, Gender) {
   return { BMI: bmiRounded, category };
 }
 
+function DailyWaterIntakeCalculator(Weight, activityLevel, climate) {
+  let baseWaterMl = Weight * 35;
+
+  if (activityLevel === "moderate") {
+    baseWaterMl += 500;
+  } else if (activityLevel === "high") {
+    baseWaterMl += 1000;
+  }
+
+  if (climate === "hot") {
+    baseWaterMl += 750;
+  } else if (climate === "cold") {
+    baseWaterMl -= 250;
+  }
+
+  return parseFloat((baseWaterMl / 1000).toFixed(2));
+}
+
+function calculateCalories(Weight, Height, Age, ActivityLevel, Gender) {
+  const bmr =
+    Gender === "male"
+      ? 10 * Weight + 6.25 * Height - 5 * Age + 5
+      : 10 * Weight + 6.25 * Height - 5 * Age - 161;
+
+  const activityFactors = {
+    sedentary: 1.2,
+    light: 1.375,
+    moderate: 1.55,
+    active: 1.725,
+    very_active: 1.9,
+  };
+
+  const multiplier = activityFactors[+ActivityLevel] || 1.2;
+
+  return Math.round(bmr * multiplier);
+}
+
+function calculateBodyFat(Gender, Waist, Neck, Height, Hip) {
+  if (Gender === "male") {
+    const numerator = Waist - Neck;
+    if (numerator <= 0) {
+      return {
+        success: false,
+        message: "Waist must be greater than Neck for males.",
+      };
+    }
+
+    const bodyFat =
+      495 /
+        (1.0324 -
+          0.19077 * Math.log10(numerator) +
+          0.15456 * Math.log10(Height)) -
+      450;
+    return { success: true, bodyFat: +bodyFat.toFixed(2) };
+  }
+
+  const numerator = Waist + Hip - Neck;
+  if (numerator <= 0) {
+    return {
+      success: false,
+      message: "Waist + Hip must be greater than Neck for females.",
+    };
+  }
+
+  const bodyFat =
+    495 /
+      (1.29579 - 0.35004 * Math.log10(numerator) + 0.221 * Math.log10(Height)) -
+    450;
+  return { success: true, bodyFat: +bodyFat.toFixed(2) };
+}
+
 module.exports = {
   GetToolsCategories,
   GetToolsList,
@@ -206,4 +277,7 @@ module.exports = {
   ReadTimeEstimateCalculator,
   QrCodeGenerator,
   BmiCalculator,
+  DailyWaterIntakeCalculator,
+  calculateCalories,
+  calculateBodyFat,
 };

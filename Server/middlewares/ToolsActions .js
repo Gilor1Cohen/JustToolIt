@@ -30,6 +30,13 @@ async function checkUserAccess(req, res, next) {
 
     next();
   } catch (error) {
+    if (
+      error.name === "TokenExpiredError" ||
+      error.name === "JsonWebTokenError"
+    ) {
+      return res.status(401).json({ message: "Missing token." });
+    }
+
     return res
       .status(403)
       .json({ message: "Daily limit reached for free users." });

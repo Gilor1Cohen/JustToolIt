@@ -1,0 +1,89 @@
+<section id="daily-calorie-calculator">
+  <form [formGroup]="Form" (ngSubmit)="onSubmit()">
+    <input type="number" formControlName="Weight" placeholder="Weight (kg)" />
+    <div
+      class="error"
+      *ngIf="Form.get('Weight')?.touched && Form.get('Weight')?.invalid"
+    >
+      <small *ngIf="Form.get('Weight')?.errors?.['required']"
+        >Weight is required.</small
+      >
+      <small *ngIf="Form.get('Weight')?.errors?.['min']"
+        >Weight must be positive.</small
+      >
+    </div>
+
+    <input type="number" formControlName="Height" placeholder="Height (cm)" />
+    <div
+      class="error"
+      *ngIf="Form.get('Height')?.touched && Form.get('Height')?.invalid"
+    >
+      <small *ngIf="Form.get('Height')?.errors?.['required']"
+        >Height is required.</small
+      >
+      <small *ngIf="Form.get('Height')?.errors?.['min']"
+        >Height must be positive.</small
+      >
+    </div>
+
+    <input type="number" formControlName="Age" placeholder="Age" />
+    <div
+      class="error"
+      *ngIf="Form.get('Age')?.touched && Form.get('Age')?.invalid"
+    >
+      <small *ngIf="Form.get('Age')?.errors?.['required']"
+        >Age is required.</small
+      >
+      <small *ngIf="Form.get('Age')?.errors?.['min']"
+        >Age must be at least 0.</small
+      >
+      <small *ngIf="Form.get('Age')?.errors?.['max']"
+        >Age cannot exceed 120.</small
+      >
+    </div>
+
+    <select formControlName="ActivityLevel">
+      <option value="" selected disabled hidden>Activity Level</option>
+      <option value="0">Sedentary</option>
+      <option value="1">Light</option>
+      <option value="2">Moderate</option>
+      <option value="3">Active</option>
+      <option value="4">Very Active</option>
+    </select>
+    <div
+      class="error"
+      *ngIf="
+        Form.get('activityLevel')?.touched && Form.get('activityLevel')?.invalid
+      "
+    >
+      <small *ngIf="Form.get('activityLevel')?.errors?.['required']"
+        >Activity level is required.</small
+      >
+    </div>
+
+    <select formControlName="Gender">
+      <option value="" selected disabled hidden>Gender</option>
+      <option value="male">Male</option>
+      <option value="female">Female</option>
+    </select>
+    <div
+      class="error"
+      *ngIf="Form.get('Gender')?.touched && Form.get('Gender')?.invalid"
+    >
+      <small *ngIf="Form.get('Gender')?.errors?.['required']"
+        >Gender is required.</small
+      >
+    </div>
+
+    <input type="submit" value="submit" [disabled]="Form.invalid || Loading" />
+  </form>
+
+  <div id="DataArea">
+    <p *ngIf="Loading">Loading...</p>
+    <p *ngIf="Error">{{ Error }}</p>
+
+    <p *ngIf="Data">
+      You should eat approximately {{ Data }} Calories per day.
+    </p>
+  </div>
+</section>

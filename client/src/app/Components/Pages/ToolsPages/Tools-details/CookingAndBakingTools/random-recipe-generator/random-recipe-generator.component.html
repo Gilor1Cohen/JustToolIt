@@ -1,0 +1,85 @@
+<section id="random-recipe-generator">
+  <h1>Random Recipe Generator</h1>
+
+  <form [formGroup]="Form" (ngSubmit)="onSubmit()">
+    <select id="CategoriesSelect" formControlName="Category">
+      <option hidden disabled value="">Select a Category</option>
+      <option *ngIf="CategoriesLoading" disabled>Loading...</option>
+      <option *ngIf="CategoriesError" disabled>No Categories Found</option>
+
+      <ng-container *ngIf="Categories">
+        <option
+          *ngFor="let Category of Categories.meals"
+          [value]="Category.strArea"
+        >
+          {{ Category.strArea }}
+        </option>
+      </ng-container>
+    </select>
+
+    <input
+      type="submit"
+      value="Submit"
+      [disabled]="
+        Form.invalid || FormLoading || CategoriesLoading || CategoriesError
+      "
+    />
+  </form>
+
+  <div class="dataArea">
+    <p *ngIf="FormLoading">Loading recipe...</p>
+    <p *ngIf="FormError && !FormLoading" class="error">{{ FormError }}</p>
+
+    <div class="recipe" *ngIf="FormData && !FormLoading">
+      <h2>{{ FormData.strMeal }}</h2>
+      <img
+        [src]="FormData.strMealThumb"
+        [alt]="FormData.strMeal"
+        width="300"
+        height="auto"
+      />
+
+      <div class="fullRecipe">
+        <p><strong>Category:</strong> {{ FormData.strCategory }}</p>
+        <p><strong>Area:</strong> {{ FormData.strArea }}</p>
+
+        <p *ngIf="FormData.strTags">
+          <strong>Tags:</strong> {{ FormData.strTags }}
+        </p>
+
+        <p><strong>Instructions:</strong></p>
+        <pre>{{ FormData.strInstructions }}</pre>
+
+        <div *ngIf="hasIngredients(FormData)">
+          <p><strong>Ingredients:</strong></p>
+          <table class="ingredients-table">
+            <tr *ngFor="let item of getIngredients(FormData)">
+              <td>{{ item.ingredient }}</td>
+              <td>{{ item.measure }}</td>
+            </tr>
+          </table>
+        </div>
+
+        <p *ngIf="FormData.strYoutube">
+          <a
+            [href]="FormData.strYoutube"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Watch on YouTube
+          </a>
+        </p>
+
+        <p *ngIf="FormData.strSource">
+          <a
+            [href]="FormData.strSource"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Original Source
+          </a>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>

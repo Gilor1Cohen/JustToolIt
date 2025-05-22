@@ -5,24 +5,21 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { HttpErrorResponseDetails } from '../../../../../../Core/Models/ToolsModel';
 import { ToolsService } from '../../../../../../Core/Services/ToolsService/tools.service';
-import { CommonModule } from '@angular/common';
-import {
-  HttpErrorResponseDetails,
-  ReadTimeStats,
-} from '../../../../../../Core/Models/ToolsModel';
 import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-read-time-estimate-calculator',
-  imports: [ReactiveFormsModule, CommonModule],
-  templateUrl: './read-time-estimate-calculator.component.html',
-  styleUrl: './read-time-estimate-calculator.component.css',
+  selector: 'app-daily-calorie-calculator',
+  imports: [CommonModule, ReactiveFormsModule],
+  templateUrl: './daily-calorie-calculator.component.html',
+  styleUrl: './daily-calorie-calculator.component.css',
 })
-export class ReadTimeEstimateCalculatorComponent implements OnInit {
+export class DailyCalorieCalculatorComponent implements OnInit {
   Error: string | null = null;
   Loading: boolean = false;
-  Data: ReadTimeStats | null = null;
+  Data: number | null = null;
 
   Form!: FormGroup;
 
@@ -33,15 +30,21 @@ export class ReadTimeEstimateCalculatorComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.Form = this.fb.group({ Text: ['', Validators.required] });
+    this.Form = this.fb.group({
+      Weight: ['', [Validators.required, Validators.min(0)]],
+      Height: ['', [Validators.required, Validators.min(0)]],
+      Age: ['', [Validators.required, Validators.min(0), Validators.max(120)]],
+      ActivityLevel: ['', [Validators.required]],
+      Gender: ['', [Validators.required]],
+    });
   }
 
   onSubmit(): void {
     this.Loading = true;
     this.Error = null;
 
-    this.tools.ReadTimeEstimateCalculator(this.Form.value).subscribe({
-      next: (value: ReadTimeStats) => {
+    this.tools.DailyCalorieCalculator(this.Form.value).subscribe({
+      next: (value: number) => {
         this.Data = value;
         this.Loading = false;
       },
