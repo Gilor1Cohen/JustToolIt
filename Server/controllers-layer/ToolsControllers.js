@@ -16,11 +16,14 @@ const {
   DailyWaterIntakeCalculator,
   calculateCalories,
   calculateBodyFat,
+  TemperatureConverter,
+  UnitsConverter,
 } = require("../business-logic-layer/ToolsBL");
 
 const { handleFreeUserUsage } = require("../business-logic-layer/AuthBL");
 
 const checkUserAccess = require("../middlewares/ToolsActions ");
+const { F } = require("../assets/TemperatureUnits");
 
 const router = express.Router();
 
@@ -366,5 +369,67 @@ router.post(
     }
   }
 );
+
+router.post("/TemperatureConverter", checkUserAccess, async (req, res) => {
+  try {
+    const { Value, FromUnit, ToUnit } = req.body;
+
+    if (
+      typeof Value !== "number" ||
+      isNaN(Value) ||
+      !["C", "F", "K"].includes(FromUnit) ||
+      !["C", "F", "K"].includes(ToUnit)
+    ) {
+      return res.status(400).json({ message: "Invalid input data." });
+    }
+
+    if (FromUnit === ToUnit) {
+      return res.status(400).json({ message: "No conversion needed." });
+    }
+
+    const data = TemperatureConverter(Value, FromUnit, ToUnit);
+
+    if (!data.success) {
+      return res.status(400).json({ message: data.message });
+    }
+
+    if (req.user.plan_id === 1 && req.user.plan_status === "active") {
+      await handleFreeUserUsage(req.user);
+    }
+
+    return res.status(200).json(data.data);
+  } catch (error) {
+    res.status(500).json({ message: error.message || "Internal server error" });
+  }
+});
+
+router.post("/UnitsConverter", checkUserAccess, async (req, res) => {
+  try {
+    const { Value, FromUnit, ToUnit, Ingredient } = req.body;
+    console.log(Value, FromUnit, ToUnit, Ingredient);
+
+    if (!Value || !FromUnit || !ToUnit || !Ingredient) {
+      return res.status(400).json({ message: "Missing required fields" });
+    }
+
+    if (FromUnit === ToUnit) {
+      return res.status(400).json({ message: "No conversion needed." });
+    }
+
+    const data = UnitsConverter(Value, FromUnit, ToUnit, Ingredient);
+
+    if (!data.success) {
+      return res.status(400).json({ message: data.message });
+    }
+
+    if (req.user.plan_id === 1 && req.user.plan_status === "active") {
+      await handleFreeUserUsage(req.user);
+    }
+
+    return res.status(200).json(data);
+  } catch (error) {
+    res.status(500).json({ message: error.message || "Internal server error" });
+  }
+});
 
 module.exports = router;

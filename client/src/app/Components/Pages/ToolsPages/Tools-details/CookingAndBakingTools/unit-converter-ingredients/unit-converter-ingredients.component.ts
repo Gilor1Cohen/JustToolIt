@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
@@ -7,43 +6,50 @@ import {
   Validators,
 } from '@angular/forms';
 import { ToolsService } from '../../../../../../Core/Services/ToolsService/tools.service';
-import { HttpErrorResponseDetails } from '../../../../../../Core/Models/ToolsModel';
 import { ActivatedRoute, Router } from '@angular/router';
+import { HttpErrorResponseDetails } from '../../../../../../Core/Models/ToolsModel';
+import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-binary-code-generator',
+  selector: 'app-unit-converter-ingredients',
   imports: [CommonModule, ReactiveFormsModule],
-  templateUrl: './binary-code-generator.component.html',
-  styleUrl: './binary-code-generator.component.css',
+  templateUrl: './unit-converter-ingredients.component.html',
+  styleUrl: './unit-converter-ingredients.component.css',
 })
-export class BinaryCodeGeneratorComponent implements OnInit {
-  Form!: FormGroup;
-  Loading: boolean = false;
+export class UnitConverterIngredientsComponent implements OnInit {
   Error: string | null = null;
-  BinaryResult: string | null = null;
+  Loading: boolean = false;
+  Data: any | null = null;
+
+  Form!: FormGroup;
+
+  Units: string[] = ['tsp', 'tbsp', 'cup', 'ml', 'g'];
+  Ingredients: string[] = ['water', 'sugar', 'flour', 'oil', 'honey', 'milk'];
 
   constructor(
-    private tools: ToolsService,
     private fb: FormBuilder,
+    private tools: ToolsService,
     private router: Router,
     private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
     this.Form = this.fb.group({
-      text: ['', [Validators.required]],
+      Value: ['', Validators.required],
+      FromUnit: ['', Validators.required],
+      ToUnit: ['', Validators.required],
+      Ingredient: ['', Validators.required],
     });
   }
 
   onSubmit(): void {
     this.Loading = true;
     this.Error = null;
+    this.Data = null;
 
-    this.tools.BinaryCodeGenerator(this.Form.value).subscribe({
-      next: (value: string) => {
-        console.log(value);
-
-        this.BinaryResult = value;
+    this.tools.UnitsConverter(this.Form.value).subscribe({
+      next: (value: any) => {
+        this.Data = value;
         this.Loading = false;
       },
       error: (err: HttpErrorResponseDetails) => {
@@ -58,20 +64,6 @@ export class BinaryCodeGeneratorComponent implements OnInit {
         this.Loading = false;
       },
     });
-  }
-
-  copyToClipboard(): void {
-    const text = this.BinaryResult;
-    if (!text) return;
-
-    navigator.clipboard
-      .writeText(text)
-      .then(() => {
-        alert('Copied to clipboard!');
-      })
-      .catch(() => {
-        alert('Failed to copy.');
-      });
   }
 
   goBack(): void {

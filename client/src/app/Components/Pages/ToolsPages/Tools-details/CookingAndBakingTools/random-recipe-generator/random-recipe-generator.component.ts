@@ -12,7 +12,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToolsService } from '../../../../../../Core/Services/ToolsService/tools.service';
 import { CommonModule } from '@angular/common';
 import { AuthServiceService } from '../../../../../../Core/Services/Auth/auth-service.service';
@@ -37,7 +37,8 @@ export class RandomRecipeGeneratorComponent implements OnInit {
     private fb: FormBuilder,
     private tools: ToolsService,
     private auth: AuthServiceService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
@@ -135,5 +136,9 @@ export class RandomRecipeGeneratorComponent implements OnInit {
 
   hasIngredients(meal: Meal): boolean {
     return this.getIngredients(meal).length > 0;
+  }
+
+  goBack(): void {
+    this.router.navigate(['../'], { relativeTo: this.route });
   }
 }

@@ -1,4 +1,8 @@
 <section id="WaterCalculator">
+  <button id="back-button" type="button" (click)="goBack()" id="back-button">
+    ← Back
+  </button>
+
   <h1>Daily Water Intake Calculator</h1>
 
   <form [formGroup]="Form" (ngSubmit)="onSubmit()" novalidate>

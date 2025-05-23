@@ -1,4 +1,8 @@
 <section id="ReadTimeEstimateCalculator">
+  <button id="back-button" type="button" (click)="goBack()" id="back-button">
+    ← Back
+  </button>
+
   <h1>Read Time Estimate Calculator</h1>
   <form id="ReadTimeForm" [formGroup]="Form" (ngSubmit)="onSubmit()">
     <textarea

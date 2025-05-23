@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
@@ -7,46 +6,52 @@ import {
   Validators,
 } from '@angular/forms';
 import { ToolsService } from '../../../../../../Core/Services/ToolsService/tools.service';
-import { HttpErrorResponseDetails } from '../../../../../../Core/Models/ToolsModel';
 import { ActivatedRoute, Router } from '@angular/router';
+import { HttpErrorResponseDetails } from '../../../../../../Core/Models/ToolsModel';
+import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-binary-code-generator',
+  selector: 'app-temperature-converter',
   imports: [CommonModule, ReactiveFormsModule],
-  templateUrl: './binary-code-generator.component.html',
-  styleUrl: './binary-code-generator.component.css',
+  templateUrl: './temperature-converter.component.html',
+  styleUrl: './temperature-converter.component.css',
 })
-export class BinaryCodeGeneratorComponent implements OnInit {
-  Form!: FormGroup;
-  Loading: boolean = false;
+export class TemperatureConverterComponent implements OnInit {
   Error: string | null = null;
-  BinaryResult: string | null = null;
+  Loading: boolean = false;
+  Data: number | null = null;
+
+  Form!: FormGroup;
 
   constructor(
-    private tools: ToolsService,
     private fb: FormBuilder,
+    private tools: ToolsService,
     private router: Router,
     private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
     this.Form = this.fb.group({
-      text: ['', [Validators.required]],
+      Value: ['', Validators.required],
+      FromUnit: ['', Validators.required],
+      ToUnit: ['', Validators.required],
     });
   }
 
   onSubmit(): void {
     this.Loading = true;
     this.Error = null;
+    this.Data = null;
 
-    this.tools.BinaryCodeGenerator(this.Form.value).subscribe({
-      next: (value: string) => {
-        console.log(value);
+    this.tools.TemperatureConverter(this.Form.value).subscribe({
+      next: (value: number) => {
+        this.Data = value;
 
-        this.BinaryResult = value;
         this.Loading = false;
       },
       error: (err: HttpErrorResponseDetails) => {
+        console.log(err);
+
         if (err.error.message === 'Missing token.') {
           const currentUrl = this.router.url;
           this.router.navigate(['/LogIn'], {
@@ -58,20 +63,6 @@ export class BinaryCodeGeneratorComponent implements OnInit {
         this.Loading = false;
       },
     });
-  }
-
-  copyToClipboard(): void {
-    const text = this.BinaryResult;
-    if (!text) return;
-
-    navigator.clipboard
-      .writeText(text)
-      .then(() => {
-        alert('Copied to clipboard!');
-      })
-      .catch(() => {
-        alert('Failed to copy.');
-      });
   }
 
   goBack(): void {

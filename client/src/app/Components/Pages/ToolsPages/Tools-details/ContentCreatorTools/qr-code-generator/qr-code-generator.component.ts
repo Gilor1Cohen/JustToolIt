@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpErrorResponseDetails } from '../../../../../../Core/Models/ToolsModel';
 import {
   FormBuilder,
@@ -6,7 +6,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToolsService } from '../../../../../../Core/Services/ToolsService/tools.service';
 import { CommonModule } from '@angular/common';
 
@@ -16,11 +16,12 @@ import { CommonModule } from '@angular/common';
   templateUrl: './qr-code-generator.component.html',
   styleUrl: './qr-code-generator.component.css',
 })
-export class QrCodeGeneratorComponent {
+export class QrCodeGeneratorComponent implements OnInit {
   constructor(
     private tools: ToolsService,
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   Form!: FormGroup;
@@ -61,5 +62,9 @@ export class QrCodeGeneratorComponent {
     link.href = this.Data;
     link.download = 'qr-code.png';
     link.click();
+  }
+
+  goBack(): void {
+    this.router.navigate(['../'], { relativeTo: this.route });
   }
 }

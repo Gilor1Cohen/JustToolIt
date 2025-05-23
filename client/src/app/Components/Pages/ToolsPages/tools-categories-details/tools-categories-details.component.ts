@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ToolsService } from '../../../../Core/Services/ToolsService/tools.service';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import {
   HttpErrorResponseDetails,
   ToolCategory,
@@ -21,7 +21,11 @@ export class ToolsCategoriesDetailsComponent implements OnInit {
   error: string | null = null;
   loading: boolean = false;
 
-  constructor(private tools: ToolsService, private route: ActivatedRoute) {}
+  constructor(
+    private tools: ToolsService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.loading = true;
@@ -33,7 +37,6 @@ export class ToolsCategoriesDetailsComponent implements OnInit {
     this.tools.getToolsList(this.categoryName).subscribe({
       next: (value: ToolDetails[]) => {
         this.toolsList = value;
-        console.log(value[0].endpoint);
 
         this.loading = false;
       },
@@ -44,5 +47,9 @@ export class ToolsCategoriesDetailsComponent implements OnInit {
         this.loading = false;
       },
     });
+  }
+
+  goBack(): void {
+    this.router.navigate(['../'], { relativeTo: this.route });
   }
 }

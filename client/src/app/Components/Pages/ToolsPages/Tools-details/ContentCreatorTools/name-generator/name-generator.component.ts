@@ -8,7 +8,7 @@ import {
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HttpErrorResponseDetails } from '../../../../../../Core/Models/ToolsModel';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-name-generator',
@@ -20,7 +20,8 @@ export class NameGeneratorComponent implements OnInit {
   constructor(
     private tools: ToolsService,
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   Form!: FormGroup;
@@ -54,5 +55,9 @@ export class NameGeneratorComponent implements OnInit {
         this.Loading = false;
       },
     });
+  }
+
+  goBack(): void {
+    this.router.navigate(['../'], { relativeTo: this.route });
   }
 }

@@ -53,9 +53,17 @@ export const toolsMap: Record<string, () => Promise<Type<any>>> = {
     import(
       '../../Components/Pages/ToolsPages/Tools-details/CookingAndBakingTools/random-recipe-generator/random-recipe-generator.component'
     ).then((m) => m.RandomRecipeGeneratorComponent),
+  'temperature-converter': () =>
+    import(
+      '../../Components/Pages/ToolsPages/Tools-details/CookingAndBakingTools/temperature-converter/temperature-converter.component'
+    ).then((m) => m.TemperatureConverterComponent),
+  'unit-converter-ingredients': () =>
+    import(
+      '../../Components/Pages/ToolsPages/Tools-details/CookingAndBakingTools/unit-converter-ingredients/unit-converter-ingredients.component'
+    ).then((m) => m.UnitConverterIngredientsComponent),
 };
 
 ///   '': () => import('../../Components/Pages/ToolsPages/Tools-details/').then((m) => m.),
 ///
 
-/// ng g c Components/Pages/ToolsPages/Tools-details/CookingAndBakingTools
+/// ng g c Components/Pages/ToolsPages/Tools-details

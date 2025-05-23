@@ -11,7 +11,7 @@ import {
   HttpErrorResponseDetails,
   ReadTimeStats,
 } from '../../../../../../Core/Models/ToolsModel';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-read-time-estimate-calculator',
@@ -29,7 +29,8 @@ export class ReadTimeEstimateCalculatorComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private tools: ToolsService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
@@ -57,5 +58,9 @@ export class ReadTimeEstimateCalculatorComponent implements OnInit {
         this.Loading = false;
       },
     });
+  }
+
+  goBack(): void {
+    this.router.navigate(['../'], { relativeTo: this.route });
   }
 }

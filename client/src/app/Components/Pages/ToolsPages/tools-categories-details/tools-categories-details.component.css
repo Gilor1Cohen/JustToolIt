@@ -8,6 +8,27 @@
   min-height: 100vh;
   margin-top: 5rem;
   padding: 2rem;
+  position: relative;
+}
+
+#back-button {
+  position: absolute;
+  top: 3rem;
+  left: 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #007aff;
+  background: none;
+  border: none;
+  padding: 8px 12px;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  transition: opacity 0.25s ease;
+}
+
+#back-button:hover {
+  opacity: 0.5;
 }
 
 #tools-categories-details button {

@@ -1,4 +1,8 @@
 <section id="name-generator">
+  <button id="back-button" type="button" (click)="goBack()" id="back-button">
+    ← Back
+  </button>
+
   <h1>Name Generator</h1>
 
   <form id="NameGeneratorForm" [formGroup]="Form" (ngSubmit)="onSubmit()">

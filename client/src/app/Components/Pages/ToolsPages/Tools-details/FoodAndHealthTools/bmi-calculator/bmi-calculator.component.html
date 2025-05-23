@@ -1,4 +1,8 @@
 <section id="BmiCalculator">
+  <button id="back-button" type="button" (click)="goBack()" id="back-button">
+    ← Back
+  </button>
+
   <h1>BMI Calculator</h1>
 
   <form [formGroup]="Form" (ngSubmit)="onSubmit()" id="BmiForm">

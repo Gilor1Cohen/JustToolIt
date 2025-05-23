@@ -1,4 +1,8 @@
 <section id="random-recipe-generator">
+  <button id="back-button" type="button" (click)="goBack()" id="back-button">
+    ← Back
+  </button>
+
   <h1>Random Recipe Generator</h1>
 
   <form [formGroup]="Form" (ngSubmit)="onSubmit()">

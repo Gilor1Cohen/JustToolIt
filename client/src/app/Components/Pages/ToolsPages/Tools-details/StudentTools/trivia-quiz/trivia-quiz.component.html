@@ -1,4 +1,8 @@
 <section id="TriviaPage">
+  <button id="back-button" type="button" (click)="goBack()" id="back-button">
+    ← Back
+  </button>
+
   <h1>Trivia</h1>
 
   <form (ngSubmit)="onSubmit()" [formGroup]="Form" id="form">

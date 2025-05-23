@@ -1,0 +1,86 @@
+#temperature-converter {
+  width: 100%;
+  min-height: 100vh;
+  padding: 1.5rem;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #202124;
+  position: relative;
+}
+
+#back-button {
+  position: absolute;
+  top: 6rem;
+  left: 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #007aff;
+  background: none;
+  border: none;
+  padding: 8px 12px;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  transition: opacity 0.25s ease;
+}
+
+#back-button:hover {
+  opacity: 0.5;
+}
+
+#temperature-converter form {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+#temperature-converter input[type="number"],
+#temperature-converter select {
+  font-size: 1rem;
+  padding: 0.75rem 0.5rem;
+  border: none;
+  border-bottom: 2px solid #dadce0;
+  background-color: transparent;
+  transition: border-color 0.2s;
+  outline: none;
+}
+
+#temperature-converter input[type="number"]:focus,
+#temperature-converter select:focus {
+  border-bottom-color: #1a73e8;
+}
+
+#temperature-converter input[type="submit"] {
+  padding: 0.75rem;
+  font-size: 1rem;
+  border: none;
+  background-color: #1a73e8;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+#temperature-converter input[type="submit"]:hover:not(:disabled) {
+  background-color: #1558b0;
+}
+
+#temperature-converter input[type="submit"]:disabled {
+  background-color: #c6dafc;
+  cursor: not-allowed;
+}
+
+#temperature-converter .error small {
+  color: #d93025;
+  font-size: 0.875rem;
+}
+
+#temperature-converter #dataArea {
+  margin-top: 2rem;
+  text-align: center;
+}

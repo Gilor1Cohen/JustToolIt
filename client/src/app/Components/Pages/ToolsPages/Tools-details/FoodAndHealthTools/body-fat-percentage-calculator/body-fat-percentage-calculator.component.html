@@ -1,4 +1,8 @@
 <section id="BodyFatCalculator">
+  <button id="back-button" type="button" (click)="goBack()" id="back-button">
+    ← Back
+  </button>
+
   <h1>Body Fat Percentage Calculator</h1>
 
   <form [formGroup]="Form" (ngSubmit)="onSubmit()" novalidate>

@@ -8,7 +8,7 @@ import {
 import { ToolsService } from '../../../../../../Core/Services/ToolsService/tools.service';
 import { RegexExplanationResult } from '../../../../../../Core/Models/ToolsModel';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-regex-tester-with-explanations',
@@ -23,9 +23,10 @@ export class RegexTesterWithExplanationsComponent implements OnInit {
   FormError: string | null = null;
 
   constructor(
-    private fb: FormBuilder,
     private tools: ToolsService,
-    private router: Router
+    private fb: FormBuilder,
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
@@ -56,5 +57,9 @@ export class RegexTesterWithExplanationsComponent implements OnInit {
         this.FormLoading = false;
       },
     });
+  }
+
+  goBack(): void {
+    this.router.navigate(['../'], { relativeTo: this.route });
   }
 }

@@ -1,0 +1,64 @@
+<section id="temperature-converter">
+  <button id="back-button" type="button" (click)="goBack()" id="back-button">
+    ← Back
+  </button>
+
+  <h1>Temperature Converter</h1>
+
+  <form [formGroup]="Form" (ngSubmit)="onSubmit()">
+    <input
+      type="number"
+      formControlName="Value"
+      placeholder="Enter temperature"
+    />
+    <div
+      class="error"
+      *ngIf="Form.get('Value')?.touched && Form.get('Value')?.invalid"
+    >
+      <small *ngIf="Form.get('Value')?.errors?.['required']"
+        >Value is required.</small
+      >
+    </div>
+
+    <select formControlName="FromUnit">
+      <option value="" disabled selected hidden>From Unit</option>
+      <option value="C">Celsius</option>
+      <option value="F">Fahrenheit</option>
+      <option value="K">Kelvin</option>
+    </select>
+    <div
+      class="error"
+      *ngIf="Form.get('FromUnit')?.touched && Form.get('FromUnit')?.invalid"
+    >
+      <small *ngIf="Form.get('FromUnit')?.errors?.['required']"
+        >From unit is required.</small
+      >
+    </div>
+
+    <select formControlName="ToUnit">
+      <option value="" disabled selected hidden>To Unit</option>
+      <option value="C">Celsius</option>
+      <option value="F">Fahrenheit</option>
+      <option value="K">Kelvin</option>
+    </select>
+    <div
+      class="error"
+      *ngIf="Form.get('ToUnit')?.touched && Form.get('ToUnit')?.invalid"
+    >
+      <small *ngIf="Form.get('ToUnit')?.errors?.['required']"
+        >To unit is required.</small
+      >
+    </div>
+
+    <input type="submit" value="Convert" [disabled]="Loading || Form.invalid" />
+  </form>
+
+  <div id="dataArea">
+    <p *ngIf="Loading">Loading...</p>
+    <p *ngIf="Error">{{ Error }}</p>
+    <p *ngIf="Data">
+      {{ Form.get("Value")?.value }} {{ Form.get("FromUnit")?.value }} is equal
+      to {{ Data }} {{ Form.get("ToUnit")?.value }}
+    </p>
+  </div>
+</section>

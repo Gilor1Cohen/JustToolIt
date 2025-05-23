@@ -1,4 +1,8 @@
 <section id="jwt-token-decoder">
+  <button id="back-button" type="button" (click)="goBack()" id="back-button">
+    ← Back
+  </button>
+
   <form [formGroup]="Form" class="jwt-form" (ngSubmit)="onSubmit()">
     <label for="token">Paste JWT here:</label>
     <textarea

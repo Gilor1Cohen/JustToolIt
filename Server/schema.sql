@@ -162,7 +162,7 @@ INSERT INTO tools_categories (name, image_url) VALUES
 
 
 INSERT INTO tools_details (name, description, category_id, endpoint) VALUES
- ("Topic Trivia Quiz", "Generates randomized quizzes on selected subjects to test knowledge retention in a fun, engaging way.", 1, "teacher-tools/topic-trivia-quiz");
+ ("Topic Trivia Quiz", "Generates randomized quizzes on selected subjects to test knowledge retention in a fun, engaging way.", 1, "student-tools/topic-trivia-quiz");
 
 
 
@@ -193,11 +193,8 @@ INSERT INTO tools_details (name, description, category_id, endpoint) VALUES
 INSERT INTO tools_details (name, description, category_id, endpoint) VALUES
   ("Random Recipe Generator", "Suggests new recipes based on cuisine type or dietary preferences for meal inspiration.", 5, "cooking-and-baking-tools/random-recipe-generator"),
   ("Temperature Converter", "Quickly converts between Celsius, Fahrenheit and Kelvin to ensure precise cooking temperatures.", 5, "cooking-and-baking-tools/temperature-converter"),
-  ("Ingredient Quantity Calculator", "Adjusts ingredient amounts proportionally for any number of servings to avoid miscalculations.", 5, "cooking-and-baking-tools/ingredient-quantity-calculator"),
-  ("Total Baking Time Calculator", "Estimates complete baking durations by summing prep, rise and bake times for accurate scheduling.", 5, "cooking-and-baking-tools/total-baking-time-calculator"),
   ("Unit Converter for Ingredients (teaspoons/cups/grams etc.)", "Translates between common kitchen measurement units to simplify recipe scaling.", 5, "cooking-and-baking-tools/unit-converter-ingredients"),
-  ("Nutritional Values Checker", "Provides macro and micronutrient breakdowns for ingredients to plan balanced meals.", 5, "cooking-and-baking-tools/nutritional-values-checker"),
-  ("Cake/Pastry Ideas Generator by Category", "Offers themed cake and pastry suggestions based on occasion or flavor preferences.", 5, "cooking-and-baking-tools/cake-pastry-ideas-generator")
+  ("Nutritional Values Checker", "Provides macro and micronutrient breakdowns for ingredients to plan balanced meals.", 5, "cooking-and-baking-tools/nutritional-values-checker")
 ;
 
 

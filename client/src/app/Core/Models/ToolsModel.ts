@@ -210,3 +210,10 @@ export interface Meal {
 export interface MealsResponse {
   meals: Meal[];
 }
+
+export interface TemperatureAndUnitsConversionReq {
+  Value: number;
+  FromUnit: string;
+  ToUnit: string;
+  Ingredient?: string;
+}

@@ -22,6 +22,7 @@ import {
   DailyCalorieReq,
   AreaResponse,
   SimpleMealRes,
+  TemperatureAndUnitsConversionReq,
 } from '../../Models/ToolsModel';
 import { Observable } from 'rxjs';
 
@@ -158,5 +159,19 @@ export class ToolsService {
     return this.http.get<any>(
       `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${idMeal}`
     );
+  }
+
+  TemperatureConverter(
+    data: TemperatureAndUnitsConversionReq
+  ): Observable<number> {
+    return this.http.post<number>(`${this.Url}TemperatureConverter`, data, {
+      withCredentials: true,
+    });
+  }
+
+  UnitsConverter(data: TemperatureAndUnitsConversionReq): Observable<any> {
+    return this.http.post<any>(`${this.Url}UnitsConverter`, data, {
+      withCredentials: true,
+    });
   }
 }

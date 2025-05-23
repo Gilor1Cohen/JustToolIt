@@ -1,4 +1,8 @@
 <section id="QrCodeGenerator">
+  <button id="back-button" type="button" (click)="goBack()" id="back-button">
+    ← Back
+  </button>
+
   <h1>Qr Code Generator</h1>
 
   <form [formGroup]="Form" (ngSubmit)="onSubmit()" id="QrCodeGenerator-Form">

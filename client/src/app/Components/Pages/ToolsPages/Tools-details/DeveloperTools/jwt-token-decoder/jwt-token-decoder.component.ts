@@ -8,7 +8,7 @@ import {
 } from '@angular/forms';
 import { ToolsService } from '../../../../../../Core/Services/ToolsService/tools.service';
 import { HttpErrorResponseDetails } from '../../../../../../Core/Models/ToolsModel';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-jwt-token-decoder',
@@ -23,9 +23,10 @@ export class JwtTokenDecoderComponent implements OnInit {
   ErrorMessage: string | null = null;
 
   constructor(
-    private fb: FormBuilder,
     private tools: ToolsService,
-    private router: Router
+    private fb: FormBuilder,
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
@@ -70,5 +71,9 @@ export class JwtTokenDecoderComponent implements OnInit {
       .catch(() => {
         alert('Failed to copy.');
       });
+  }
+
+  goBack(): void {
+    this.router.navigate(['../'], { relativeTo: this.route });
   }
 }

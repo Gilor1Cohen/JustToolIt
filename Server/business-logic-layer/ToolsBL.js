@@ -16,6 +16,13 @@ const QRCode = require("qrcode");
 
 const ageGroups = require("../assets/BmiAgesGroups");
 
+const table = require("../assets/TemperatureUnits");
+
+const {
+  baseConversionTable,
+  ingredientDensity,
+} = require("../assets/UnitCalc");
+
 async function GetToolsCategories() {
   try {
     return await ToolsCategories();
@@ -264,6 +271,81 @@ function calculateBodyFat(Gender, Waist, Neck, Height, Hip) {
   return { success: true, bodyFat: +bodyFat.toFixed(2) };
 }
 
+function TemperatureConverter(Value, FromUnit, ToUnit) {
+  const raw = table[FromUnit][ToUnit](Value);
+  const rounded = Math.round(raw * 100) / 100;
+
+  return { success: true, data: rounded };
+}
+
+function UnitsConverter(Value, FromUnit, ToUnit, Ingredient) {
+  FromUnit = FromUnit.toLowerCase();
+  ToUnit = ToUnit.toLowerCase();
+  Ingredient = Ingredient?.toLowerCase();
+
+  if (FromUnit === ToUnit) {
+    return {
+      success: true,
+      from: FromUnit,
+      to: ToUnit,
+      original: Value,
+      converted: Value,
+    };
+  }
+
+  const toML = baseConversionTable[FromUnit]?.ml;
+  const fromML = 1 / (baseConversionTable[ToUnit]?.ml || 1);
+
+  if (ToUnit === "g") {
+    if (!toML)
+      return {
+        success: false,
+        message: `Cannot convert ${FromUnit} to g directly.`,
+      };
+    const ml = Value * toML;
+    const density = ingredientDensity[Ingredient] || 1;
+    const grams = +(ml * density).toFixed(2);
+    return {
+      success: true,
+      from: FromUnit,
+      to: ToUnit,
+      original: Value,
+      converted: grams,
+    };
+  }
+
+  if (FromUnit === "g") {
+    const density = ingredientDensity[Ingredient] || 1;
+    const ml = Value / density;
+    const targetUnit = baseConversionTable[ToUnit];
+    if (!targetUnit || !targetUnit.ml) {
+      return { success: false, message: `Cannot convert from g to ${ToUnit}` };
+    }
+    const converted = +(ml * fromML).toFixed(2);
+    return {
+      success: true,
+      from: FromUnit,
+      to: ToUnit,
+      original: Value,
+      converted,
+    };
+  }
+
+  const toFactor = baseConversionTable[FromUnit]?.[ToUnit];
+  if (!toFactor) {
+    return { success: false, message: "Unsupported unit conversion." };
+  }
+
+  const converted = +(Value * toFactor).toFixed(2);
+  return {
+    success: true,
+    from: FromUnit,
+    to: ToUnit,
+    original: Value,
+    converted,
+  };
+}
+
 module.exports = {
   GetToolsCategories,
   GetToolsList,
@@ -280,4 +362,6 @@ module.exports = {
   DailyWaterIntakeCalculator,
   calculateCalories,
   calculateBodyFat,
+  TemperatureConverter,
+  UnitsConverter,
 };

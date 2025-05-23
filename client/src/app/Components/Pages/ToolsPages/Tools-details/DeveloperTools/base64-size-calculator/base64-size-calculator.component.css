@@ -9,6 +9,26 @@
   justify-content: center;
 }
 
+#back-button {
+  position: absolute;
+  top: 6rem;
+  left: 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #007aff;
+  background: none;
+  border: none;
+  padding: 8px 12px;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  transition: opacity 0.25s ease;
+}
+
+#back-button:hover {
+  opacity: 0.5;
+}
+
 #base64-size-calculator h1 {
   font-size: 2rem;
   font-weight: 500;

@@ -6,6 +6,15 @@
 
     <ng-container *ngSwitchCase="false">
       <ng-container *ngIf="toolsList && toolsList.length > 0; else noTools">
+        <button
+          id="back-button"
+          type="button"
+          (click)="goBack()"
+          id="back-button"
+        >
+          ← Back
+        </button>
+
         <div class="Tools">
           <div class="ToolBox" *ngFor="let tool of toolsList">
             <h3>{{ tool.name }}</h3>

@@ -6,7 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { ToolsService } from '../../../../../../Core/Services/ToolsService/tools.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
   BmiResult,
   HttpErrorResponseDetails,
@@ -29,7 +29,8 @@ export class BmiCalculatorComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private tools: ToolsService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
@@ -62,5 +63,9 @@ export class BmiCalculatorComponent implements OnInit {
         this.Loading = false;
       },
     });
+  }
+
+  goBack(): void {
+    this.router.navigate(['../'], { relativeTo: this.route });
   }
 }

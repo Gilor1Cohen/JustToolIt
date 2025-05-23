@@ -1,0 +1,76 @@
+<section id="unit-converter-ingredients">
+  <button id="back-button" type="button" (click)="goBack()" id="back-button">
+    ← Back
+  </button>
+
+  <h1>Unit Converter Ingredients</h1>
+
+  <form [formGroup]="Form" (ngSubmit)="onSubmit()">
+    <input
+      type="number"
+      formControlName="Value"
+      placeholder="Enter Unit Value"
+    />
+    <div
+      class="error"
+      *ngIf="Form.get('Value')?.touched && Form.get('Value')?.invalid"
+    >
+      <small *ngIf="Form.get('Value')?.errors?.['required']"
+        >Value is required.</small
+      >
+    </div>
+
+    <select formControlName="FromUnit">
+      <option value="" disabled selected hidden>From Unit</option>
+      <option *ngFor="let unit of Units" [value]="unit">{{ unit }}</option>
+    </select>
+    <div
+      class="error"
+      *ngIf="Form.get('FromUnit')?.touched && Form.get('FromUnit')?.invalid"
+    >
+      <small *ngIf="Form.get('FromUnit')?.errors?.['required']"
+        >From unit is required.</small
+      >
+    </div>
+
+    <select formControlName="ToUnit">
+      <option value="" disabled selected hidden>To Unit</option>
+      <option *ngFor="let unit of Units" [value]="unit">{{ unit }}</option>
+    </select>
+    <div
+      class="error"
+      *ngIf="Form.get('ToUnit')?.touched && Form.get('ToUnit')?.invalid"
+    >
+      <small *ngIf="Form.get('ToUnit')?.errors?.['required']"
+        >To unit is required.</small
+      >
+    </div>
+
+    <select formControlName="Ingredient">
+      <option value="" disabled selected hidden>Ingredients</option>
+      <option *ngFor="let ingredient of Ingredients" [value]="ingredient">
+        {{ ingredient }}
+      </option>
+    </select>
+    <div
+      class="error"
+      *ngIf="
+        Form.get('Ingredients')?.touched && Form.get('Ingredients')?.invalid
+      "
+    >
+      <small *ngIf="Form.get('Ingredients')?.errors?.['required']"
+        >Ingredients is required.</small
+      >
+    </div>
+
+    <input type="submit" value="Convert" [disabled]="Loading || Form.invalid" />
+  </form>
+
+  <div id="dataArea">
+    <p *ngIf="Loading">Loading...</p>
+    <p *ngIf="Error">{{ Error }}</p>
+    <p *ngIf="Data">
+      {{ Data.original }} {{ Data.from }} = {{ Data.converted }} {{ Data.to }}
+    </p>
+  </div>
+</section>

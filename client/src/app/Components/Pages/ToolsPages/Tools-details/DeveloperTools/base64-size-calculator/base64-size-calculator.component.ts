@@ -11,7 +11,7 @@ import {
   Base64SizeResult,
   HttpErrorResponseDetails,
 } from '../../../../../../Core/Models/ToolsModel';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-base64-size-calculator',
@@ -29,7 +29,8 @@ export class Base64SizeCalculatorComponent implements OnInit {
   constructor(
     private tools: ToolsService,
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
@@ -63,5 +64,9 @@ export class Base64SizeCalculatorComponent implements OnInit {
         this.Loading = false;
       },
     });
+  }
+
+  goBack(): void {
+    this.router.navigate(['../'], { relativeTo: this.route });
   }
 }
