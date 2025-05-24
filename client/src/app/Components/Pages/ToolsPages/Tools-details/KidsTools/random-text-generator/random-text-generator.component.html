@@ -1,0 +1,69 @@
+<section id="RandomTextGenerator">
+  <button id="back-button" (click)="goBack()">← Back</button>
+  <h1 class="title">Random Text Generator</h1>
+
+  <form id="random-text-form" [formGroup]="Form" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <input
+        type="number"
+        formControlName="Paragraphs"
+        placeholder="number of Paragraphs"
+      />
+      <div
+        class="error"
+        *ngIf="
+          Form.get('Paragraphs')?.touched && Form.get('Paragraphs')?.invalid
+        "
+      >
+        <small
+          class="message"
+          *ngIf="Form.get('Paragraphs')?.errors?.['required']"
+        >
+          Paragraph is required.
+        </small>
+        <small class="message" *ngIf="Form.get('Paragraphs')?.errors?.['min']">
+          Minimum length is 1.
+        </small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <input
+        type="number"
+        formControlName="wordsPerParagraph"
+        placeholder="Number of words per paragraph"
+      />
+      <div
+        class="error"
+        *ngIf="
+          Form.get('wordsPerParagraph')?.touched &&
+          Form.get('wordsPerParagraph')?.invalid
+        "
+      >
+        <small
+          class="message"
+          *ngIf="Form.get('wordsPerParagraph')?.errors?.['required']"
+        >
+          Value is required.
+        </small>
+        <small
+          class="message"
+          *ngIf="Form.get('wordsPerParagraph')?.errors?.['min']"
+        >
+          Minimum length is 10.
+        </small>
+      </div>
+    </div>
+
+    <input
+      type="submit"
+      id="submit-button"
+      value="Generate"
+      [disabled]="Form.invalid || FormLoading"
+    />
+  </form>
+
+  <div class="loading" *ngIf="FormLoading">Loading...</div>
+  <div class="error" *ngIf="FormError">{{ FormError }}</div>
+  <div class="result" *ngIf="FormData">{{ FormData }}</div>
+</section>

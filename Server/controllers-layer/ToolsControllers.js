@@ -18,6 +18,8 @@ const {
   calculateBodyFat,
   TemperatureConverter,
   UnitsConverter,
+  createRandomText,
+  convertText,
 } = require("../business-logic-layer/ToolsBL");
 
 const { handleFreeUserUsage } = require("../business-logic-layer/AuthBL");
@@ -406,7 +408,6 @@ router.post("/TemperatureConverter", checkUserAccess, async (req, res) => {
 router.post("/UnitsConverter", checkUserAccess, async (req, res) => {
   try {
     const { Value, FromUnit, ToUnit, Ingredient } = req.body;
-    console.log(Value, FromUnit, ToUnit, Ingredient);
 
     if (!Value || !FromUnit || !ToUnit || !Ingredient) {
       return res.status(400).json({ message: "Missing required fields" });
@@ -421,6 +422,51 @@ router.post("/UnitsConverter", checkUserAccess, async (req, res) => {
     if (!data.success) {
       return res.status(400).json({ message: data.message });
     }
+
+    if (req.user.plan_id === 1 && req.user.plan_status === "active") {
+      await handleFreeUserUsage(req.user);
+    }
+
+    return res.status(200).json(data);
+  } catch (error) {
+    res.status(500).json({ message: error.message || "Internal server error" });
+  }
+});
+
+router.post("/RandomTextGenerator", checkUserAccess, async (req, res) => {
+  try {
+    const { Paragraphs, wordsPerParagraph } = req.body;
+
+    if (
+      !Paragraphs ||
+      +Paragraphs < 1 ||
+      !wordsPerParagraph ||
+      +wordsPerParagraph < 10
+    ) {
+      return res.status(400).json({ message: "Invalid input data." });
+    }
+
+    const data = createRandomText(Paragraphs, wordsPerParagraph);
+
+    if (req.user.plan_id === 1 && req.user.plan_status === "active") {
+      await handleFreeUserUsage(req.user);
+    }
+
+    return res.status(200).json(data);
+  } catch (error) {
+    res.status(500).json({ message: error.message || "Internal server error" });
+  }
+});
+
+router.post("/CoolTextConverter", checkUserAccess, async (req, res) => {
+  try {
+    const { Text } = req.body;
+
+    if (!Text || typeof Text !== "string") {
+      return res.status(400).json({ message: "Invalid text input." });
+    }
+
+    const data = await convertText(Text);
 
     if (req.user.plan_id === 1 && req.user.plan_status === "active") {
       await handleFreeUserUsage(req.user);

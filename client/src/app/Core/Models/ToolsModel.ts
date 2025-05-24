@@ -217,3 +217,132 @@ export interface TemperatureAndUnitsConversionReq {
   ToUnit: string;
   Ingredient?: string;
 }
+
+export interface DailyPrayerTimesReq {
+  City: string;
+  Country: string;
+}
+
+export interface DailyPrayerTimesRes {
+  code: number;
+  status: string;
+  data: {
+    timings: {
+      Fajr: string;
+      Sunrise: string;
+      Dhuhr: string;
+      Asr: string;
+      Sunset: string;
+      Maghrib: string;
+      Isha: string;
+      Imsak: string;
+      Midnight: string;
+      Firstthird: string;
+      Lastthird: string;
+    };
+    date: {
+      readable: string;
+      timestamp: string;
+      hijri: {
+        date: string;
+        format: string;
+        day: string;
+        weekday: { en: string; ar: string };
+        month: { number: number; en: string; ar: string; days: number };
+        year: string;
+        designation: { abbreviated: string; expanded: string };
+        holidays: string[];
+        adjustedHolidays: string[];
+        method: string;
+      };
+      gregorian: {
+        date: string;
+        format: string;
+        day: string;
+        weekday: { en: string };
+        month: { number: number; en: string };
+        year: string;
+        designation: { abbreviated: string; expanded: string };
+        lunarSighting: boolean;
+      };
+    };
+    meta: {
+      latitude: number;
+      longitude: number;
+      timezone: string;
+      method: {
+        id: number;
+        name: string;
+        params: { Fajr: number; Isha: number };
+        location: { latitude: number; longitude: number };
+      };
+      latitudeAdjustmentMethod: string;
+      midnightMode: string;
+      school: string;
+      offset: {
+        Imsak: number;
+        Fajr: number;
+        Sunrise: number;
+        Dhuhr: number;
+        Asr: number;
+        Maghrib: number;
+        Sunset: number;
+        Isha: number;
+        Midnight: number;
+      };
+    };
+  };
+}
+
+export interface LocationRes {
+  place_id: number;
+  licence: string;
+  osm_type: string;
+  osm_id: number;
+  lat: string;
+  lon: string;
+  class: string;
+  type: string;
+  place_rank: number;
+  importance: number;
+  addresstype: string;
+  name: string;
+  display_name: string;
+  boundingbox: [string, string, string, string];
+}
+
+export interface SunriseSunsetRes {
+  results: {
+    sunrise: string;
+    sunset: string;
+    solar_noon: string;
+    day_length: number;
+    civil_twilight_begin: string;
+    civil_twilight_end: string;
+    nautical_twilight_begin: string;
+    nautical_twilight_end: string;
+    astronomical_twilight_begin: string;
+    astronomical_twilight_end: string;
+  };
+  status: string;
+  tzid?: string;
+}
+
+export interface RandomTextGeneratorReq {
+  Paragraphs: number | string;
+  wordsPerParagraph: number | string;
+}
+
+export interface CoolTextConverterReq {
+  Text: string;
+}
+
+export interface CoolTextConvertedRes {
+  original: string;
+  smallCaps: string;
+  circled: string;
+  ascii: string;
+  fancyBold: string;
+  fancyItalic: string;
+  fancyMono: string;
+}

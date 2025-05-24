@@ -1,0 +1,48 @@
+<section id="SabbathCandleLightingTime">
+  <button id="back-button" type="button" (click)="goBack()" id="back-button">
+    ← Back
+  </button>
+
+  <h1>Sabbath Candle Lighting Time</h1>
+
+  <form [formGroup]="Form" (ngSubmit)="onSubmit()">
+    <input type="text" formControlName="City" placeholder="City" />
+    <div
+      *ngIf="Form.controls['City'].touched && Form.controls['City'].invalid"
+      class="error"
+    >
+      <small *ngIf="Form.controls['City'].errors?.['required']"
+        >City is required.</small
+      >
+    </div>
+
+    <input type="text" formControlName="Country" placeholder="Country" />
+    <div
+      *ngIf="
+        Form.controls['Country'].touched && Form.controls['Country'].invalid
+      "
+      class="error"
+    >
+      <small *ngIf="Form.controls['Country'].errors?.['required']"
+        >Country is required.</small
+      >
+    </div>
+
+    <input type="submit" value="submit" [disabled]="Loading || Form.invalid" />
+  </form>
+
+  <div class="data-area" id="data-area">
+    <p *ngIf="Error" class="error-message" id="error-message">
+      {{ Error }}
+    </p>
+
+    <p *ngIf="Loading" class="loading-message" id="loading-message">
+      Loading...
+    </p>
+
+    <p *ngIf="Data">
+      Candle Lighting Time for the next Friday in
+      <strong>{{ Data }}</strong>
+    </p>
+  </div>
+</section>

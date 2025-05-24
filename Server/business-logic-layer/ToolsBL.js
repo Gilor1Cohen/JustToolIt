@@ -23,6 +23,16 @@ const {
   ingredientDensity,
 } = require("../assets/UnitCalc");
 
+const { LoremIpsum } = require("lorem-ipsum");
+
+const {
+  toSmallCaps,
+  toCircle,
+  toFiglet,
+} = require("../assets/coolTextConverter");
+
+const fancy = require("fancy-text-generator");
+
 async function GetToolsCategories() {
   try {
     return await ToolsCategories();
@@ -346,6 +356,35 @@ function UnitsConverter(Value, FromUnit, ToUnit, Ingredient) {
   };
 }
 
+function createRandomText(Paragraphs, wordsPerParagraph) {
+  const customLorem = new LoremIpsum({
+    sentencesPerParagraph: {
+      min: Math.max(1, Math.floor(wordsPerParagraph / 5)),
+      max: Math.max(1, Math.ceil(wordsPerParagraph / 4)),
+    },
+    wordsPerSentence: {
+      min: 4,
+      max: 8,
+    },
+  });
+
+  return customLorem.generateParagraphs(Paragraphs);
+}
+
+async function convertText(text) {
+  const ascii = await toFiglet(text);
+
+  return {
+    original: text,
+    smallCaps: toSmallCaps(text),
+    circled: toCircle(text),
+    ascii,
+    fancyBold: fancy(text, "bold"),
+    fancyItalic: fancy(text, "italic"),
+    fancyMono: fancy(text, "monospace"),
+  };
+}
+
 module.exports = {
   GetToolsCategories,
   GetToolsList,
@@ -364,4 +403,6 @@ module.exports = {
   calculateBodyFat,
   TemperatureConverter,
   UnitsConverter,
+  createRandomText,
+  convertText,
 };

@@ -1,0 +1,36 @@
+<section id="CoolTextConverter">
+  <button id="back-button" type="button" (click)="goBack()" id="back-button">
+    ← Back
+  </button>
+
+  <h1>Cool Text Converter</h1>
+
+  <form [formGroup]="Form" (ngSubmit)="onSubmit()">
+    <input type="text" formControlName="Text" placeholder="Text" />
+    <input
+      type="submit"
+      value="submit"
+      [disabled]="FormLoading || Form.invalid"
+    />
+  </form>
+
+  <div class="dataArea">
+    <div *ngIf="ErrorMessage" class="error">
+      <p>{{ ErrorMessage }}</p>
+    </div>
+
+    <div *ngIf="FormLoading">
+      <p>Loading....</p>
+    </div>
+
+    <div *ngIf="Data">
+      <p><strong>Original:</strong> {{ Data.original }}</p>
+      <p><strong>Small Caps:</strong> {{ Data.smallCaps }}</p>
+      <p><strong>Circled:</strong> {{ Data.circled }}</p>
+      <pre><strong>ASCII:</strong> {{ Data.ascii }}</pre>
+      <p><strong>Fancy Bold:</strong> {{ Data.fancyBold }}</p>
+      <p><strong>Fancy Italic:</strong> {{ Data.fancyItalic }}</p>
+      <p><strong>Fancy Mono:</strong> {{ Data.fancyMono }}</p>
+    </div>
+  </div>
+</section>

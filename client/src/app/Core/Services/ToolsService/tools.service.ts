@@ -23,6 +23,13 @@ import {
   AreaResponse,
   SimpleMealRes,
   TemperatureAndUnitsConversionReq,
+  DailyPrayerTimesReq,
+  DailyPrayerTimesRes,
+  LocationRes,
+  RandomTextGeneratorReq,
+  SunriseSunsetRes,
+  CoolTextConverterReq,
+  CoolTextConvertedRes,
 } from '../../Models/ToolsModel';
 import { Observable } from 'rxjs';
 
@@ -173,5 +180,50 @@ export class ToolsService {
     return this.http.post<any>(`${this.Url}UnitsConverter`, data, {
       withCredentials: true,
     });
+  }
+
+  DailyPrayerTimes(data: DailyPrayerTimesReq): Observable<DailyPrayerTimesRes> {
+    return this.http.get<DailyPrayerTimesRes>(
+      `http://api.aladhan.com/v1/timingsByCity?city=${data.City}&country=${data.Country}&method=3`
+    );
+  }
+
+  GetLoc(data: DailyPrayerTimesReq): Observable<LocationRes[]> {
+    return this.http.get<LocationRes[]>(
+      `https://nominatim.openstreetmap.org/search?city=${data.City}&country=${data.Country}&format=json&limit=1`,
+      {
+        headers: {
+          'User-Agent': 'JustToolIt',
+        },
+      }
+    );
+  }
+
+  GetSunset(
+    lat: string | number,
+    lon: string | number,
+    date: string
+  ): Observable<SunriseSunsetRes> {
+    return this.http.get<SunriseSunsetRes>(
+      `https://api.sunrise-sunset.org/json?lat=${lat}&lng=${lon}&date=${date}&formatted=0`
+    );
+  }
+
+  RandomTextGenerator(data: RandomTextGeneratorReq): Observable<string> {
+    return this.http.post<string>(`${this.Url}RandomTextGenerator`, data, {
+      withCredentials: true,
+    });
+  }
+
+  CoolTextConverter(
+    data: CoolTextConverterReq
+  ): Observable<CoolTextConvertedRes> {
+    return this.http.post<CoolTextConvertedRes>(
+      `${this.Url}CoolTextConverter`,
+      data,
+      {
+        withCredentials: true,
+      }
+    );
   }
 }

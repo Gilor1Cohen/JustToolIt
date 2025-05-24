@@ -61,9 +61,25 @@ export const toolsMap: Record<string, () => Promise<Type<any>>> = {
     import(
       '../../Components/Pages/ToolsPages/Tools-details/CookingAndBakingTools/unit-converter-ingredients/unit-converter-ingredients.component'
     ).then((m) => m.UnitConverterIngredientsComponent),
+  'daily-prayer-times': () =>
+    import(
+      '../../Components/Pages/ToolsPages/Tools-details/ReligiousTools/daily-prayer-times/daily-prayer-times.component'
+    ).then((m) => m.DailyPrayerTimesComponent),
+  'sabbath-candle-lighting-time': () =>
+    import(
+      '../../Components/Pages/ToolsPages/Tools-details/ReligiousTools/sabbath-candle-lighting-time/sabbath-candle-lighting-time.component'
+    ).then((m) => m.SabbathCandleLightingTimeComponent),
+  'random-text-generator': () =>
+    import(
+      '../../Components/Pages/ToolsPages/Tools-details/KidsTools/random-text-generator/random-text-generator.component'
+    ).then((m) => m.RandomTextGeneratorComponent),
+  'cool-text-converter': () =>
+    import(
+      '../../Components/Pages/ToolsPages/Tools-details/KidsTools/cool-text-converter/cool-text-converter.component'
+    ).then((m) => m.CoolTextConverterComponent),
 };
 
 ///   '': () => import('../../Components/Pages/ToolsPages/Tools-details/').then((m) => m.),
 ///
 
-/// ng g c Components/Pages/ToolsPages/Tools-details
+/// ng g c Components/Pages/ToolsPages/Tools-details/KidsTools/cool-text-converter

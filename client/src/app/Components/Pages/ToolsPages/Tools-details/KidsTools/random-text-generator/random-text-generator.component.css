@@ -1,0 +1,114 @@
+#RandomTextGenerator {
+  width: 100%;
+  min-height: 100vh;
+  padding: 3rem 1rem;
+  margin: 3rem auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #202124;
+}
+
+#back-button {
+  position: absolute;
+  top: 6rem;
+  left: 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #007aff;
+  background: none;
+  border: none;
+  padding: 8px 12px;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  transition: opacity 0.25s ease;
+}
+
+#back-button:hover {
+  opacity: 0.5;
+}
+
+#RandomTextGenerator input {
+  font-family: inherit;
+  font-size: 1rem;
+  padding: 0.5rem 0;
+  border: none;
+  border-bottom: 1px solid #dadce0;
+  background: transparent;
+  outline: none;
+  transition: border-color 0.2s ease-in-out;
+  width: 400px;
+}
+
+#RandomTextGenerator h1 {
+  font-size: 2.25rem;
+  font-weight: 600;
+  margin-bottom: 2.5rem;
+  color: #202124;
+  text-align: center;
+}
+
+#RandomTextGenerator .form-group {
+  width: 100%;
+  max-width: 500px;
+  margin-bottom: 1.75rem;
+  display: flex;
+  flex-direction: column;
+}
+
+#RandomTextGenerator .error .message {
+  font-size: 0.75rem;
+  color: #d93025;
+  margin-top: 0.35rem;
+}
+
+#RandomTextGenerator #submit-button {
+  margin-top: 2rem;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #ffffff;
+  background-color: #1a73e8;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(60, 64, 67, 0.15);
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+#RandomTextGenerator #submit-button:disabled {
+  background-color: #e8eaed;
+  color: #9aa0a6;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+#RandomTextGenerator #submit-button:not(:disabled):hover {
+  background-color: #1558b0;
+  box-shadow: 0 2px 6px rgba(60, 64, 67, 0.25);
+}
+
+#RandomTextGenerator .loading {
+  margin-top: 1.5rem;
+  font-size: 1rem;
+  color: #5f6368;
+  font-style: italic;
+  text-align: center;
+}
+
+#RandomTextGenerator .result {
+  margin-top: 2rem;
+  width: 100%;
+  max-width: 500px;
+  padding: 1.25rem;
+  background-color: #f8f9fa;
+  border-radius: 6px;
+  font-size: 1rem;
+  color: #202124;
+  box-shadow: 0 1px 4px rgba(60, 64, 67, 0.1);
+  white-space: pre-wrap;
+  word-break: break-word;
+  line-height: 1.5;
+}
