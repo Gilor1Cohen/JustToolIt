@@ -31,12 +31,16 @@ const {
   calculateHeatTransfer,
   calculateRadioactiveHalfLife,
   calculatePhotonEnergy,
+  calculateMassVsWeight,
+  calculateEscapeVelocity,
+  getElementData,
+  solveIdealGasLaw,
+  parseChemicalFormula,
 } = require("../business-logic-layer/ToolsBL");
 
 const { handleFreeUserUsage } = require("../business-logic-layer/AuthBL");
 
 const checkUserAccess = require("../middlewares/ToolsActions ");
-const { F } = require("../assets/TemperatureUnits");
 
 const router = express.Router();
 
@@ -734,6 +738,131 @@ router.post("/calculatePhotonEnergy", checkUserAccess, async (req, res) => {
     }
 
     const data = calculatePhotonEnergy(wavelength, frequency);
+
+    if (req.user.plan_id === 1 && req.user.plan_status === "active") {
+      await handleFreeUserUsage(req.user);
+    }
+
+    return res.status(200).json(data);
+  } catch (error) {
+    res.status(500).json({ message: error.message || "Internal server error" });
+  }
+});
+
+router.post("/calculateMassVsWeight", checkUserAccess, async (req, res) => {
+  try {
+    const { mass, gravity } = req.body;
+
+    if (mass == null || gravity == null) {
+      return res.status(400).json({
+        message: "Provide both mass and gravity",
+      });
+    }
+
+    const data = calculateMassVsWeight(mass, gravity);
+
+    if (req.user.plan_id === 1 && req.user.plan_status === "active") {
+      await handleFreeUserUsage(req.user);
+    }
+
+    return res.status(200).json(data);
+  } catch (error) {
+    res.status(500).json({ message: error.message || "Internal server error" });
+  }
+});
+
+router.post("/calculateEscapeVelocity", checkUserAccess, async (req, res) => {
+  try {
+    const { mass, radius } = req.body;
+
+    if (mass == null || radius == null) {
+      return res.status(400).json({
+        message: "Provide both mass and radius of the celestial body",
+      });
+    }
+
+    const data = calculateEscapeVelocity(mass, radius);
+
+    if (req.user.plan_id === 1 && req.user.plan_status === "active") {
+      await handleFreeUserUsage(req.user);
+    }
+
+    return res.status(200).json(data);
+  } catch (error) {
+    res.status(500).json({ message: error.message || "Internal server error" });
+  }
+});
+
+router.post("/periodicTableLookup", checkUserAccess, async (req, res) => {
+  try {
+    const { query } = req.body;
+
+    if (query == null) {
+      return res.status(400).json({
+        message: "Query parameter is required",
+      });
+    }
+
+    const data = getElementData(query);
+
+    if (!data) return res.status(404).json({ message: "Element not found" });
+
+    if (req.user.plan_id === 1 && req.user.plan_status === "active") {
+      await handleFreeUserUsage(req.user);
+    }
+
+    return res.status(200).json(data);
+  } catch (error) {
+    res.status(500).json({ message: error.message || "Internal server error" });
+  }
+});
+
+router.post("/idealGasLawSolver", checkUserAccess, async (req, res) => {
+  try {
+    const { pressure, volume, moles, temperature } = req.body;
+
+    const inputs = [pressure, volume, moles, temperature];
+    const providedCount = inputs.filter(
+      (v) => v !== null && v !== "" && !isNaN(Number(v))
+    ).length;
+
+    if (providedCount < 1) {
+      return res.status(400).json({
+        message:
+          "At least one of pressure, volume, moles or temperature is required",
+      });
+    }
+
+    if (providedCount > 3) {
+      return res.status(400).json({
+        message:
+          "No more than three of pressure, volume, moles or temperature can be provided",
+      });
+    }
+
+    const data = solveIdealGasLaw(pressure, volume, moles, temperature);
+
+    if (req.user.plan_id === 1 && req.user.plan_status === "active") {
+      await handleFreeUserUsage(req.user);
+    }
+
+    return res.status(200).json(data);
+  } catch (error) {
+    res.status(500).json({ message: error.message || "Internal server error" });
+  }
+});
+
+router.post("/chemicalFormulaParser", checkUserAccess, async (req, res) => {
+  try {
+    const { formula } = req.body;
+
+    if (formula == null) {
+      return res.status(400).json({
+        message: "Formula parameter is required",
+      });
+    }
+
+    const data = parseChemicalFormula(formula);
 
     if (req.user.plan_id === 1 && req.user.plan_status === "active") {
       await handleFreeUserUsage(req.user);

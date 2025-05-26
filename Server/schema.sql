@@ -223,16 +223,14 @@ INSERT INTO tools_details (name, description, category_id, endpoint) VALUES
 INSERT INTO tools_details (name, description, category_id, endpoint) VALUES
   ("Mass vs Weight Calculator", "Compares how mass translates to weight under varying gravity fields of different planets.", 9, "astronomy-and-astrophysics-tools/mass-vs-weight-calculator"),
   ("Escape Velocity Calculator", "Computes the minimum speed needed to break free from a celestial body’s gravity.", 9, "astronomy-and-astrophysics-tools/escape-velocity-calculator"),
-  ("Gravitational Force Calculator", "Applies Newton’s law of universal gravitation to calculate force between two masses.", 9, "astronomy-and-astrophysics-tools/gravitational-force-calculator"),
-  ("Solar/Lunar Cycle Calculator", "Determines local sunrise, sunset, and moon phase times based on date and location.", 9, "astronomy-and-astrophysics-tools/solar-lunar-cycle-calculator")
 ;
 
 
 INSERT INTO tools_details (name, description, category_id, endpoint) VALUES
   ("Periodic Table Lookup", "Provides elemental properties and atomic data lookup alongside interactive periodic table views.", 10, "chemistry-tools/periodic-table-lookup"),
   ("Ideal Gas Law Solver", "Solves PV=nRT and related equations to predict gas behavior under varying conditions.", 10, "chemistry-tools/ideal-gas-law-solver"),
-  ("Molecular Diagram Generator", "Renders 2D structural diagrams from chemical formulas for presentations and study.", 10, "chemistry-tools/molecular-diagram-generator"),
   ("Chemical Formula Parser", "Breaks down complex chemical formulas into constituent elements and rebuilds them.", 10, "chemistry-tools/chemical-formula-parser"),
+  ("Molecular Diagram Generator", "Renders 2D structural diagrams from chemical formulas for presentations and study.", 10, "chemistry-tools/molecular-diagram-generator"),
   ("SMILES to Structure Converter", "Converts SMILES notation into interactive molecular structures for research and education.", 10, "chemistry-tools/smiles-to-structure-converter")
 ;
 

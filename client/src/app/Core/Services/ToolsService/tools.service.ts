@@ -43,6 +43,27 @@ import {
   HeatTransferReq,
   RadioactiveHalfLifeReq,
   PhotonEnergyReq,
+  DistanceSpeedTimeRes,
+  AccelerationRes,
+  KinematicMotionRes,
+  FreeFallRes,
+  ForceRes,
+  WorkAndEnergyRes,
+  KineticPotentialEnergyRes,
+  TorqueRes,
+  HeatTransferRes,
+  RadioactiveHalfLifeRes,
+  PhotonEnergyRes,
+  MassVsWeightReq,
+  EscapeVelocityReq,
+  EscapeVelocityRes,
+  MassVsWeightRes,
+  PeriodicTableLookupReq,
+  PeriodicTableLookupRes,
+  IdealGasLawSolverReq,
+  IdealGasLawSolverRes,
+  ChemicalFormulaParserReq,
+  ChemicalFormulaParserRes,
 } from '../../Models/ToolsModel';
 import { Observable } from 'rxjs';
 
@@ -252,46 +273,66 @@ export class ToolsService {
     );
   }
 
-  computeDistanceSpeedTime(data: DistanceSpeedTimeReq): Observable<any> {
-    return this.http.post<any>(`${this.Url}computeDistanceSpeedTime`, data, {
+  computeDistanceSpeedTime(
+    data: DistanceSpeedTimeReq
+  ): Observable<DistanceSpeedTimeRes> {
+    return this.http.post<DistanceSpeedTimeRes>(
+      `${this.Url}computeDistanceSpeedTime`,
+      data,
+      {
+        withCredentials: true,
+      }
+    );
+  }
+
+  calculateAcceleration(data: AccelerationReq): Observable<AccelerationRes> {
+    return this.http.post<AccelerationRes>(
+      `${this.Url}calculateAcceleration`,
+      data,
+      {
+        withCredentials: true,
+      }
+    );
+  }
+
+  solveKinematicMotion(
+    data: KinematicMotionReq
+  ): Observable<KinematicMotionRes> {
+    return this.http.post<KinematicMotionRes>(
+      `${this.Url}solveKinematicMotion`,
+      data,
+      {
+        withCredentials: true,
+      }
+    );
+  }
+
+  calculateFreeFall(data: FreeFallReq): Observable<FreeFallRes> {
+    return this.http.post<FreeFallRes>(`${this.Url}calculateFreeFall`, data, {
       withCredentials: true,
     });
   }
 
-  calculateAcceleration(data: AccelerationReq): Observable<any> {
-    return this.http.post<any>(`${this.Url}computeDistanceSpeedTime`, data, {
+  calculateForce(data: ForceReq): Observable<ForceRes> {
+    return this.http.post<ForceRes>(`${this.Url}calculateForce`, data, {
       withCredentials: true,
     });
   }
 
-  solveKinematicMotion(data: KinematicMotionReq): Observable<any> {
-    return this.http.post<any>(`${this.Url}solveKinematicMotion`, data, {
-      withCredentials: true,
-    });
-  }
-
-  calculateFreeFall(data: FreeFallReq): Observable<any> {
-    return this.http.post<any>(`${this.Url}calculateFreeFall`, data, {
-      withCredentials: true,
-    });
-  }
-
-  calculateForce(data: ForceReq): Observable<any> {
-    return this.http.post<any>(`${this.Url}calculateForce`, data, {
-      withCredentials: true,
-    });
-  }
-
-  calculateWorkAndEnergy(data: WorkEnergyReq): Observable<any> {
-    return this.http.post<any>(`${this.Url}calculateWorkAndEnergy`, data, {
-      withCredentials: true,
-    });
+  calculateWorkAndEnergy(data: WorkEnergyReq): Observable<WorkAndEnergyRes> {
+    return this.http.post<WorkAndEnergyRes>(
+      `${this.Url}calculateWorkAndEnergy`,
+      data,
+      {
+        withCredentials: true,
+      }
+    );
   }
 
   calculateKineticPotentialEnergy(
     data: KineticPotentialEnergyReq
-  ): Observable<any> {
-    return this.http.post<any>(
+  ): Observable<KineticPotentialEnergyRes> {
+    return this.http.post<KineticPotentialEnergyRes>(
       `${this.Url}calculateKineticPotentialEnergy`,
       data,
       {
@@ -300,20 +341,26 @@ export class ToolsService {
     );
   }
 
-  calculateTorque(data: TorqueReq): Observable<any> {
-    return this.http.post<any>(`${this.Url}calculateTorque`, data, {
+  calculateTorque(data: TorqueReq): Observable<TorqueRes> {
+    return this.http.post<TorqueRes>(`${this.Url}calculateTorque`, data, {
       withCredentials: true,
     });
   }
 
-  calculateHeatTransfer(data: HeatTransferReq): Observable<any> {
-    return this.http.post<any>(`${this.Url}calculateHeatTransfer`, data, {
-      withCredentials: true,
-    });
+  calculateHeatTransfer(data: HeatTransferReq): Observable<HeatTransferRes> {
+    return this.http.post<HeatTransferRes>(
+      `${this.Url}calculateHeatTransfer`,
+      data,
+      {
+        withCredentials: true,
+      }
+    );
   }
 
-  calculateRadioactiveHalfLife(data: RadioactiveHalfLifeReq): Observable<any> {
-    return this.http.post<any>(
+  calculateRadioactiveHalfLife(
+    data: RadioactiveHalfLifeReq
+  ): Observable<RadioactiveHalfLifeRes> {
+    return this.http.post<RadioactiveHalfLifeRes>(
       `${this.Url}calculateRadioactiveHalfLife`,
       data,
       {
@@ -322,9 +369,71 @@ export class ToolsService {
     );
   }
 
-  calculatePhotonEnergy(data: PhotonEnergyReq): Observable<any> {
-    return this.http.post<any>(`${this.Url}calculatePhotonEnergy`, data, {
-      withCredentials: true,
-    });
+  calculatePhotonEnergy(data: PhotonEnergyReq): Observable<PhotonEnergyRes> {
+    return this.http.post<PhotonEnergyRes>(
+      `${this.Url}calculatePhotonEnergy`,
+      data,
+      {
+        withCredentials: true,
+      }
+    );
+  }
+
+  calculateMassVsWeight(data: MassVsWeightReq): Observable<MassVsWeightRes> {
+    return this.http.post<MassVsWeightRes>(
+      `${this.Url}calculateMassVsWeight`,
+      data,
+      {
+        withCredentials: true,
+      }
+    );
+  }
+
+  calculateEscapeVelocity(
+    data: EscapeVelocityReq
+  ): Observable<EscapeVelocityRes> {
+    return this.http.post<EscapeVelocityRes>(
+      `${this.Url}calculateEscapeVelocity`,
+      data,
+      {
+        withCredentials: true,
+      }
+    );
+  }
+
+  periodicTableLookup(
+    data: PeriodicTableLookupReq
+  ): Observable<PeriodicTableLookupRes> {
+    return this.http.post<PeriodicTableLookupRes>(
+      `${this.Url}periodicTableLookup`,
+      data,
+      {
+        withCredentials: true,
+      }
+    );
+  }
+
+  idealGasLawSolver(
+    data: IdealGasLawSolverReq
+  ): Observable<IdealGasLawSolverRes> {
+    return this.http.post<IdealGasLawSolverRes>(
+      `${this.Url}idealGasLawSolver`,
+      data,
+      {
+        withCredentials: true,
+      }
+    );
+  }
+
+  chemicalFormulaParser(
+    data: ChemicalFormulaParserReq
+  ): Observable<ChemicalFormulaParserRes> {
+    return this.http.post<ChemicalFormulaParserRes>(
+      `${this.Url}chemicalFormulaParser`,
+      data,
+      {
+        withCredentials: true,
+      }
+    );
   }
 }

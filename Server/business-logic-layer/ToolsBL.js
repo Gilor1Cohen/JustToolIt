@@ -33,6 +33,8 @@ const {
 
 const fancy = require("fancy-text-generator");
 
+const { elements } = require("../assets/PeriodicTableJSON.json");
+
 async function GetToolsCategories() {
   try {
     return await ToolsCategories();
@@ -475,6 +477,63 @@ function calculatePhotonEnergy(wavelength, frequency) {
   return { energy };
 }
 
+function calculateMassVsWeight(mass, gravity) {
+  const weight = mass * gravity;
+  return { weight };
+}
+
+function calculateEscapeVelocity(mass, radius) {
+  const G = 6.6743e-11;
+  const escapeVelocity = Math.sqrt((2 * G * mass) / radius);
+  return { escapeVelocity };
+}
+
+function getElementData(query) {
+  return elements.find((el) => {
+    return (
+      el.symbol?.toLowerCase() === String(query).toLowerCase() ||
+      el.name?.toLowerCase() === String(query).toLowerCase() ||
+      el.number === Number(query)
+    );
+  });
+}
+
+function solveIdealGasLaw(pressure, volume, moles, temperature) {
+  let missing = null;
+
+  if (pressure == null) {
+    missing = "pressure";
+    pressure = (moles * 0.0821 * temperature) / volume;
+  } else if (volume == null) {
+    missing = "volume";
+    volume = (moles * 0.0821 * temperature) / pressure;
+  } else if (moles == null) {
+    missing = "moles";
+    moles = (pressure * volume) / (0.0821 * temperature);
+  } else if (temperature == null) {
+    missing = "temperature";
+    temperature = (pressure * volume) / (0.0821 * moles);
+  }
+
+  return { pressure, volume, moles, temperature, missing };
+}
+
+function parseChemicalFormula(formula) {
+  if (!/^[A-Za-z0-9()]+$/.test(formula)) throw new Error("Invalid formula");
+
+  const elementRegex = /([A-Z][a-z]?)(\d*)/g;
+  const result = {};
+  let match;
+
+  while ((match = elementRegex.exec(formula)) !== null) {
+    const [, element, count] = match;
+    const num = parseInt(count || "1", 10);
+    result[element] = (result[element] || 0) + num;
+  }
+
+  return result;
+}
+
 module.exports = {
   GetToolsCategories,
   GetToolsList,
@@ -506,4 +565,9 @@ module.exports = {
   calculateHeatTransfer,
   calculateRadioactiveHalfLife,
   calculatePhotonEnergy,
+  calculateMassVsWeight,
+  calculateEscapeVelocity,
+  getElementData,
+  solveIdealGasLaw,
+  parseChemicalFormula,
 };

@@ -129,30 +129,34 @@ export const toolsMap: Record<string, () => Promise<Type<any>>> = {
     import(
       '../../Components/Pages/ToolsPages/Tools-details/PhysicsTools/physics-tools-multi-page-component/physics-tools-multi-page-component.component'
     ).then((m) => m.PhysicsToolsMultiPageComponentComponent),
+  'mass-vs-weight-calculator': () =>
+    import(
+      '../../Components/Pages/ToolsPages/Tools-details/AstroTools/astro-tools-multi-page/astro-tools-multi-page.component'
+    ).then((m) => m.AstronomyAndAstrophysicsToolsMultiPageComponentComponent),
+  'escape-velocity-calculator': () =>
+    import(
+      '../../Components/Pages/ToolsPages/Tools-details/AstroTools/astro-tools-multi-page/astro-tools-multi-page.component'
+    ).then((m) => m.AstronomyAndAstrophysicsToolsMultiPageComponentComponent),
+  'periodic-table-lookup': () =>
+    import(
+      '../../Components/Pages/ToolsPages/Tools-details/ChemistryTools/chemistry-tools-multi-page-component/chemistry-tools-multi-page-component.component'
+    ).then((m) => m.ChemistryToolsMultiPageComponentComponent),
+  'ideal-gas-law-solver': () =>
+    import(
+      '../../Components/Pages/ToolsPages/Tools-details/ChemistryTools/chemistry-tools-multi-page-component/chemistry-tools-multi-page-component.component'
+    ).then((m) => m.ChemistryToolsMultiPageComponentComponent),
+  'chemical-formula-parser': () =>
+    import(
+      '../../Components/Pages/ToolsPages/Tools-details/ChemistryTools/chemistry-tools-multi-page-component/chemistry-tools-multi-page-component.component'
+    ).then((m) => m.ChemistryToolsMultiPageComponentComponent),
 };
 
 ///   '': () => import('../../Components/Pages/ToolsPages/Tools-details/').then((m) => m.),
 ///
 
-/// ng g c Components/Pages/ToolsPages/Tools-details
-// /PhysicsTools/PhysicsToolsMultiPageComponent
+/// ng g c Components/Pages/ToolsPages/Tools-details/ChemistryTools/ChemistryToolsMultiPageComponent
 ///
 
-//////  PhysicsTools
-/// distance-speed-time-calculator
-/// acceleration-calculator
-/// kinematic-motion-solver
-/// free-fall-calculator
-/// force-calculator
-/// work-and-energy-calculator
-/// kinetic-potential-energy-calculator
-/// torque-calculator
-/// heat-transfer-calculator
-/// radioactive-half-life-calculator
-/// photon-energy-calculator
-
-////// AstronomyAndAstrophysicsTools
-// mass-vs-weight-calculator
-// escape-velocity-calculator
-// gravitational-force-calculator
-// solar-lunar-cycle-calculator
+/// periodic-table-lookup
+/// ideal-gas-law-solver
+/// chemical-formula-parser

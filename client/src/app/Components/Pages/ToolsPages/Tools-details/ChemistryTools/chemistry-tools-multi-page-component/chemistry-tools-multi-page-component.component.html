@@ -1,0 +1,55 @@
+<section id="ChemistryToolsMultiPageComponent">
+  <button id="back-button" type="button" (click)="goBack()">← Back</button>
+
+  <h1>{{ extractToolName(URL) }}</h1>
+
+  <form [formGroup]="Form" (ngSubmit)="onSubmit()">
+    <ng-container *ngFor="let control of Form.controls | keyvalue">
+      <input
+        [formControlName]="control.key"
+        [placeholder]="control.key | titlecase"
+        type="text"
+      />
+    </ng-container>
+    <input type="submit" value="Submit" [disabled]="Form.invalid || Loading" />
+  </form>
+
+  <div class="DataArea">
+    <div *ngIf="Loading">
+      <p>Loading...</p>
+    </div>
+    <div *ngIf="Error && !Loading">
+      <p>{{ Error }}</p>
+    </div>
+    <div *ngIf="Data && !Loading">
+      <div *ngIf="isPeriodicTableLookup(Data)" class="image-container">
+        <img
+          [src]="Data.image.url"
+          [alt]="Data.image.title"
+          class="result-image"
+        />
+      </div>
+      <table class="result-table">
+        <thead>
+          <tr>
+            <th>Property</th>
+            <th>Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let entry of getDataEntries()">
+            <td>{{ entry.key | titlecase }}</td>
+            <td>
+              <ng-container *ngIf="isArray(entry.value); else singleValue">
+                {{ entry.value.join(", ") }}
+              </ng-container>
+              <ng-template #singleValue>
+                {{ entry.value }}
+              </ng-template>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>

@@ -424,3 +424,157 @@ export interface PhotonEnergyReq {
   wavelength?: number | null;
   frequency?: number | null;
 }
+
+export interface DistanceSpeedTimeRes {
+  distance?: number;
+  speed?: number;
+  time?: number;
+}
+
+export interface AccelerationRes {
+  acceleration: number;
+}
+
+export interface KinematicMotionRes {
+  finalVelocity: number;
+  displacement: number;
+}
+
+export interface FreeFallRes {
+  height?: number;
+  time?: number;
+  impactSpeed?: number;
+}
+
+export interface ForceRes {
+  force: number;
+}
+
+export interface WorkAndEnergyRes {
+  work: number;
+}
+
+export interface KineticPotentialEnergyRes {
+  kineticEnergy?: number;
+  potentialEnergy?: number;
+}
+
+export interface TorqueRes {
+  torque: number;
+}
+
+export interface HeatTransferRes {
+  heat: number;
+}
+
+export interface RadioactiveHalfLifeRes {
+  remainingMass: number;
+}
+
+export interface PhotonEnergyRes {
+  energy: number;
+}
+
+export type AllPhysicsResponses =
+  | DistanceSpeedTimeRes
+  | AccelerationRes
+  | KinematicMotionRes
+  | FreeFallRes
+  | ForceRes
+  | WorkAndEnergyRes
+  | KineticPotentialEnergyRes
+  | TorqueRes
+  | HeatTransferRes
+  | RadioactiveHalfLifeRes
+  | PhotonEnergyRes;
+
+export interface MassVsWeightReq {
+  mass: number;
+  gravity: number;
+}
+
+export interface MassVsWeightRes {
+  weight: number;
+}
+
+export interface EscapeVelocityReq {
+  mass: number;
+  radius: number;
+}
+
+export interface EscapeVelocityRes {
+  escapeVelocity: number;
+}
+
+export type AllAstronomyResponses = MassVsWeightRes | EscapeVelocityRes;
+
+export interface PeriodicTableLookupReq {
+  query: string | number;
+}
+
+export interface PeriodicTableLookupRes {
+  name: string;
+  symbol: string;
+  number: number;
+  atomic_mass: number;
+  appearance: string | null;
+  boil: number | null;
+  category: string;
+  density: number | null;
+  discovered_by: string | null;
+  melt: number | null;
+  molar_heat: number | null;
+  named_by: string | null;
+  period: number;
+  group: number;
+  phase: string;
+  source: string;
+  bohr_model_image: string | null;
+  bohr_model_3d: string | null;
+  spectral_img: string | null;
+  summary: string;
+  xpos: number;
+  ypos: number;
+  wxpos: number;
+  wypos: number;
+  shells: number[];
+  electron_configuration: string;
+  electron_configuration_semantic: string;
+  electron_affinity: number | null;
+  electronegativity_pauling: number | null;
+  ionization_energies: number[];
+  block: string;
+  image: {
+    title: string;
+    url: string;
+    attribution: string;
+  };
+}
+
+export interface IdealGasLawSolverReq {
+  pressure: number;
+  volume: number;
+  moles: number;
+  temperature: number;
+}
+
+export interface IdealGasLawSolverRes {
+  pressure: number;
+  volume: number;
+  moles: number;
+  temperature: number;
+  missing: 'pressure' | 'volume' | 'moles' | 'temperature';
+}
+
+export interface ChemicalFormulaParserReq {
+  formula: string;
+}
+
+export interface ChemicalFormulaParserRes {
+  [element: string]: number;
+}
+
+export type AllChemistryResponses =
+  | PeriodicTableLookupRes
+  | IdealGasLawSolverRes
+  | ChemicalFormulaParserRes;
