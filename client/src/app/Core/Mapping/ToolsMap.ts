@@ -77,9 +77,82 @@ export const toolsMap: Record<string, () => Promise<Type<any>>> = {
     import(
       '../../Components/Pages/ToolsPages/Tools-details/KidsTools/cool-text-converter/cool-text-converter.component'
     ).then((m) => m.CoolTextConverterComponent),
+  'random-jokes-generator': () =>
+    import(
+      '../../Components/Pages/ToolsPages/Tools-details/KidsTools/kids-tools-multi-page-component/kids-tools-multi-page-component.component'
+    ).then((m) => m.KidsToolsMultiPageComponentComponent),
+  'faux-facts-generator': () =>
+    import(
+      '../../Components/Pages/ToolsPages/Tools-details/KidsTools/kids-tools-multi-page-component/kids-tools-multi-page-component.component'
+    ).then((m) => m.KidsToolsMultiPageComponentComponent),
+  'distance-speed-time-calculator': () =>
+    import(
+      '../../Components/Pages/ToolsPages/Tools-details/PhysicsTools/physics-tools-multi-page-component/physics-tools-multi-page-component.component'
+    ).then((m) => m.PhysicsToolsMultiPageComponentComponent),
+  'acceleration-calculator': () =>
+    import(
+      '../../Components/Pages/ToolsPages/Tools-details/PhysicsTools/physics-tools-multi-page-component/physics-tools-multi-page-component.component'
+    ).then((m) => m.PhysicsToolsMultiPageComponentComponent),
+  'kinematic-motion-solver': () =>
+    import(
+      '../../Components/Pages/ToolsPages/Tools-details/PhysicsTools/physics-tools-multi-page-component/physics-tools-multi-page-component.component'
+    ).then((m) => m.PhysicsToolsMultiPageComponentComponent),
+  'free-fall-calculator': () =>
+    import(
+      '../../Components/Pages/ToolsPages/Tools-details/PhysicsTools/physics-tools-multi-page-component/physics-tools-multi-page-component.component'
+    ).then((m) => m.PhysicsToolsMultiPageComponentComponent),
+  'force-calculator': () =>
+    import(
+      '../../Components/Pages/ToolsPages/Tools-details/PhysicsTools/physics-tools-multi-page-component/physics-tools-multi-page-component.component'
+    ).then((m) => m.PhysicsToolsMultiPageComponentComponent),
+  'work-and-energy-calculator': () =>
+    import(
+      '../../Components/Pages/ToolsPages/Tools-details/PhysicsTools/physics-tools-multi-page-component/physics-tools-multi-page-component.component'
+    ).then((m) => m.PhysicsToolsMultiPageComponentComponent),
+  'kinetic-potential-energy-calculator': () =>
+    import(
+      '../../Components/Pages/ToolsPages/Tools-details/PhysicsTools/physics-tools-multi-page-component/physics-tools-multi-page-component.component'
+    ).then((m) => m.PhysicsToolsMultiPageComponentComponent),
+  'torque-calculator': () =>
+    import(
+      '../../Components/Pages/ToolsPages/Tools-details/PhysicsTools/physics-tools-multi-page-component/physics-tools-multi-page-component.component'
+    ).then((m) => m.PhysicsToolsMultiPageComponentComponent),
+  'heat-transfer-calculator': () =>
+    import(
+      '../../Components/Pages/ToolsPages/Tools-details/PhysicsTools/physics-tools-multi-page-component/physics-tools-multi-page-component.component'
+    ).then((m) => m.PhysicsToolsMultiPageComponentComponent),
+  'radioactive-half-life-calculator': () =>
+    import(
+      '../../Components/Pages/ToolsPages/Tools-details/PhysicsTools/physics-tools-multi-page-component/physics-tools-multi-page-component.component'
+    ).then((m) => m.PhysicsToolsMultiPageComponentComponent),
+  'photon-energy-calculator': () =>
+    import(
+      '../../Components/Pages/ToolsPages/Tools-details/PhysicsTools/physics-tools-multi-page-component/physics-tools-multi-page-component.component'
+    ).then((m) => m.PhysicsToolsMultiPageComponentComponent),
 };
 
 ///   '': () => import('../../Components/Pages/ToolsPages/Tools-details/').then((m) => m.),
 ///
 
-/// ng g c Components/Pages/ToolsPages/Tools-details/KidsTools/cool-text-converter
+/// ng g c Components/Pages/ToolsPages/Tools-details
+// /PhysicsTools/PhysicsToolsMultiPageComponent
+///
+
+//////  PhysicsTools
+/// distance-speed-time-calculator
+/// acceleration-calculator
+/// kinematic-motion-solver
+/// free-fall-calculator
+/// force-calculator
+/// work-and-energy-calculator
+/// kinetic-potential-energy-calculator
+/// torque-calculator
+/// heat-transfer-calculator
+/// radioactive-half-life-calculator
+/// photon-energy-calculator
+
+////// AstronomyAndAstrophysicsTools
+// mass-vs-weight-calculator
+// escape-velocity-calculator
+// gravitational-force-calculator
+// solar-lunar-cycle-calculator

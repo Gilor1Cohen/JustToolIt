@@ -20,6 +20,17 @@ const {
   UnitsConverter,
   createRandomText,
   convertText,
+  computeDistanceSpeedTime,
+  calculateAcceleration,
+  solveKinematicMotion,
+  calculateFreeFall,
+  calculateForce,
+  calculateWorkAndEnergy,
+  calculateKineticPotentialEnergy,
+  calculateTorque,
+  calculateHeatTransfer,
+  calculateRadioactiveHalfLife,
+  calculatePhotonEnergy,
 } = require("../business-logic-layer/ToolsBL");
 
 const { handleFreeUserUsage } = require("../business-logic-layer/AuthBL");
@@ -467,6 +478,262 @@ router.post("/CoolTextConverter", checkUserAccess, async (req, res) => {
     }
 
     const data = await convertText(Text);
+
+    if (req.user.plan_id === 1 && req.user.plan_status === "active") {
+      await handleFreeUserUsage(req.user);
+    }
+
+    return res.status(200).json(data);
+  } catch (error) {
+    res.status(500).json({ message: error.message || "Internal server error" });
+  }
+});
+
+router.post("/computeDistanceSpeedTime", checkUserAccess, async (req, res) => {
+  try {
+    const { distance, speed, time } = req.body;
+
+    if ([distance, speed, time].filter((v) => v == null).length > 1) {
+      return res.status(400).json({
+        message: "At least two values (distance, speed, time) are required",
+      });
+    }
+
+    const data = computeDistanceSpeedTime(distance, speed, time);
+
+    if (req.user.plan_id === 1 && req.user.plan_status === "active") {
+      await handleFreeUserUsage(req.user);
+    }
+
+    return res.status(200).json(data);
+  } catch (error) {
+    res.status(500).json({ message: error.message || "Internal server error" });
+  }
+});
+
+router.post("/calculateAcceleration", checkUserAccess, async (req, res) => {
+  try {
+    const { initialVelocity, finalVelocity, time } = req.body;
+
+    if (initialVelocity == null || finalVelocity == null || time == null) {
+      return res.status(400).json({
+        message:
+          "Provide initialVelocity, finalVelocity and time to compute acceleration",
+      });
+    }
+
+    if (time === 0) {
+      return res.status(400).json({
+        message: "Time must be non-zero",
+      });
+    }
+
+    const data = calculateAcceleration(initialVelocity, finalVelocity, time);
+
+    if (req.user.plan_id === 1 && req.user.plan_status === "active") {
+      await handleFreeUserUsage(req.user);
+    }
+
+    return res.status(200).json(data);
+  } catch (error) {
+    res.status(500).json({ message: error.message || "Internal server error" });
+  }
+});
+
+router.post("/solveKinematicMotion", checkUserAccess, async (req, res) => {
+  try {
+    const { initialVelocity, acceleration, time } = req.body;
+
+    if (initialVelocity == null || acceleration == null || time == null) {
+      return res.status(400).json({
+        message:
+          "Provide initialVelocity, acceleration and time to solve kinematic motion",
+      });
+    }
+
+    const data = solveKinematicMotion(initialVelocity, acceleration, time);
+
+    if (req.user.plan_id === 1 && req.user.plan_status === "active") {
+      await handleFreeUserUsage(req.user);
+    }
+
+    return res.status(200).json(data);
+  } catch (error) {
+    res.status(500).json({ message: error.message || "Internal server error" });
+  }
+});
+
+router.post("/calculateFreeFall", checkUserAccess, async (req, res) => {
+  try {
+    const { height, time, impactSpeed } = req.body;
+
+    const data = calculateFreeFall(height, time, impactSpeed);
+
+    if (req.user.plan_id === 1 && req.user.plan_status === "active") {
+      await handleFreeUserUsage(req.user);
+    }
+
+    return res.status(200).json(data);
+  } catch (error) {
+    res.status(500).json({ message: error.message || "Internal server error" });
+  }
+});
+
+router.post("/calculateForce", checkUserAccess, async (req, res) => {
+  try {
+    const { mass, acceleration } = req.body;
+
+    if (mass == null || acceleration == null) {
+      return res.status(400).json({
+        message: "Provide mass and acceleration to compute acceleration",
+      });
+    }
+
+    const data = calculateForce(mass, acceleration);
+
+    if (req.user.plan_id === 1 && req.user.plan_status === "active") {
+      await handleFreeUserUsage(req.user);
+    }
+
+    return res.status(200).json(data);
+  } catch (error) {
+    res.status(500).json({ message: error.message || "Internal server error" });
+  }
+});
+
+router.post("/calculateWorkAndEnergy", checkUserAccess, async (req, res) => {
+  try {
+    const { force, displacement } = req.body;
+
+    if (force == null || displacement == null) {
+      return res.status(400).json({
+        message: "Provide force and displacement to compute work",
+      });
+    }
+
+    const data = calculateWorkAndEnergy(force, displacement);
+
+    if (req.user.plan_id === 1 && req.user.plan_status === "active") {
+      await handleFreeUserUsage(req.user);
+    }
+
+    return res.status(200).json(data);
+  } catch (error) {
+    res.status(500).json({ message: error.message || "Internal server error" });
+  }
+});
+
+router.post(
+  "/calculateKineticPotentialEnergy",
+  checkUserAccess,
+  async (req, res) => {
+    try {
+      const { mass, velocity, height } = req.body;
+
+      if (mass == null) {
+        return res.status(400).json({
+          message: "Provide mass",
+        });
+      }
+
+      const data = calculateKineticPotentialEnergy(mass, velocity, height);
+
+      if (req.user.plan_id === 1 && req.user.plan_status === "active") {
+        await handleFreeUserUsage(req.user);
+      }
+
+      return res.status(200).json(data);
+    } catch (error) {
+      res
+        .status(500)
+        .json({ message: error.message || "Internal server error" });
+    }
+  }
+);
+
+router.post("/calculateTorque", checkUserAccess, async (req, res) => {
+  try {
+    const { force, distance } = req.body;
+
+    if (force == null || distance == null) {
+      return res.status(400).json({
+        message: "Provide force and distance to compute torque",
+      });
+    }
+
+    const data = calculateTorque(force, distance);
+
+    if (req.user.plan_id === 1 && req.user.plan_status === "active") {
+      await handleFreeUserUsage(req.user);
+    }
+
+    return res.status(200).json(data);
+  } catch (error) {
+    res.status(500).json({ message: error.message || "Internal server error" });
+  }
+});
+
+router.post("/calculateHeatTransfer", checkUserAccess, async (req, res) => {
+  try {
+    const { mass, specificHeat, temperatureChange } = req.body;
+
+    if (mass == null || specificHeat == null || temperatureChange == null) {
+      return res.status(400).json({
+        message: "Provide mass, specificHeat and temperatureChange",
+      });
+    }
+
+    const data = calculateHeatTransfer(mass, specificHeat, temperatureChange);
+
+    if (req.user.plan_id === 1 && req.user.plan_status === "active") {
+      await handleFreeUserUsage(req.user);
+    }
+
+    return res.status(200).json(data);
+  } catch (error) {
+    res.status(500).json({ message: error.message || "Internal server error" });
+  }
+});
+
+router.post(
+  "/calculateRadioactiveHalfLife",
+  checkUserAccess,
+  async (req, res) => {
+    try {
+      const { initialMass, halfLife, time } = req.body;
+
+      if (initialMass == null || halfLife == null || time == null) {
+        return res.status(400).json({
+          message: "Provide initialMass, halfLife and time",
+        });
+      }
+
+      const data = calculateRadioactiveHalfLife(initialMass, halfLife, time);
+
+      if (req.user.plan_id === 1 && req.user.plan_status === "active") {
+        await handleFreeUserUsage(req.user);
+      }
+
+      return res.status(200).json(data);
+    } catch (error) {
+      res
+        .status(500)
+        .json({ message: error.message || "Internal server error" });
+    }
+  }
+);
+
+router.post("/calculatePhotonEnergy", checkUserAccess, async (req, res) => {
+  try {
+    const { wavelength, frequency } = req.body;
+
+    if (wavelength == null && frequency == null) {
+      return res.status(400).json({
+        message: "Provide wavelength or frequency",
+      });
+    }
+
+    const data = calculatePhotonEnergy(wavelength, frequency);
 
     if (req.user.plan_id === 1 && req.user.plan_status === "active") {
       await handleFreeUserUsage(req.user);

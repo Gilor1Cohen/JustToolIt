@@ -30,6 +30,19 @@ import {
   SunriseSunsetRes,
   CoolTextConverterReq,
   CoolTextConvertedRes,
+  UselessFact,
+  Joke,
+  DistanceSpeedTimeReq,
+  AccelerationReq,
+  KinematicMotionReq,
+  FreeFallReq,
+  ForceReq,
+  WorkEnergyReq,
+  KineticPotentialEnergyReq,
+  TorqueReq,
+  HeatTransferReq,
+  RadioactiveHalfLifeReq,
+  PhotonEnergyReq,
 } from '../../Models/ToolsModel';
 import { Observable } from 'rxjs';
 
@@ -225,5 +238,93 @@ export class ToolsService {
         withCredentials: true,
       }
     );
+  }
+
+  getRandomJoke(): Observable<Joke> {
+    return this.http.get<Joke>(
+      'https://official-joke-api.appspot.com/jokes/random'
+    );
+  }
+
+  getFauxFact(): Observable<UselessFact> {
+    return this.http.get<UselessFact>(
+      'https://uselessfacts.jsph.pl/random.json?language=en'
+    );
+  }
+
+  computeDistanceSpeedTime(data: DistanceSpeedTimeReq): Observable<any> {
+    return this.http.post<any>(`${this.Url}computeDistanceSpeedTime`, data, {
+      withCredentials: true,
+    });
+  }
+
+  calculateAcceleration(data: AccelerationReq): Observable<any> {
+    return this.http.post<any>(`${this.Url}computeDistanceSpeedTime`, data, {
+      withCredentials: true,
+    });
+  }
+
+  solveKinematicMotion(data: KinematicMotionReq): Observable<any> {
+    return this.http.post<any>(`${this.Url}solveKinematicMotion`, data, {
+      withCredentials: true,
+    });
+  }
+
+  calculateFreeFall(data: FreeFallReq): Observable<any> {
+    return this.http.post<any>(`${this.Url}calculateFreeFall`, data, {
+      withCredentials: true,
+    });
+  }
+
+  calculateForce(data: ForceReq): Observable<any> {
+    return this.http.post<any>(`${this.Url}calculateForce`, data, {
+      withCredentials: true,
+    });
+  }
+
+  calculateWorkAndEnergy(data: WorkEnergyReq): Observable<any> {
+    return this.http.post<any>(`${this.Url}calculateWorkAndEnergy`, data, {
+      withCredentials: true,
+    });
+  }
+
+  calculateKineticPotentialEnergy(
+    data: KineticPotentialEnergyReq
+  ): Observable<any> {
+    return this.http.post<any>(
+      `${this.Url}calculateKineticPotentialEnergy`,
+      data,
+      {
+        withCredentials: true,
+      }
+    );
+  }
+
+  calculateTorque(data: TorqueReq): Observable<any> {
+    return this.http.post<any>(`${this.Url}calculateTorque`, data, {
+      withCredentials: true,
+    });
+  }
+
+  calculateHeatTransfer(data: HeatTransferReq): Observable<any> {
+    return this.http.post<any>(`${this.Url}calculateHeatTransfer`, data, {
+      withCredentials: true,
+    });
+  }
+
+  calculateRadioactiveHalfLife(data: RadioactiveHalfLifeReq): Observable<any> {
+    return this.http.post<any>(
+      `${this.Url}calculateRadioactiveHalfLife`,
+      data,
+      {
+        withCredentials: true,
+      }
+    );
+  }
+
+  calculatePhotonEnergy(data: PhotonEnergyReq): Observable<any> {
+    return this.http.post<any>(`${this.Url}calculatePhotonEnergy`, data, {
+      withCredentials: true,
+    });
   }
 }

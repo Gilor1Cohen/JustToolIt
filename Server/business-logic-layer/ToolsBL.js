@@ -385,6 +385,96 @@ async function convertText(text) {
   };
 }
 
+function computeDistanceSpeedTime(distance, speed, time) {
+  if (distance == null) return { distance: speed * time };
+  if (speed == null) return { speed: distance / time };
+  if (time == null) return { time: distance / speed };
+
+  return { distance, speed, time };
+}
+
+function calculateAcceleration(initialVelocity, finalVelocity, time) {
+  return { acceleration: (finalVelocity - initialVelocity) / time };
+}
+
+function solveKinematicMotion(initialVelocity, acceleration, time) {
+  const displacement = initialVelocity * time + 0.5 * acceleration * time ** 2;
+  const finalVelocity = initialVelocity + acceleration * time;
+  return {
+    displacement,
+    finalVelocity,
+    finalPosition: displacement,
+  };
+}
+
+function calculateFreeFall(height, time, impactSpeed) {
+  const g = 9.81;
+  let h = height,
+    t = time,
+    v = impactSpeed;
+  if (h != null && t != null) {
+    v = g * t;
+  } else if (h != null && v != null) {
+    t = v / g;
+  } else if (t != null && v != null) {
+    h = 0.5 * g * t ** 2;
+  } else if (h != null) {
+    t = Math.sqrt((2 * h) / g);
+    v = g * t;
+  } else if (t != null) {
+    h = 0.5 * g * t ** 2;
+    v = g * t;
+  } else if (v != null) {
+    t = v / g;
+    h = 0.5 * g * t ** 2;
+  } else {
+    throw new Error("Provide at least one of: height, time, or impactSpeed");
+  }
+  return { height: h, time: t, impactSpeed: v };
+}
+
+function calculateForce(mass, acceleration) {
+  return { force: mass * acceleration };
+}
+
+function calculateWorkAndEnergy(force, displacement) {
+  return { work: force * displacement };
+}
+
+function calculateKineticPotentialEnergy(mass, velocity, height) {
+  const results = {};
+  if (velocity != null) {
+    results.kineticEnergy = 0.5 * mass * velocity ** 2;
+  }
+  if (height != null) {
+    results.potentialEnergy = mass * 9.81 * height;
+  }
+  return results;
+}
+
+function calculateTorque(force, distance) {
+  return { torque: force * distance };
+}
+
+function calculateHeatTransfer(mass, specificHeat, temperatureChange) {
+  return { heatTransfer: mass * specificHeat * temperatureChange };
+}
+
+function calculateRadioactiveHalfLife(initialMass, halfLife, time) {
+  const remainingMass = initialMass * 0.5 ** (time / halfLife);
+  return { remainingMass };
+}
+
+function calculatePhotonEnergy(wavelength, frequency) {
+  let energy;
+  if (wavelength != null) {
+    energy = (6.626e-34 * 3e8) / wavelength;
+  } else {
+    energy = 6.626e-34 * frequency;
+  }
+  return { energy };
+}
+
 module.exports = {
   GetToolsCategories,
   GetToolsList,
@@ -405,4 +495,15 @@ module.exports = {
   UnitsConverter,
   createRandomText,
   convertText,
+  computeDistanceSpeedTime,
+  calculateAcceleration,
+  solveKinematicMotion,
+  calculateFreeFall,
+  calculateForce,
+  calculateWorkAndEnergy,
+  calculateKineticPotentialEnergy,
+  calculateTorque,
+  calculateHeatTransfer,
+  calculateRadioactiveHalfLife,
+  calculatePhotonEnergy,
 };

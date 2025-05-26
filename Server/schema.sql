@@ -145,9 +145,7 @@ INSERT INTO tools_categories (name, image_url) VALUES
   ("Random Tools", "random-tools.png");
 
 
--- ReligiousTools
--- KidsTools
--- FootballTools
+
 -- PhysicsTools
 -- AstronomyAndAstrophysicsTools
 -- ChemistryTools
@@ -202,97 +200,81 @@ INSERT INTO tools_details (name, description, category_id, endpoint) VALUES
 INSERT INTO tools_details (name, description, category_id, endpoint) VALUES
   ("Random Text Generator", "Generates creative sentences or paragraphs with whimsical themes for writing prompts and language practice.", 7, "kids-tools/random-text-generator"),
   ("Cool Text Converter", "Transforms plain text into stylized Unicode and ASCII art for fun social media posts.", 7, "kids-tools/cool-text-converter"),
-  ("Emoji Translator", "Transforms words and phrases into emoji sequences that capture the intended meaning playfully.", 7, "kids-tools/emoji-translator"),
-  ("Emoji Stories Generator", "Composes short narratives using only emojis to challenge kids to interpret visual storytelling.",7, "kids-tools/emoji-stories-generator"),
   ("Random Jokes Generator", "Serves age-appropriate jokes and riddles at random to entertain children.", 7, "kids-tools/random-jokes-generator"),
-  ("Silly Daily Forecast", "Provides quirky, playful daily “horoscopes” with imaginative predictions to amuse kids.", 7, "kids-tools/silly-daily-forecast"),
   ("Faux Facts Generator", "Produces believable-sounding but fictitious facts to inspire creativity and critical thinking.", 7, "kids-tools/faux-facts-generator")
 ;
 
 
-
 INSERT INTO tools_details (name, description, category_id, endpoint) VALUES
-  ("Live Match Scores", "Streams real-time scores and key events for ongoing football matches across major leagues.", 8, "football-tools/live-match-scores"),
-  ("Match Schedule Lookup", "Displays upcoming fixtures filtered by league or team with dates, times, and broadcast information.", 8, "football-tools/match-schedule-lookup"),
-  ("Player Stats Analysis", "Analyzes player performance metrics such as goals and assists to generate in-depth reports.", 8, "football-tools/player-stats-analysis"),
-  ("Football Trivia Quiz", "Challenges fans with randomized quizzes on football history, records, and legends.", 8, "football-tools/football-trivia-quiz"),
-  ("Open Fields Locator", "Finds public football pitches and facilities in your area with maps and availability details.", 8, "football-tools/open-fields-locator"),
-  ("Player Profile Search", "Retrieves player bios, career stats, and news updates by entering their name.", 8, "football-tools/player-profile-search"),
-  ("Player Comparison Tool", "Compares two players side-by-side across key metrics to highlight strengths and weaknesses.", 8, "football-tools/player-comparison-tool")
+  ("Distance/Speed/Time Calculator", "Computes missing variables among distance, speed, and time relationships for physics problem-solving.", 8, "physics-tools/distance-speed-time-calculator"),
+  ("Acceleration Calculator", "Determines acceleration from given initial and final velocities and time intervals.",8, "physics-tools/acceleration-calculator"),
+  ("Kinematic Motion Solver", "Solves equations for objects under constant acceleration to predict future states.", 8, "physics-tools/kinematic-motion-solver"),
+  ("Free Fall Calculator", "Calculates fall time and impact speed neglecting air resistance to model simple gravity.", 8, "physics-tools/free-fall-calculator"),
+  ("Force Calculator (F = ma)", "Applies Newton’s second law to compute force given mass and acceleration inputs.", 8, "physics-tools/force-calculator"),
+  ("Work and Energy Calculator", "Evaluates work done and changes in energy for systems based on force and displacement.", 8, "physics-tools/work-and-energy-calculator"),
+  ("Kinetic/Potential Energy Calculator", "Determines energy values and transition points for mechanical systems.", 8, "physics-tools/kinetic-potential-energy-calculator"),
+  ("Torque Calculator", "Computes torque produced by forces acting at distances from pivot points.", 8, "physics-tools/torque-calculator"),
+  ("Heat Transfer Calculator", "Calculates heat transfer using mass, specific heat, and temperature change inputs (Q=mcΔT).",8, "physics-tools/heat-transfer-calculator"),
+  ("Radioactive Half-Life Calculator", "Models radioactive decay by computing remaining mass over half-life periods.", 8, "physics-tools/radioactive-half-life-calculator"),
+  ("Photon Energy Calculator", "Determines photon energy from wavelength or frequency using Planck’s relation.", 8, "physics-tools/photon-energy-calculator")
 ;
 
 
 INSERT INTO tools_details (name, description, category_id, endpoint) VALUES
-  ("Distance/Speed/Time Calculator", "Computes missing variables among distance, speed, and time relationships for physics problem-solving.", 9, "physics-tools/distance-speed-time-calculator"),
-  ("Acceleration Calculator", "Determines acceleration from given initial and final velocities and time intervals.", 9, "physics-tools/acceleration-calculator"),
-  ("Kinematic Motion Solver", "Solves equations for objects under constant acceleration to predict future states.", 9, "physics-tools/kinematic-motion-solver"),
-  ("Free Fall Calculator", "Calculates fall time and impact speed neglecting air resistance to model simple gravity.", 9, "physics-tools/free-fall-calculator"),
-  ("Force Calculator (F = ma)", "Applies Newton’s second law to compute force given mass and acceleration inputs.", 9, "physics-tools/force-calculator"),
-  ("Work and Energy Calculator", "Evaluates work done and changes in energy for systems based on force and displacement.", 9, "physics-tools/work-and-energy-calculator"),
-  ("Kinetic/Potential Energy Calculator", "Determines energy values and transition points for mechanical systems.", 9, "physics-tools/kinetic-potential-energy-calculator"),
-  ("Torque Calculator", "Computes torque produced by forces acting at distances from pivot points.", 9, "physics-tools/torque-calculator"),
-  ("Heat Transfer Calculator", "Calculates heat transfer using mass, specific heat, and temperature change inputs (Q=mcΔT).", 9, "physics-tools/heat-transfer-calculator"),
-  ("Temp Conversion Calculator", "Converts temperatures between Celsius, Fahrenheit, and Kelvin scales.", 9, "physics-tools/temp-conversion-calculator"),
-  ("Radioactive Half-Life Calculator", "Models radioactive decay by computing remaining mass over half-life periods.", 9, "physics-tools/radioactive-half-life-calculator"),
-  ("Photon Energy Calculator", "Determines photon energy from wavelength or frequency using Planck’s relation.", 9, "physics-tools/photon-energy-calculator")
+  ("Mass vs Weight Calculator", "Compares how mass translates to weight under varying gravity fields of different planets.", 9, "astronomy-and-astrophysics-tools/mass-vs-weight-calculator"),
+  ("Escape Velocity Calculator", "Computes the minimum speed needed to break free from a celestial body’s gravity.", 9, "astronomy-and-astrophysics-tools/escape-velocity-calculator"),
+  ("Gravitational Force Calculator", "Applies Newton’s law of universal gravitation to calculate force between two masses.", 9, "astronomy-and-astrophysics-tools/gravitational-force-calculator"),
+  ("Solar/Lunar Cycle Calculator", "Determines local sunrise, sunset, and moon phase times based on date and location.", 9, "astronomy-and-astrophysics-tools/solar-lunar-cycle-calculator")
 ;
 
 
 INSERT INTO tools_details (name, description, category_id, endpoint) VALUES
-  ("Mass vs Weight Calculator", "Compares how mass translates to weight under varying gravity fields of different planets.", 10, "astronomy-and-astrophysics-tools/mass-vs-weight-calculator"),
-  ("Escape Velocity Calculator", "Computes the minimum speed needed to break free from a celestial body’s gravity.", 10, "astronomy-and-astrophysics-tools/escape-velocity-calculator"),
-  ("Gravitational Force Calculator", "Applies Newton’s law of universal gravitation to calculate force between two masses.", 10, "astronomy-and-astrophysics-tools/gravitational-force-calculator"),
-  ("Solar/Lunar Cycle Calculator", "Determines local sunrise, sunset, and moon phase times based on date and location.", 10, "astronomy-and-astrophysics-tools/solar-lunar-cycle-calculator")
-;
-
-
-INSERT INTO tools_details (name, description, category_id, endpoint) VALUES
-  ("Periodic Table Lookup", "Provides elemental properties and atomic data lookup alongside interactive periodic table views.", 11, "chemistry-tools/periodic-table-lookup"),
-  ("Ideal Gas Law Solver", "Solves PV=nRT and related equations to predict gas behavior under varying conditions.", 11, "chemistry-tools/ideal-gas-law-solver"),
-  ("Molecular Diagram Generator", "Renders 2D structural diagrams from chemical formulas for presentations and study.", 11, "chemistry-tools/molecular-diagram-generator"),
-  ("Chemical Formula Parser", "Breaks down complex chemical formulas into constituent elements and rebuilds them.", 11, "chemistry-tools/chemical-formula-parser"),
-  ("SMILES to Structure Converter", "Converts SMILES notation into interactive molecular structures for research and education.", 11, "chemistry-tools/smiles-to-structure-converter")
+  ("Periodic Table Lookup", "Provides elemental properties and atomic data lookup alongside interactive periodic table views.", 10, "chemistry-tools/periodic-table-lookup"),
+  ("Ideal Gas Law Solver", "Solves PV=nRT and related equations to predict gas behavior under varying conditions.", 10, "chemistry-tools/ideal-gas-law-solver"),
+  ("Molecular Diagram Generator", "Renders 2D structural diagrams from chemical formulas for presentations and study.", 10, "chemistry-tools/molecular-diagram-generator"),
+  ("Chemical Formula Parser", "Breaks down complex chemical formulas into constituent elements and rebuilds them.", 10, "chemistry-tools/chemical-formula-parser"),
+  ("SMILES to Structure Converter", "Converts SMILES notation into interactive molecular structures for research and education.", 10, "chemistry-tools/smiles-to-structure-converter")
 ;
 
 
 
 INSERT INTO tools_details (name, description, category_id, endpoint) VALUES
-  ("Function Graph Plotter", "Plots mathematical functions and allows zooming and annotation for detailed analysis.", 12, "math-tools/function-graph-plotter"),
-  ("Prime Number Checker", "Determines primality of integers and highlights their factors for demonstrations.", 12, "math-tools/prime-number-checker"),
-  ("Base Converter", "Transforms numbers between binary, hexadecimal, and other bases for computing tasks.", 12,  "math-tools/base-converter"),
-  ("Matrix Operations Calculator", "Performs matrix addition, multiplication, inversion, and more for linear algebra.", 12, "math-tools/matrix-operations-calculator"),
-  ("Equation Solver", "Solves linear and polynomial equations symbolically or numerically with steps.", 12,  "math-tools/equation-solver"),
-  ("Probability Calculator", "Calculates discrete event probabilities using combinatorial formulas.", 12,  "math-tools/probability-calculator"),
-  ("Combinatorics Tool", "Computes permutations, combinations, and factorials for counting problems.", 12,  "math-tools/combinatorics-tool"),
-  ("Symmetry Checker", "Analyzes functions or graphs to determine lines or points of symmetry.", 12, "math-tools/symmetry-checker"),
-  ("Limits and Derivatives Calculator", "Computes symbolic limits and derivatives to support calculus learning.", 12, "math-tools/limits-and-derivatives-calculator")
+  ("Function Graph Plotter", "Plots mathematical functions and allows zooming and annotation for detailed analysis.", 11, "math-tools/function-graph-plotter"),
+  ("Prime Number Checker", "Determines primality of integers and highlights their factors for demonstrations.", 11, "math-tools/prime-number-checker"),
+  ("Base Converter", "Transforms numbers between binary, hexadecimal, and other bases for computing tasks.", 11,  "math-tools/base-converter"),
+  ("Matrix Operations Calculator", "Performs matrix addition, multiplication, inversion, and more for linear algebra.", 11, "math-tools/matrix-operations-calculator"),
+  ("Equation Solver", "Solves linear and polynomial equations symbolically or numerically with steps.", 11,  "math-tools/equation-solver"),
+  ("Probability Calculator", "Calculates discrete event probabilities using combinatorial formulas.", 11,  "math-tools/probability-calculator"),
+  ("Combinatorics Tool", "Computes permutations, combinations, and factorials for counting problems.", 11,  "math-tools/combinatorics-tool"),
+  ("Symmetry Checker", "Analyzes functions or graphs to determine lines or points of symmetry.", 11, "math-tools/symmetry-checker"),
+  ("Limits and Derivatives Calculator", "Computes symbolic limits and derivatives to support calculus learning.", 11, "math-tools/limits-and-derivatives-calculator")
 ;
 
 
 INSERT INTO tools_details (name, description, category_id, endpoint) VALUES
-  ("Solar and Lunar Calculator", "Calculates daily solar and lunar cycles including golden hours and moon phases.", 13, "weather-tools/solar-and-lunar-calculator"),
-  ("Live Weather Checker", "Fetches real-time weather data such as temperature, humidity, and wind speed.", 13, "weather-tools/live-weather-checker"),
-  ("7-Day Forecast", "Provides a detailed week-long weather forecast with temperature, precipitation, and alerts.", 13, "weather-tools/7-day-forecast")
+  ("Solar and Lunar Calculator", "Calculates daily solar and lunar cycles including golden hours and moon phases.", 12, "weather-tools/solar-and-lunar-calculator"),
+  ("Live Weather Checker", "Fetches real-time weather data such as temperature, humidity, and wind speed.", 12, "weather-tools/live-weather-checker"),
+  ("7-Day Forecast", "Provides a detailed week-long weather forecast with temperature, precipitation, and alerts.", 12 "weather-tools/7-day-forecast")
 ;
 
 
 INSERT INTO tools_details (name, description, category_id, endpoint) VALUES
-  ("Fun Fact by Date", "Delivers surprising historical trivia tied to specific calendar dates.", 14, "history-tools/fun-fact-by-date"),
-  ("History Trivia Quiz", "Generates quizzes on historical events and figures with varying difficulty levels.", 14,  "history-tools/history-trivia-quiz"),
-  ("Period Distance Calculator", "Calculates the exact time span between two historical events in years, months, and days.", 14, "history-tools/period-distance-calculator"),
-  ("Historical Figure Search", "Filters historical personalities by era, field, or country for research insights.", 14, "history-tools/historical-figure-search"),
-  ("Border History Viewer", "Displays historical national borders on chosen dates using interactive maps.", 14, "history-tools/border-history-viewer")
+  ("Fun Fact by Date", "Delivers surprising historical trivia tied to specific calendar dates.", 13, "history-tools/fun-fact-by-date"),
+  ("History Trivia Quiz", "Generates quizzes on historical events and figures with varying difficulty levels.", 13,  "history-tools/history-trivia-quiz"),
+  ("Period Distance Calculator", "Calculates the exact time span between two historical events in years, months, and days.", 13, "history-tools/period-distance-calculator"),
+  ("Historical Figure Search", "Filters historical personalities by era, field, or country for research insights.", 13, "history-tools/historical-figure-search"),
+  ("Border History Viewer", "Displays historical national borders on chosen dates using interactive maps.", 13, "history-tools/border-history-viewer")
 ;
 
 
 
 INSERT INTO tools_details (name, description, category_id, endpoint) VALUES
-  ("Random Fact", "Generates unexpected random facts across various topics to entertain and educate.", 15, "random-tools/random-fact"),
-  ("Random Sentence", "Creates quirky sentences for creative inspiration.", 15, "random-tools/random-sentence"),
-  ("Random Joke", "Serves up a fresh joke to lighten the mood.", 15, "random-tools/random-joke"),
-  ("random-tools/Scientific Fact Generator", "Provides verifiable scientific trivia about the natural world.", 15, "scientific-fact-generator"),
-  ("Philosophical Quote Generator", "Delivers thought-provoking quotes from philosophers to stimulate reflection.", 15, "random-tools/philosophical-quote-generator"),
-  ("Date-based Fun Fact", "Offers historical trivia based on dates for variety in random facts.", 15, "random-tools/date-based-fun-fact"),
-  ("Inspirational Sentence Generator", "Produces motivational sentences to boost productivity and confidence.", 15, "random-tools/inspirational-sentence-generator"),
-  ("Relaxing Music Generator", "Composes short ambient music clips for relaxation sessions.", 15, "random-tools/relaxing-music-generator")
+  ("Random Fact", "Generates unexpected random facts across various topics to entertain and educate.", 14, "random-tools/random-fact"),
+  ("Random Sentence", "Creates quirky sentences for creative inspiration.", 14, "random-tools/random-sentence"),
+  ("Random Joke", "Serves up a fresh joke to lighten the mood.", 14, "random-tools/random-joke"),
+  ("random-tools/Scientific Fact Generator", "Provides verifiable scientific trivia about the natural world.", 14, "scientific-fact-generator"),
+  ("Philosophical Quote Generator", "Delivers thought-provoking quotes from philosophers to stimulate reflection.", 14, "random-tools/philosophical-quote-generator"),
+  ("Date-based Fun Fact", "Offers historical trivia based on dates for variety in random facts.", 14, "random-tools/date-based-fun-fact"),
+  ("Inspirational Sentence Generator", "Produces motivational sentences to boost productivity and confidence.", 14, "random-tools/inspirational-sentence-generator"),
+  ("Relaxing Music Generator", "Composes short ambient music clips for relaxation sessions.", 14, "random-tools/relaxing-music-generator")
 ;

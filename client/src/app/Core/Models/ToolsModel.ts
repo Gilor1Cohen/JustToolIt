@@ -346,3 +346,81 @@ export interface CoolTextConvertedRes {
   fancyItalic: string;
   fancyMono: string;
 }
+
+export interface UselessFact {
+  id: string;
+  text: string;
+  source: string;
+  source_url: string;
+  language: string;
+  permalink: string;
+}
+
+export interface Joke {
+  type: string;
+  setup: string;
+  punchline: string;
+  id: number;
+}
+
+export interface DistanceSpeedTimeReq {
+  distance: number | null;
+  speed: number | null;
+  time: number | null;
+}
+
+export interface AccelerationReq {
+  initialVelocity: number | null;
+  finalVelocity: number | null;
+  time: number | null;
+}
+
+export interface KinematicMotionReq {
+  initialVelocity: number | null;
+  acceleration: number | null;
+  time: number | null;
+}
+
+export interface FreeFallReq {
+  height: number | null;
+  time: number | null;
+  impactSpeed: number | null;
+}
+
+export interface ForceReq {
+  mass: number | null;
+  acceleration: number | null;
+}
+
+export interface WorkEnergyReq {
+  force: number | null;
+  displacement: number | null;
+}
+
+export interface KineticPotentialEnergyReq {
+  mass: number | null;
+  velocity?: number | null;
+  height?: number | null;
+}
+
+export interface TorqueReq {
+  force: number | null;
+  distance: number | null;
+}
+
+export interface HeatTransferReq {
+  mass: number | null;
+  specificHeat: number | null;
+  temperatureChange: number | null;
+}
+
+export interface RadioactiveHalfLifeReq {
+  initialMass: number | null;
+  halfLife: number | null;
+  time: number | null;
+}
+
+export interface PhotonEnergyReq {
+  wavelength?: number | null;
+  frequency?: number | null;
+}

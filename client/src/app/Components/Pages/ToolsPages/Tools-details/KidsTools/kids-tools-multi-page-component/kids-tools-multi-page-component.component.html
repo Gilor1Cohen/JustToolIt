@@ -1,0 +1,15 @@
+<section id="KidsToolsMultiPage">
+  <button id="back-button" type="button" (click)="goBack()" id="back-button">
+    ← Back
+  </button>
+
+  <h1>{{ extractToolName(URL) }}</h1>
+
+  <button (click)="Generate()">Generate</button>
+
+  <div class="DataArea">
+    <p *ngIf="Loading">Loading...</p>
+    <p *ngIf="Error">{{ Error }}</p>
+    <p *ngIf="Data && !Loading">{{ Data }}</p>
+  </div>
+</section>
