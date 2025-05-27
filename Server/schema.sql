@@ -135,24 +135,13 @@ INSERT INTO tools_categories (name, image_url) VALUES
   ("Cooking and Baking Tools", "cooking-baking-tools.png"),
   ("Religious Tools", "religious-tools.png"),
   ("Kids Tools", "kids-tools.png"),
-  ("Football Tools", "football-tools.png"),
   ("Physics Tools", "physics-tools.png"),
   ("Astronomy and Astrophysics Tools", "astronomy-tools.png"),
   ("Chemistry Tools", "chemistry-tools.png"),
   ("Math Tools", "math-tools.png"),
-  ("Weather Tools", "weather-tools.png"),
   ("History Tools", "history-tools.png"),
   ("Random Tools", "random-tools.png");
 
-
-
--- PhysicsTools
--- AstronomyAndAstrophysicsTools
--- ChemistryTools
--- MathTools
--- WeatherTools
--- HistoryTools
--- RandomTools
 
 
 INSERT INTO tools_details (name, description, category_id, endpoint) VALUES
@@ -222,7 +211,7 @@ INSERT INTO tools_details (name, description, category_id, endpoint) VALUES
 
 INSERT INTO tools_details (name, description, category_id, endpoint) VALUES
   ("Mass vs Weight Calculator", "Compares how mass translates to weight under varying gravity fields of different planets.", 9, "astronomy-and-astrophysics-tools/mass-vs-weight-calculator"),
-  ("Escape Velocity Calculator", "Computes the minimum speed needed to break free from a celestial body’s gravity.", 9, "astronomy-and-astrophysics-tools/escape-velocity-calculator"),
+  ("Escape Velocity Calculator", "Computes the minimum speed needed to break free from a celestial body’s gravity.", 9, "astronomy-and-astrophysics-tools/escape-velocity-calculator")
 ;
 
 
@@ -250,29 +239,21 @@ INSERT INTO tools_details (name, description, category_id, endpoint) VALUES
 
 
 INSERT INTO tools_details (name, description, category_id, endpoint) VALUES
-  ("Solar and Lunar Calculator", "Calculates daily solar and lunar cycles including golden hours and moon phases.", 12, "weather-tools/solar-and-lunar-calculator"),
-  ("Live Weather Checker", "Fetches real-time weather data such as temperature, humidity, and wind speed.", 12, "weather-tools/live-weather-checker"),
-  ("7-Day Forecast", "Provides a detailed week-long weather forecast with temperature, precipitation, and alerts.", 12 "weather-tools/7-day-forecast")
+  ("Historical Figure Search", "Filters historical personalities by era, field, or country for research insights.", 12, "history-tools/historical-figure-search")
 ;
 
 
 INSERT INTO tools_details (name, description, category_id, endpoint) VALUES
-  ("Fun Fact by Date", "Delivers surprising historical trivia tied to specific calendar dates.", 13, "history-tools/fun-fact-by-date"),
-  ("History Trivia Quiz", "Generates quizzes on historical events and figures with varying difficulty levels.", 13,  "history-tools/history-trivia-quiz"),
-  ("Period Distance Calculator", "Calculates the exact time span between two historical events in years, months, and days.", 13, "history-tools/period-distance-calculator"),
-  ("Historical Figure Search", "Filters historical personalities by era, field, or country for research insights.", 13, "history-tools/historical-figure-search"),
-  ("Border History Viewer", "Displays historical national borders on chosen dates using interactive maps.", 13, "history-tools/border-history-viewer")
-;
-
-
-
-INSERT INTO tools_details (name, description, category_id, endpoint) VALUES
-  ("Random Fact", "Generates unexpected random facts across various topics to entertain and educate.", 14, "random-tools/random-fact"),
-  ("Random Sentence", "Creates quirky sentences for creative inspiration.", 14, "random-tools/random-sentence"),
-  ("Random Joke", "Serves up a fresh joke to lighten the mood.", 14, "random-tools/random-joke"),
-  ("random-tools/Scientific Fact Generator", "Provides verifiable scientific trivia about the natural world.", 14, "scientific-fact-generator"),
-  ("Philosophical Quote Generator", "Delivers thought-provoking quotes from philosophers to stimulate reflection.", 14, "random-tools/philosophical-quote-generator"),
-  ("Date-based Fun Fact", "Offers historical trivia based on dates for variety in random facts.", 14, "random-tools/date-based-fun-fact"),
-  ("Inspirational Sentence Generator", "Produces motivational sentences to boost productivity and confidence.", 14, "random-tools/inspirational-sentence-generator"),
-  ("Relaxing Music Generator", "Composes short ambient music clips for relaxation sessions.", 14, "random-tools/relaxing-music-generator")
+  ("Random Fact", "Generates unexpected random facts across various topics to entertain and educate.", 13, "random-tools/random-fact"),
+  ("Programming Joke Generator", "Fetches random programming jokes to amuse developers.", 13, "random-tools/programming-joke-generator"),
+  ("Chuck Norris Joke Generator", "Random Chuck Norris jokes for a laugh.", 13, "random-tools/chuck-norris-joke-generator"),
+  ("Cat Fact Generator", "Provides fascinating facts about cats.", 13, "random-tools/cat-fact-generator"),
+  ("Random User Generator", "Generates random user profile data for testing purposes.", 13, "random-tools/random-user-generator"),
+  ("Dog Image Generator", "Fetches random dog images from various breeds.", 13, "random-tools/dog-image-generator"),
+  ("Pokemon Info Generator", "Retrieves information about Pokémon characters.", 13, "random-tools/pokemon-info-generator"),
+  ("YesNo Generator", "Provides random yes, no, or maybe answers with illustrative GIFs.", 13, "random-tools/yesno-generator"),
+  ("Kanye Quote Generator", "Supplies random Kanye West quotes.", 13, "random-tools/kanye-quote-generator"),
+  ("Deck of Cards Generator", "Creates and draws cards from virtual decks.", 13, "random-tools/deck-of-cards-generator"),
+  ("Fox Image Generator", "Provides random fox images.", 13, "random-tools/fox-image-generator"),
+  ("SpaceX Launch Generator", "Provides details on the latest SpaceX launch.", 13, "random-tools/spacex-launch-generator")
 ;

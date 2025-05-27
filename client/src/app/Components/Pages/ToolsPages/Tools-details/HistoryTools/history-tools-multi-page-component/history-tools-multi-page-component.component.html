@@ -1,0 +1,50 @@
+<section id="HistoryToolsMultiPage">
+  <button id="back-button" type="button" (click)="goBack()" id="back-button">
+    ← Back
+  </button>
+
+  <h1>{{ extractToolName(URL) }}</h1>
+
+  <form [formGroup]="Form" (ngSubmit)="onSubmit()">
+    <ng-container *ngFor="let control of Form.controls | keyvalue">
+      <input
+        [formControlName]="control.key"
+        [placeholder]="control.key | titlecase"
+        type="text"
+      />
+    </ng-container>
+    <input type="submit" value="Submit" [disabled]="Form.invalid || Loading" />
+  </form>
+
+  <div class="DataArea">
+    <p *ngIf="Loading">Loading...</p>
+    <p *ngIf="Error" class="error">{{ Error }}</p>
+
+    <div id="data" *ngIf="getPages().length && !Loading">
+      <div id="dataDiv" *ngFor="let item of getPages()" class="result-card">
+        <h3>{{ item.title }}</h3>
+        <p *ngIf="item.description">
+          <em>{{ item.description }}</em>
+        </p>
+        <p [innerHTML]="item.excerpt"></p>
+
+        <img
+          *ngIf="item.thumbnail"
+          [src]="'https:' + item.thumbnail.url"
+          [width]="item.thumbnail.width"
+          [height]="item.thumbnail.height"
+          alt="{{ item.title }}"
+        />
+
+        <a
+          *ngIf="item.key"
+          [href]="'https://en.wikipedia.org/wiki/' + item.key"
+          target="_blank"
+          rel="noopener"
+        >
+          Wikipedia Page
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

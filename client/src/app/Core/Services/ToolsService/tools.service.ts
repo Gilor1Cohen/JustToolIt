@@ -64,6 +64,19 @@ import {
   IdealGasLawSolverRes,
   ChemicalFormulaParserReq,
   ChemicalFormulaParserRes,
+  HistoricalFigureSearchReq,
+  HistoricalFigureSearchRes,
+  RandomFact,
+  ChuckNorrisJoke,
+  CatFact,
+  RandomUserResponse,
+  DogImageResponse,
+  Pokemon,
+  YesNoResponse,
+  KanyeQuote,
+  CardDraw,
+  FoxImage,
+  Launch,
 } from '../../Models/ToolsModel';
 import { Observable } from 'rxjs';
 
@@ -434,6 +447,78 @@ export class ToolsService {
       {
         withCredentials: true,
       }
+    );
+  }
+
+  historicalFigureSearch(
+    data: HistoricalFigureSearchReq
+  ): Observable<HistoricalFigureSearchRes> {
+    return this.http.get<HistoricalFigureSearchRes>(
+      `https://api.wikimedia.org/core/v1/wikipedia/en/search/page?q=${encodeURIComponent(
+        data.query
+      )}&limit=10`
+    );
+  }
+
+  getRandomFact(): Observable<RandomFact> {
+    return this.http.get<RandomFact>(
+      'https://uselessfacts.jsph.pl/random.json?language=en'
+    );
+  }
+
+  getProgrammingJoke(): Observable<Joke[]> {
+    return this.http.get<Joke[]>(
+      'https://official-joke-api.appspot.com/jokes/programming/random'
+    );
+  }
+
+  getChuckNorrisJoke(): Observable<ChuckNorrisJoke> {
+    return this.http.get<ChuckNorrisJoke>(
+      'https://api.chucknorris.io/jokes/random'
+    );
+  }
+
+  getCatFact(): Observable<CatFact> {
+    return this.http.get<CatFact>('https://catfact.ninja/fact');
+  }
+
+  getRandomUser(): Observable<RandomUserResponse> {
+    return this.http.get<RandomUserResponse>('https://randomuser.me/api/');
+  }
+
+  getRandomDogImage(): Observable<DogImageResponse> {
+    return this.http.get<DogImageResponse>(
+      'https://dog.ceo/api/breeds/image/random'
+    );
+  }
+
+  getPokemonInfo(nameOrId: string | number): Observable<Pokemon> {
+    return this.http.get<Pokemon>(
+      `https://pokeapi.co/api/v2/pokemon/${nameOrId}`
+    );
+  }
+
+  getYesNo(): Observable<YesNoResponse> {
+    return this.http.get<YesNoResponse>('https://yesno.wtf/api');
+  }
+
+  getKanyeQuote(): Observable<KanyeQuote> {
+    return this.http.get<KanyeQuote>('https://api.kanye.rest/');
+  }
+
+  getRandomCard(): Observable<CardDraw> {
+    return this.http.get<CardDraw>(
+      'https://deckofcardsapi.com/api/deck/new/draw/?count=1'
+    );
+  }
+
+  getRandomFoxImage(): Observable<FoxImage> {
+    return this.http.get<FoxImage>('https://randomfox.ca/floof/');
+  }
+
+  getLatestLaunch(): Observable<Launch> {
+    return this.http.get<Launch>(
+      'https://api.spacexdata.com/v4/launches/latest'
     );
   }
 }

@@ -149,14 +149,61 @@ export const toolsMap: Record<string, () => Promise<Type<any>>> = {
     import(
       '../../Components/Pages/ToolsPages/Tools-details/ChemistryTools/chemistry-tools-multi-page-component/chemistry-tools-multi-page-component.component'
     ).then((m) => m.ChemistryToolsMultiPageComponentComponent),
+  'historical-figure-search': () =>
+    import(
+      '../../Components/Pages/ToolsPages/Tools-details/HistoryTools/history-tools-multi-page-component/history-tools-multi-page-component.component'
+    ).then((m) => m.HistoryToolsMultiPageComponentComponent),
+  'random-fact': () =>
+    import(
+      '../../Components/Pages/ToolsPages/Tools-details/RandomTools/random-tools-multi-page-component/random-tools-multi-page-component.component'
+    ).then((m) => m.RandomToolsMultiPageComponentComponent),
+  'programming-joke-generator': () =>
+    import(
+      '../../Components/Pages/ToolsPages/Tools-details/RandomTools/random-tools-multi-page-component/random-tools-multi-page-component.component'
+    ).then((m) => m.RandomToolsMultiPageComponentComponent),
+  'chuck-norris-joke-generator': () =>
+    import(
+      '../../Components/Pages/ToolsPages/Tools-details/RandomTools/random-tools-multi-page-component/random-tools-multi-page-component.component'
+    ).then((m) => m.RandomToolsMultiPageComponentComponent),
+  'cat-fact-generator': () =>
+    import(
+      '../../Components/Pages/ToolsPages/Tools-details/RandomTools/random-tools-multi-page-component/random-tools-multi-page-component.component'
+    ).then((m) => m.RandomToolsMultiPageComponentComponent),
+  'random-user-generator': () =>
+    import(
+      '../../Components/Pages/ToolsPages/Tools-details/RandomTools/random-tools-multi-page-component/random-tools-multi-page-component.component'
+    ).then((m) => m.RandomToolsMultiPageComponentComponent),
+  'dog-image-generator': () =>
+    import(
+      '../../Components/Pages/ToolsPages/Tools-details/RandomTools/random-tools-multi-page-component/random-tools-multi-page-component.component'
+    ).then((m) => m.RandomToolsMultiPageComponentComponent),
+  'pokemon-info-generator': () =>
+    import(
+      '../../Components/Pages/ToolsPages/Tools-details/RandomTools/random-tools-multi-page-component/random-tools-multi-page-component.component'
+    ).then((m) => m.RandomToolsMultiPageComponentComponent),
+  'yesno-generator': () =>
+    import(
+      '../../Components/Pages/ToolsPages/Tools-details/RandomTools/random-tools-multi-page-component/random-tools-multi-page-component.component'
+    ).then((m) => m.RandomToolsMultiPageComponentComponent),
+  'kanye-quote-generator': () =>
+    import(
+      '../../Components/Pages/ToolsPages/Tools-details/RandomTools/random-tools-multi-page-component/random-tools-multi-page-component.component'
+    ).then((m) => m.RandomToolsMultiPageComponentComponent),
+  'deck-of-cards-generator': () =>
+    import(
+      '../../Components/Pages/ToolsPages/Tools-details/RandomTools/random-tools-multi-page-component/random-tools-multi-page-component.component'
+    ).then((m) => m.RandomToolsMultiPageComponentComponent),
+  'fox-image-generator': () =>
+    import(
+      '../../Components/Pages/ToolsPages/Tools-details/RandomTools/random-tools-multi-page-component/random-tools-multi-page-component.component'
+    ).then((m) => m.RandomToolsMultiPageComponentComponent),
+  'spacex-launch-generator': () =>
+    import(
+      '../../Components/Pages/ToolsPages/Tools-details/RandomTools/random-tools-multi-page-component/random-tools-multi-page-component.component'
+    ).then((m) => m.RandomToolsMultiPageComponentComponent),
 };
 
 ///   '': () => import('../../Components/Pages/ToolsPages/Tools-details/').then((m) => m.),
 ///
 
-/// ng g c Components/Pages/ToolsPages/Tools-details/ChemistryTools/ChemistryToolsMultiPageComponent
-///
-
-/// periodic-table-lookup
-/// ideal-gas-law-solver
-/// chemical-formula-parser
+/// ng g c Components/Pages/ToolsPages/Tools-details/RandomTools/RandomToolsMultiPageComponent

@@ -578,3 +578,119 @@ export type AllChemistryResponses =
   | PeriodicTableLookupRes
   | IdealGasLawSolverRes
   | ChemicalFormulaParserRes;
+
+export interface HistoricalFigureSearchReq {
+  query: string;
+}
+
+export interface HistoricalFigureSearchRes {
+  pages: Array<{
+    id: number;
+    key: string;
+    title: string;
+    excerpt: string;
+    matched_title: string | null;
+    description?: string;
+    thumbnail?: {
+      url: string;
+      width: number;
+      height: number;
+    };
+  }>;
+}
+
+export interface RandomFact {
+  id: string;
+  text: string;
+  source: string;
+  source_url: string;
+  language: string;
+  permalink: string;
+}
+
+export interface Joke {
+  id: number;
+  type: string;
+  setup: string;
+  punchline: string;
+}
+
+export interface ChuckNorrisJoke {
+  categories: string[];
+  created_at: string;
+  icon_url: string;
+  id: string;
+  updated_at: string;
+  url: string;
+  value: string;
+}
+
+export interface CatFact {
+  fact: string;
+  length: number;
+}
+
+export interface RandomUserResponse {
+  results: Array<{
+    gender: string;
+    name: { title: string; first: string; last: string };
+    email: string;
+    picture: { large: string; medium: string; thumbnail: string };
+  }>;
+  info: { seed: string; results: number; page: number; version: string };
+}
+
+export interface DogImageResponse {
+  message: string;
+  status: string;
+}
+
+export interface Pokemon {
+  id: number;
+  name: string;
+  height: number;
+  weight: number;
+  types: Array<{ slot: number; type: { name: string; url: string } }>;
+  sprites: { front_default: string };
+}
+
+export interface YesNoResponse {
+  answer: string;
+  forced: boolean;
+  image: string;
+}
+
+export interface KanyeQuote {
+  quote: string;
+}
+
+export interface CardDraw {
+  success: boolean;
+  deck_id: string;
+  cards: Array<{
+    code: string;
+    image: string;
+    suit: string;
+    value: string;
+  }>;
+  remaining: number;
+}
+
+export interface FoxImage {
+  image: string;
+  link: string;
+}
+
+export interface Launch {
+  fairings: any;
+  links: {
+    patch: { small: string; large: string };
+    webcast: string;
+    youtube_id: string;
+    wikipedia: string;
+  };
+  rocket: string;
+  success: boolean;
+  details: string;
+  date_utc: string;
+}

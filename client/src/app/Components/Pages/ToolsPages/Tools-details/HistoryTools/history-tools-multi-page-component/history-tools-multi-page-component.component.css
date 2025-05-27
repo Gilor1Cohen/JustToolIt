@@ -1,0 +1,194 @@
+#HistoryToolsMultiPage {
+  width: 100%;
+  min-height: 100vh;
+  padding: 1rem;
+  margin: 2rem auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #202124;
+  background-color: #fff;
+}
+
+#back-button {
+  position: absolute;
+  top: 6rem;
+  left: 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #007aff;
+  background: none;
+  border: none;
+  padding: 8px 12px;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  transition: opacity 0.25s ease;
+}
+
+#back-button:hover {
+  opacity: 0.5;
+}
+
+#HistoryToolsMultiPage h1 {
+  margin-top: 3rem;
+  font-size: 2rem;
+  font-weight: 600;
+  text-align: center;
+  color: #1a1a1a;
+}
+
+#HistoryToolsMultiPage form {
+  width: 100%;
+  max-width: 450px;
+  margin-top: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background-color: #f0f2f5;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+#HistoryToolsMultiPage form input[type="text"],
+#HistoryToolsMultiPage form input[type="submit"] {
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  transition: border-color 0.2s ease;
+}
+
+#HistoryToolsMultiPage form input[type="text"]:focus {
+  border-color: #007aff;
+  outline: none;
+  background-color: #fff;
+}
+
+#HistoryToolsMultiPage form input[type="submit"] {
+  background-color: #007aff;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+#HistoryToolsMultiPage form input[type="submit"]:hover {
+  background-color: #005ecb;
+}
+
+#HistoryToolsMultiPage form input[type="submit"]:disabled {
+  background-color: #cfd8dc;
+  color: #666;
+  cursor: not-allowed;
+  opacity: 0.7;
+  border: none;
+}
+
+#HistoryToolsMultiPage .DataArea {
+  width: 100%;
+  max-width: 900px;
+  margin-top: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#HistoryToolsMultiPage .error {
+  color: #d32f2f;
+  font-weight: 600;
+  margin-top: 1rem;
+  text-align: center;
+}
+
+#HistoryToolsMultiPage #data {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+#HistoryToolsMultiPage .result-card {
+  width: 100%;
+  padding: 1.5rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+#HistoryToolsMultiPage .result-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+}
+
+#HistoryToolsMultiPage .result-card h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.4rem;
+  color: #333;
+}
+
+#HistoryToolsMultiPage .result-card p {
+  margin: 0.5rem 0;
+  color: #444;
+  line-height: 1.5;
+}
+
+#HistoryToolsMultiPage .result-card img {
+  margin-top: 1rem;
+  border-radius: 6px;
+  max-width: 100%;
+  height: auto;
+}
+
+#HistoryToolsMultiPage .result-card a {
+  display: inline-block;
+  margin-top: 1rem;
+  text-decoration: none;
+  color: #007aff;
+  font-weight: 600;
+}
+
+#HistoryToolsMultiPage .result-card a:hover {
+  text-decoration: underline;
+}
+
+@media screen and (max-width: 768px) {
+  #HistoryToolsMultiPage {
+    margin: 5rem auto;
+  }
+
+  #HistoryToolsMultiPage form {
+    max-width: 90%;
+    padding: 1rem;
+    gap: 0.75rem;
+  }
+
+  #HistoryToolsMultiPage h1 {
+    font-size: 1.5rem;
+  }
+
+  .result-card {
+    padding: 1rem;
+  }
+
+  .result-card h3 {
+    font-size: 1.2rem;
+  }
+
+  .result-card p {
+    font-size: 0.95rem;
+  }
+
+  #back-button {
+    top: 4rem;
+    left: 1rem;
+    font-size: 0.9rem;
+    padding: 6px 10px;
+  }
+}

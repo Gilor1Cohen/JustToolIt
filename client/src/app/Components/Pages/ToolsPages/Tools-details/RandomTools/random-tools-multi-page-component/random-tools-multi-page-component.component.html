@@ -1,0 +1,131 @@
+<section id="RandomToolsMultiPageComponent">
+  <button id="back-button" type="button" (click)="goBack()" id="back-button">
+    ← Back
+  </button>
+
+  <h1>{{ extractToolName(URL) }}</h1>
+
+  <button (click)="onGenerate()">Generate</button>
+
+  <div class="data-area">
+    <p *ngIf="Loading" class="loading-text">Loading...</p>
+    <p *ngIf="Error" class="error-text">{{ Error }}</p>
+
+    <!-- Random Fact -->
+
+    <div *ngIf="slug === 'random-fact' && Data" class="tool-output random-fact">
+      <p class="fact-text">{{ Data?.text }}</p>
+    </div>
+
+    <!-- Programming Joke -->
+    <div
+      *ngIf="slug === 'programming-joke-generator' && DataList?.length"
+      class="tool-output programming-jokes"
+    >
+      <div *ngFor="let joke of DataList">
+        <p>{{ joke.setup }}</p>
+        <p>
+          <strong>{{ joke.punchline }}</strong>
+        </p>
+      </div>
+    </div>
+
+    <!-- Chuck Norris Joke -->
+    <div
+      *ngIf="slug === 'chuck-norris-joke-generator' && Data"
+      class="tool-output chuck-norris"
+    >
+      <p>{{ Data?.value }}</p>
+    </div>
+
+    <!-- Cat Fact -->
+    <div
+      *ngIf="slug === 'cat-fact-generator' && Data"
+      class="tool-output cat-fact"
+    >
+      <p>{{ Data?.fact }}</p>
+    </div>
+
+    <!-- Random User -->
+    <div
+      *ngIf="slug === 'random-user-generator' && Data?.results?.length"
+      class="tool-output random-user"
+    >
+      <img
+        [src]="Data?.results[0]?.picture?.large"
+        alt="User picture"
+        class="user-img"
+      />
+      <p>
+        {{ Data?.results[0]?.name?.title }} {{ Data?.results[0]?.name?.first }}
+        {{ Data?.results[0]?.name?.last }}
+      </p>
+      <p>{{ Data?.results[0]?.email }}</p>
+    </div>
+
+    <!-- Dog Image -->
+    <div
+      *ngIf="slug === 'dog-image-generator' && Data"
+      class="tool-output dog-image"
+    >
+      <img [src]="Data?.message" alt="Random Dog" class="responsive-img" />
+    </div>
+
+    <!-- Pokémon Info -->
+    <div
+      *ngIf="slug === 'pokemon-info-generator' && Data"
+      class="tool-output pokemon-info"
+    >
+      <h2>{{ Data?.name | titlecase }} (#{{ Data?.id }})</h2>
+      <img [src]="Data?.sprites?.front_default" alt="{{ Data?.name }} sprite" />
+      <p>Height: {{ Data?.height }} | Weight: {{ Data?.weight }}</p>
+      <p>Types: {{ typesString }}</p>
+    </div>
+
+    <!-- Yes/No -->
+    <div *ngIf="slug === 'yesno-generator' && Data" class="tool-output yesno">
+      <img [src]="Data?.image" alt="YesNo" class="responsive-img" />
+      <p>{{ Data?.answer?.toUpperCase() }}</p>
+    </div>
+
+    <!-- Kanye Quote -->
+    <div
+      *ngIf="slug === 'kanye-quote-generator' && Data"
+      class="tool-output kanye-quote"
+    >
+      <p>“{{ Data?.quote }}”</p>
+    </div>
+
+    <!-- Deck of Cards -->
+    <div
+      *ngIf="slug === 'deck-of-cards-generator' && Data?.cards?.length"
+      class="tool-output deck-of-cards"
+    >
+      <img [src]="Data?.cards[0]?.image" alt="Card" class="responsive-img" />
+      <p>{{ Data?.cards[0]?.value }} of {{ Data?.cards[0]?.suit }}</p>
+    </div>
+
+    <!-- Fox Image -->
+    <div
+      *ngIf="slug === 'fox-image-generator' && Data"
+      class="tool-output fox-image"
+    >
+      <img [src]="Data?.image" alt="Random Fox" class="responsive-img" />
+    </div>
+
+    <!-- SpaceX Latest Launch -->
+    <div
+      *ngIf="slug === 'spacex-launch-generator' && Data"
+      class="tool-output spacex-launch"
+    >
+      <h3>{{ Data?.name }}</h3>
+      <p>{{ Data?.details }}</p>
+      <a [href]="Data?.links?.wikipedia" target="_blank">Read more</a>
+    </div>
+
+    <!-- Fallback when no data -->
+    <p *ngIf="!Loading && !Error && !Data && !DataList" class="no-data-text">
+      No data to display. Click &quot;Generate&quot;.
+    </p>
+  </div>
+</section>

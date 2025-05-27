@@ -1,0 +1,173 @@
+#RandomToolsMultiPageComponent {
+  width: 100%;
+  min-height: 100vh;
+  padding: 1rem;
+  margin: 2rem auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #202124;
+  background-color: #fff;
+}
+
+#back-button {
+  position: absolute;
+  top: 6rem;
+  left: 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #007aff;
+  background: none;
+  border: none;
+  padding: 8px 12px;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  transition: opacity 0.25s ease;
+}
+
+#back-button:hover {
+  opacity: 0.5;
+}
+
+#RandomToolsMultiPageComponent h1 {
+  margin-top: 3rem;
+  font-size: 1.5rem;
+  font-weight: 500;
+  text-align: center;
+}
+
+#RandomToolsMultiPageComponent > button {
+  margin: 1rem 0;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #fff;
+  background-color: #007aff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+#RandomToolsMultiPageComponent > button:hover {
+  background-color: #005bb5;
+}
+
+#RandomToolsMultiPageComponent > button:disabled {
+  background-color: #a0cfff;
+  cursor: not-allowed;
+}
+
+.data-area {
+  width: 100%;
+  max-width: 600px;
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.loading-text {
+  font-style: italic;
+  text-align: center;
+  color: #555;
+}
+
+.error-text {
+  color: #d93025;
+  text-align: center;
+  font-weight: 500;
+}
+
+.no-data-text {
+  text-align: center;
+  color: #777;
+}
+
+.tool-output {
+  padding: 1rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  background-color: #fafafa;
+  width: 100%;
+}
+
+.random-fact .fact-text {
+  font-size: 1.25rem;
+  font-style: italic;
+  text-align: center;
+}
+
+.programming-jokes p {
+  margin: 0.5rem 0;
+}
+
+.responsive-img,
+.user-img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+  display: block;
+  margin: 0.5rem auto;
+}
+
+.pokemon-info h2 {
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.pokemon-info p {
+  text-align: center;
+  margin: 0.25rem 0;
+}
+
+.yesno p,
+.kanye-quote p {
+  text-align: center;
+  font-size: 1.1rem;
+}
+
+.deck-of-cards p {
+  text-align: center;
+  margin-top: 0.5rem;
+}
+
+.tool-output p {
+  margin: 0.5rem 0;
+}
+
+@media (max-width: 800px) {
+  #RandomToolsMultiPageComponent {
+    padding: 1.5rem;
+    margin: 7.5rem auto;
+  }
+  #back-button {
+    top: 4rem;
+    left: 1rem;
+    font-size: 0.9rem;
+    padding: 6px 10px;
+  }
+  #RandomToolsMultiPageComponent h1 {
+    margin-top: 2rem;
+    font-size: 1.25rem;
+  }
+  #RandomToolsMultiPageComponent > button {
+    width: 100%;
+    font-size: 0.9rem;
+    padding: 0.5rem;
+  }
+  .data-area {
+    max-width: 100%;
+    gap: 0.5rem;
+  }
+  .tool-output {
+    padding: 0.75rem;
+    border-radius: 6px;
+  }
+  .random-fact .fact-text {
+    font-size: 1.1rem;
+  }
+}
