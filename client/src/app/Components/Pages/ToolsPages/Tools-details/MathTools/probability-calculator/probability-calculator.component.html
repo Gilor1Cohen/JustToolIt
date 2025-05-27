@@ -1,0 +1,36 @@
+<section id="ProbabilityCalculator">
+  <button id="back-button" type="button" (click)="goBack()" id="back-button">
+    ← Back
+  </button>
+
+  <h1>Probability Calculator (Combinatorics)</h1>
+  <form [formGroup]="Form" (ngSubmit)="onSubmit()">
+    <select formControlName="mode">
+      <option value="" disabled selected hidden>Mode</option>
+      <option value="combination">Combinations</option>
+      <option value="permutation">Permutations</option>
+    </select>
+
+    <input type="number" formControlName="n" placeholder="Total items (n)" />
+    <input type="number" formControlName="r" placeholder="Selected items (r)" />
+    <input
+      type="number"
+      formControlName="successfulEvents"
+      placeholder="Successful outcomes"
+    />
+
+    <input
+      type="submit"
+      value="Calculate"
+      [disabled]="Form.invalid || Loading"
+    />
+  </form>
+
+  <p *ngIf="Loading">Calculating...</p>
+  <p *ngIf="Error" class="error">{{ Error }}</p>
+
+  <div *ngIf="Data">
+    <p>Total Outcomes: {{ Data.totalOutcomes ? Data.totalOutcomes : "NaN" }}</p>
+    <p>Probability: {{ Data.probability ? Data.probability : "NaN" }}</p>
+  </div>
+</section>

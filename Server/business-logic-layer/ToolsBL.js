@@ -534,6 +534,95 @@ function parseChemicalFormula(formula) {
   return result;
 }
 
+function calculateProbability(mode, n, r, successfulEvents) {
+  n = Number(n);
+  r = Number(r);
+  successfulEvents = Number(successfulEvents);
+
+  if (!["combination", "permutation"].includes(mode))
+    throw new Error("Mode must be 'combination' or 'permutation'");
+  if (isNaN(n) || isNaN(r) || isNaN(successfulEvents))
+    throw new Error("All inputs must be numbers");
+  if (n < 0 || r < 0 || r > n || successfulEvents < 0)
+    throw new Error("Invalid values");
+
+  let totalOutcomes;
+
+  if (mode === "combination") {
+    if (r > n - r) r = n - r;
+    totalOutcomes = 1;
+    for (let i = 1; i <= r; i++) {
+      totalOutcomes *= n - r + i;
+      totalOutcomes /= i;
+    }
+  } else {
+    totalOutcomes = 1;
+    for (let i = 0; i < r; i++) {
+      totalOutcomes *= n - i;
+    }
+  }
+
+  const probability = successfulEvents / totalOutcomes;
+
+  return {
+    totalOutcomes: Math.round(totalOutcomes),
+    probability: +probability.toFixed(4),
+  };
+}
+
+function checkPrimeAndFactors(number) {
+  number = Number(number);
+
+  let isPrime = true;
+  const factors = [];
+
+  for (let i = 2; i < number; i++) {
+    if (number % i === 0) {
+      isPrime = false;
+      factors.push(i);
+    }
+  }
+
+  const result = {
+    isPrime: number > 1 && isPrime,
+    factors,
+  };
+
+  if (!result.isPrime) {
+    const isPrimeCheck = (num) => {
+      if (num < 2) return false;
+      for (let i = 2; i <= Math.sqrt(num); i++) {
+        if (num % i === 0) return false;
+      }
+      return true;
+    };
+
+    let lower = number - 1;
+    let upper = number + 1;
+
+    while (lower > 1 || upper < Number.MAX_SAFE_INTEGER) {
+      if (lower > 1 && isPrimeCheck(lower)) {
+        result.closestPrime = lower;
+        break;
+      }
+      if (isPrimeCheck(upper)) {
+        result.closestPrime = upper;
+        break;
+      }
+      lower--;
+      upper++;
+    }
+  }
+
+  return result;
+}
+
+function BaseConverter(value, fromBase, toBase) {
+  const decimalValue = parseInt(value, fromBase);
+  const convertedValue = decimalValue.toString(toBase);
+  return { convertedValue };
+}
+
 module.exports = {
   GetToolsCategories,
   GetToolsList,
@@ -570,4 +659,7 @@ module.exports = {
   getElementData,
   solveIdealGasLaw,
   parseChemicalFormula,
+  calculateProbability,
+  checkPrimeAndFactors,
+  BaseConverter,
 };

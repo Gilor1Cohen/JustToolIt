@@ -1,0 +1,37 @@
+<section id="PrimeNumberChecker">
+  <button id="back-button" type="button" (click)="goBack()" id="back-button">
+    ← Back
+  </button>
+
+  <h1>Prime Number Checker</h1>
+
+  <form [formGroup]="Form" (ngSubmit)="onSubmit()">
+    <input
+      type="number"
+      formControlName="number"
+      placeholder="Enter a number"
+    />
+    <input type="submit" value="Submit" [disabled]="Form.invalid || Loading" />
+  </form>
+
+  <p *ngIf="Loading">Checking...</p>
+  <p *ngIf="Error" class="error">{{ Error }}</p>
+
+  <div *ngIf="Data">
+    <p *ngIf="Data.isPrime">
+      {{ Form.value.number }} is a <strong>prime</strong> number ✅
+    </p>
+
+    <div *ngIf="!Data.isPrime">
+      <p>{{ Form.value.number }} is <strong>not prime</strong>.</p>
+      <p>Factors:</p>
+      <ul>
+        <li *ngFor="let factor of Data.factors">{{ factor }}</li>
+      </ul>
+
+      <p *ngIf="Data.closestPrime !== undefined">
+        Closest prime number: <strong>{{ Data.closestPrime }}</strong>
+      </p>
+    </div>
+  </div>
+</section>

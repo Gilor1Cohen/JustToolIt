@@ -36,6 +36,9 @@ const {
   getElementData,
   solveIdealGasLaw,
   parseChemicalFormula,
+  calculateProbability,
+  checkPrimeAndFactors,
+  BaseConverter,
 } = require("../business-logic-layer/ToolsBL");
 
 const { handleFreeUserUsage } = require("../business-logic-layer/AuthBL");
@@ -863,6 +866,105 @@ router.post("/chemicalFormulaParser", checkUserAccess, async (req, res) => {
     }
 
     const data = parseChemicalFormula(formula);
+
+    if (req.user.plan_id === 1 && req.user.plan_status === "active") {
+      await handleFreeUserUsage(req.user);
+    }
+
+    return res.status(200).json(data);
+  } catch (error) {
+    res.status(500).json({ message: error.message || "Internal server error" });
+  }
+});
+
+router.post("/calculateProbability", checkUserAccess, async (req, res) => {
+  try {
+    const { mode, n, r, successfulEvents } = req.body;
+
+    if (mode == null || n == null || r == null || successfulEvents == null) {
+      return res.status(400).json({
+        message: "All parameters is required",
+      });
+    }
+
+    const data = calculateProbability(mode, n, r, successfulEvents);
+
+    if (req.user.plan_id === 1 && req.user.plan_status === "active") {
+      await handleFreeUserUsage(req.user);
+    }
+
+    return res.status(200).json(data);
+  } catch (error) {
+    res.status(500).json({ message: error.message || "Internal server error" });
+  }
+});
+
+router.post("/checkPrimeAndFactors", checkUserAccess, async (req, res) => {
+  try {
+    const { number } = req.body;
+
+    if (number == null) {
+      return res.status(400).json({
+        message: "Number parameter is required",
+      });
+    }
+
+    if (!Number.isInteger(number) || number < 1) {
+      return res.status(400).json({
+        message: "Input must be a positive integer",
+      });
+    }
+
+    const data = checkPrimeAndFactors(number);
+
+    if (req.user.plan_id === 1 && req.user.plan_status === "active") {
+      await handleFreeUserUsage(req.user);
+    }
+
+    return res.status(200).json(data);
+  } catch (error) {
+    res.status(500).json({ message: error.message || "Internal server error" });
+  }
+});
+
+router.post("/BaseConverter", checkUserAccess, async (req, res) => {
+  try {
+    const { value, fromBase, toBase } = req.body;
+
+    if (typeof value !== "string") {
+      return res.status(400).json({ message: "Value must be a string" });
+    }
+
+    const baseRegexMap = {
+      2: /^[01]+$/,
+      8: /^[0-7]+$/,
+      10: /^\d+$/,
+      16: /^[0-9a-fA-F]+$/,
+      32: /^[0-9a-vA-V]+$/,
+      36: /^[0-9a-zA-Z]+$/,
+    };
+
+    const regex = baseRegexMap[fromBase];
+    if (!regex?.test(value)) {
+      return res
+        .status(400)
+        .json({ message: "Value does not match the source base" });
+    }
+
+    if (fromBase < 2 || fromBase > 36 || toBase < 2 || toBase > 36) {
+      return res
+        .status(400)
+        .json({ message: "Bases must be between 2 and 36" });
+    }
+
+    const decimal = parseInt(value, fromBase);
+    if (isNaN(decimal)) {
+      return res
+        .status(400)
+        .json({ message: "Invalid number for the given base" });
+    }
+
+    const data = BaseConverter(value, fromBase, toBase);
 
     if (req.user.plan_id === 1 && req.user.plan_status === "active") {
       await handleFreeUserUsage(req.user);

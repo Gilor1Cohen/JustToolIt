@@ -201,9 +201,16 @@ export const toolsMap: Record<string, () => Promise<Type<any>>> = {
     import(
       '../../Components/Pages/ToolsPages/Tools-details/RandomTools/random-tools-multi-page-component/random-tools-multi-page-component.component'
     ).then((m) => m.RandomToolsMultiPageComponentComponent),
+  'probability-calculator': () =>
+    import(
+      '../../Components/Pages/ToolsPages/Tools-details/MathTools/probability-calculator/probability-calculator.component'
+    ).then((m) => m.ProbabilityCalculatorComponent),
+  'prime-number-checker': () =>
+    import(
+      '../../Components/Pages/ToolsPages/Tools-details/MathTools/prime-number-checker/prime-number-checker.component'
+    ).then((m) => m.PrimeNumberCheckerComponent),
+  'base-converter': () =>
+    import(
+      '../../Components/Pages/ToolsPages/Tools-details/MathTools/base-converter/base-converter.component'
+    ).then((m) => m.BaseConverterComponent),
 };
-
-///   '': () => import('../../Components/Pages/ToolsPages/Tools-details/').then((m) => m.),
-///
-
-/// ng g c Components/Pages/ToolsPages/Tools-details/RandomTools/RandomToolsMultiPageComponent

@@ -694,3 +694,21 @@ export interface Launch {
   details: string;
   date_utc: string;
 }
+
+export interface ProbabilityCalculatorReq {
+  mode: 'combination' | 'permutation';
+  n: number;
+  r: number;
+  successfulEvents: number;
+}
+
+export interface ProbabilityCalculatorRes {
+  totalOutcomes: number;
+  probability: number;
+}
+
+export interface PrimeNumberCheckerRes {
+  isPrime: boolean;
+  factors: number[];
+  closestPrime?: number;
+}

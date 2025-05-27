@@ -218,23 +218,15 @@ INSERT INTO tools_details (name, description, category_id, endpoint) VALUES
 INSERT INTO tools_details (name, description, category_id, endpoint) VALUES
   ("Periodic Table Lookup", "Provides elemental properties and atomic data lookup alongside interactive periodic table views.", 10, "chemistry-tools/periodic-table-lookup"),
   ("Ideal Gas Law Solver", "Solves PV=nRT and related equations to predict gas behavior under varying conditions.", 10, "chemistry-tools/ideal-gas-law-solver"),
-  ("Chemical Formula Parser", "Breaks down complex chemical formulas into constituent elements and rebuilds them.", 10, "chemistry-tools/chemical-formula-parser"),
-  ("Molecular Diagram Generator", "Renders 2D structural diagrams from chemical formulas for presentations and study.", 10, "chemistry-tools/molecular-diagram-generator"),
-  ("SMILES to Structure Converter", "Converts SMILES notation into interactive molecular structures for research and education.", 10, "chemistry-tools/smiles-to-structure-converter")
+  ("Chemical Formula Parser", "Breaks down complex chemical formulas into constituent elements and rebuilds them.", 10, "chemistry-tools/chemical-formula-parser")
 ;
 
 
 
 INSERT INTO tools_details (name, description, category_id, endpoint) VALUES
-  ("Function Graph Plotter", "Plots mathematical functions and allows zooming and annotation for detailed analysis.", 11, "math-tools/function-graph-plotter"),
   ("Prime Number Checker", "Determines primality of integers and highlights their factors for demonstrations.", 11, "math-tools/prime-number-checker"),
   ("Base Converter", "Transforms numbers between binary, hexadecimal, and other bases for computing tasks.", 11,  "math-tools/base-converter"),
-  ("Matrix Operations Calculator", "Performs matrix addition, multiplication, inversion, and more for linear algebra.", 11, "math-tools/matrix-operations-calculator"),
-  ("Equation Solver", "Solves linear and polynomial equations symbolically or numerically with steps.", 11,  "math-tools/equation-solver"),
-  ("Probability Calculator", "Calculates discrete event probabilities using combinatorial formulas.", 11,  "math-tools/probability-calculator"),
-  ("Combinatorics Tool", "Computes permutations, combinations, and factorials for counting problems.", 11,  "math-tools/combinatorics-tool"),
-  ("Symmetry Checker", "Analyzes functions or graphs to determine lines or points of symmetry.", 11, "math-tools/symmetry-checker"),
-  ("Limits and Derivatives Calculator", "Computes symbolic limits and derivatives to support calculus learning.", 11, "math-tools/limits-and-derivatives-calculator")
+  ("Probability Calculator", "Calculates discrete event probabilities using combinatorial formulas.", 11,  "math-tools/probability-calculator")
 ;
 
 

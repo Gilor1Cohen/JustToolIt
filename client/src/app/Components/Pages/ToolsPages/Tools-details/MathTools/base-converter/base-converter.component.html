@@ -1,0 +1,36 @@
+<section id="BaseConverter">
+  <button id="back-button" type="button" (click)="goBack()" id="back-button">
+    ← Back
+  </button>
+
+  <h1>Base Converter</h1>
+
+  <form [formGroup]="Form" (ngSubmit)="onSubmit()">
+    <input type="text" formControlName="value" placeholder="Enter number" />
+
+    <select formControlName="fromBase">
+      <option disabled selected value="">From base</option>
+      <option *ngFor="let base of CommonBases" [ngValue]="base">
+        {{ base }}
+      </option>
+    </select>
+
+    <select formControlName="toBase">
+      <option disabled selected value="">To base</option>
+      <option *ngFor="let base of CommonBases" [ngValue]="base">
+        {{ base }}
+      </option>
+    </select>
+
+    <input type="submit" value="Convert" [disabled]="Form.invalid || Loading" />
+  </form>
+
+  <p *ngIf="Loading">Converting...</p>
+  <p *ngIf="Error" class="error">{{ Error }}</p>
+
+  <div *ngIf="Data">
+    <p>
+      Converted Value: <strong>{{ Data.convertedValue }}</strong>
+    </p>
+  </div>
+</section>

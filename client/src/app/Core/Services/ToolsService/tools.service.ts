@@ -77,6 +77,8 @@ import {
   CardDraw,
   FoxImage,
   Launch,
+  ProbabilityCalculatorReq,
+  ProbabilityCalculatorRes,
 } from '../../Models/ToolsModel';
 import { Observable } from 'rxjs';
 
@@ -520,5 +522,33 @@ export class ToolsService {
     return this.http.get<Launch>(
       'https://api.spacexdata.com/v4/launches/latest'
     );
+  }
+
+  calculateProbability(
+    data: ProbabilityCalculatorReq
+  ): Observable<ProbabilityCalculatorRes> {
+    return this.http.post<ProbabilityCalculatorRes>(
+      `${this.Url}calculateProbability`,
+      data,
+      {
+        withCredentials: true,
+      }
+    );
+  }
+
+  checkPrimeAndFactors(number: number): Observable<any> {
+    return this.http.post<any>(
+      `${this.Url}checkPrimeAndFactors`,
+      { number },
+      {
+        withCredentials: true,
+      }
+    );
+  }
+
+  BaseConverter(data: any): Observable<any> {
+    return this.http.post<any>(`${this.Url}BaseConverter`, data, {
+      withCredentials: true,
+    });
   }
 }

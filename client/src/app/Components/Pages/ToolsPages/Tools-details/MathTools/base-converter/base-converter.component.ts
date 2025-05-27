@@ -5,49 +5,53 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { ToolsService } from '../../../../../../Core/Services/ToolsService/tools.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToolsService } from '../../../../../../Core/Services/ToolsService/tools.service';
 import { HttpErrorResponseDetails } from '../../../../../../Core/Models/ToolsModel';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-body-fat-percentage-calculator',
+  selector: 'app-base-converter',
   imports: [CommonModule, ReactiveFormsModule],
-  templateUrl: './body-fat-percentage-calculator.component.html',
-  styleUrl: './body-fat-percentage-calculator.component.css',
+  templateUrl: './base-converter.component.html',
+  styleUrl: './base-converter.component.css',
 })
-export class BodyFatPercentageCalculatorComponent implements OnInit {
-  Error: string | null = null;
-  Loading: boolean = false;
-  Data: any | null = null;
-
+export class BaseConverterComponent implements OnInit {
   Form!: FormGroup;
+  Data: any | null = null;
+  Loading: boolean = false;
+  Error: string | null = null;
+
+  CommonBases: number[] = [2, 8, 10, 16, 32, 36];
 
   constructor(
-    private fb: FormBuilder,
-    private tools: ToolsService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private fb: FormBuilder,
+    private tools: ToolsService
   ) {}
 
   ngOnInit(): void {
     this.Form = this.fb.group({
-      Gender: ['', [Validators.required]],
-      Waist: ['', [Validators.required, Validators.min(0)]],
-      Neck: ['', [Validators.required, Validators.min(0)]],
-      Height: ['', [Validators.required, Validators.min(0)]],
-      Hip: ['', [Validators.required, Validators.min(0)]],
+      value: ['', Validators.required],
+      fromBase: [
+        '',
+        [Validators.required, Validators.min(2), Validators.max(36)],
+      ],
+      toBase: [
+        '',
+        [Validators.required, Validators.min(2), Validators.max(36)],
+      ],
     });
   }
 
   onSubmit(): void {
-    this.Loading = true;
+    this.Data = null;
     this.Error = null;
+    this.Loading = true;
 
-    this.tools.BodyFatPercentageCalculator(this.Form.value).subscribe({
+    this.tools.BaseConverter(this.Form.value).subscribe({
       next: (value: any) => {
-        console.log(value);
-
         this.Data = value;
         this.Loading = false;
       },
